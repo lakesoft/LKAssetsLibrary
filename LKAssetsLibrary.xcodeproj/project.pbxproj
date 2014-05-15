@@ -53,6 +53,7 @@
 		BC060CFA19246CC1009989D0 /* LKAssetsLibraryTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "LKAssetsLibraryTests-Info.plist"; sourceTree = "<group>"; };
 		BC060CFC19246CC1009989D0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		BC060CFE19246CC1009989D0 /* LKAssetsLibraryTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKAssetsLibraryTests.m; sourceTree = "<group>"; };
+		BC060D0919246D4D009989D0 /* LKAssetsLibrary.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = LKAssetsLibrary.podspec; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +83,8 @@
 		BC060CC719246CC0009989D0 = {
 			isa = PBXGroup;
 			children = (
+				BC060D0919246D4D009989D0 /* LKAssetsLibrary.podspec */,
+				BC060D0819246D0B009989D0 /* Classes */,
 				BC060CD919246CC1009989D0 /* LKAssetsLibrary */,
 				BC060CF819246CC1009989D0 /* LKAssetsLibraryTests */,
 				BC060CD219246CC1009989D0 /* Frameworks */,
@@ -120,7 +123,8 @@
 				BC060CEB19246CC1009989D0 /* Images.xcassets */,
 				BC060CDA19246CC1009989D0 /* Supporting Files */,
 			);
-			path = LKAssetsLibrary;
+			name = LKAssetsLibrary;
+			path = Examples;
 			sourceTree = "<group>";
 		};
 		BC060CDA19246CC1009989D0 /* Supporting Files */ = {
@@ -140,7 +144,8 @@
 				BC060CFE19246CC1009989D0 /* LKAssetsLibraryTests.m */,
 				BC060CF919246CC1009989D0 /* Supporting Files */,
 			);
-			path = LKAssetsLibraryTests;
+			name = LKAssetsLibraryTests;
+			path = Tests;
 			sourceTree = "<group>";
 		};
 		BC060CF919246CC1009989D0 /* Supporting Files */ = {
@@ -150,6 +155,13 @@
 				BC060CFB19246CC1009989D0 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		BC060D0819246D0B009989D0 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Classes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -377,8 +389,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "LKAssetsLibrary/LKAssetsLibrary-Prefix.pch";
-				INFOPLIST_FILE = "LKAssetsLibrary/LKAssetsLibrary-Info.plist";
+				GCC_PREFIX_HEADER = "Examples/LKAssetsLibrary-Prefix.pch";
+				INFOPLIST_FILE = "Examples/LKAssetsLibrary-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -390,8 +402,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "LKAssetsLibrary/LKAssetsLibrary-Prefix.pch";
-				INFOPLIST_FILE = "LKAssetsLibrary/LKAssetsLibrary-Info.plist";
+				GCC_PREFIX_HEADER = "Examples/LKAssetsLibrary-Prefix.pch";
+				INFOPLIST_FILE = "Examples/LKAssetsLibrary-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -407,12 +419,12 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "LKAssetsLibrary/LKAssetsLibrary-Prefix.pch";
+				GCC_PREFIX_HEADER = "Examples/LKAssetsLibrary-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "LKAssetsLibraryTests/LKAssetsLibraryTests-Info.plist";
+				INFOPLIST_FILE = "Tests/LKAssetsLibraryTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
@@ -429,8 +441,8 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "LKAssetsLibrary/LKAssetsLibrary-Prefix.pch";
-				INFOPLIST_FILE = "LKAssetsLibraryTests/LKAssetsLibraryTests-Info.plist";
+				GCC_PREFIX_HEADER = "Examples/LKAssetsLibrary-Prefix.pch";
+				INFOPLIST_FILE = "Tests/LKAssetsLibraryTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
