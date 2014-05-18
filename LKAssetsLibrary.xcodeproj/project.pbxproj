@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		23E8E7AED783490C96B62FC3 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C5216A84106443DC8AAA2854 /* libPods.a */; };
 		BC060CD419246CC1009989D0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC060CD319246CC1009989D0 /* Foundation.framework */; };
 		BC060CD619246CC1009989D0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC060CD519246CC1009989D0 /* CoreGraphics.framework */; };
 		BC060CD819246CC1009989D0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC060CD719246CC1009989D0 /* UIKit.framework */; };
@@ -14,13 +15,25 @@
 		BC060CE019246CC1009989D0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BC060CDF19246CC1009989D0 /* main.m */; };
 		BC060CE419246CC1009989D0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BC060CE319246CC1009989D0 /* AppDelegate.m */; };
 		BC060CE719246CC1009989D0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC060CE519246CC1009989D0 /* Main.storyboard */; };
-		BC060CEA19246CC1009989D0 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC060CE919246CC1009989D0 /* ViewController.m */; };
 		BC060CEC19246CC1009989D0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BC060CEB19246CC1009989D0 /* Images.xcassets */; };
 		BC060CF319246CC1009989D0 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC060CF219246CC1009989D0 /* XCTest.framework */; };
 		BC060CF419246CC1009989D0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC060CD319246CC1009989D0 /* Foundation.framework */; };
 		BC060CF519246CC1009989D0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC060CD719246CC1009989D0 /* UIKit.framework */; };
 		BC060CFD19246CC1009989D0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BC060CFB19246CC1009989D0 /* InfoPlist.strings */; };
 		BC060CFF19246CC1009989D0 /* LKAssetsLibraryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BC060CFE19246CC1009989D0 /* LKAssetsLibraryTests.m */; };
+		BC060D2219246ECB009989D0 /* LKAssetsGroupManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BC060D1B19246ECB009989D0 /* LKAssetsGroupManager.m */; };
+		BC060D2319246ECB009989D0 /* LKAssetsGroupManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BC060D1B19246ECB009989D0 /* LKAssetsGroupManager.m */; };
+		BC060D2419246ECB009989D0 /* LKAssetsGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = BC060D1D19246ECB009989D0 /* LKAssetsGroup.m */; };
+		BC060D2519246ECB009989D0 /* LKAssetsGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = BC060D1D19246ECB009989D0 /* LKAssetsGroup.m */; };
+		BC060D2619246ECB009989D0 /* LKAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = BC060D1F19246ECB009989D0 /* LKAsset.m */; };
+		BC060D2719246ECB009989D0 /* LKAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = BC060D1F19246ECB009989D0 /* LKAsset.m */; };
+		BC060D7719280662009989D0 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC060D7619280662009989D0 /* TableViewController.m */; };
+		BC060D7A19280674009989D0 /* CollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC060D7919280674009989D0 /* CollectionViewController.m */; };
+		BC060D83192811CE009989D0 /* PhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC060D82192811CE009989D0 /* PhotoViewController.m */; };
+		BC060D86192811E3009989D0 /* PhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC060D85192811E3009989D0 /* PhotoCell.m */; };
+		BC060D8B192815D4009989D0 /* AssetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC060D8A192815D4009989D0 /* AssetCell.m */; };
+		BC060D8E19281F69009989D0 /* AssetHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC060D8D19281F69009989D0 /* AssetHeaderView.m */; };
+		BC060D94192825BB009989D0 /* LKAssetsDayGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = BC060D93192825BB009989D0 /* LKAssetsDayGroup.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,8 +58,6 @@
 		BC060CE219246CC1009989D0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		BC060CE319246CC1009989D0 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		BC060CE619246CC1009989D0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		BC060CE819246CC1009989D0 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		BC060CE919246CC1009989D0 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		BC060CEB19246CC1009989D0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		BC060CF119246CC1009989D0 /* LKAssetsLibraryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LKAssetsLibraryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC060CF219246CC1009989D0 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -54,6 +65,29 @@
 		BC060CFC19246CC1009989D0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		BC060CFE19246CC1009989D0 /* LKAssetsLibraryTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKAssetsLibraryTests.m; sourceTree = "<group>"; };
 		BC060D0919246D4D009989D0 /* LKAssetsLibrary.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = LKAssetsLibrary.podspec; sourceTree = "<group>"; };
+		BC060D1A19246ECB009989D0 /* LKAssetsGroupManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKAssetsGroupManager.h; sourceTree = "<group>"; };
+		BC060D1B19246ECB009989D0 /* LKAssetsGroupManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKAssetsGroupManager.m; sourceTree = "<group>"; };
+		BC060D1C19246ECB009989D0 /* LKAssetsGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKAssetsGroup.h; sourceTree = "<group>"; };
+		BC060D1D19246ECB009989D0 /* LKAssetsGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKAssetsGroup.m; sourceTree = "<group>"; };
+		BC060D1E19246ECB009989D0 /* LKAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKAsset.h; sourceTree = "<group>"; };
+		BC060D1F19246ECB009989D0 /* LKAsset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKAsset.m; sourceTree = "<group>"; };
+		BC060D7519280662009989D0 /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
+		BC060D7619280662009989D0 /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
+		BC060D7819280674009989D0 /* CollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewController.h; sourceTree = "<group>"; };
+		BC060D7919280674009989D0 /* CollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewController.m; sourceTree = "<group>"; };
+		BC060D7B19280758009989D0 /* LKAssetsLibrary.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKAssetsLibrary.h; sourceTree = "<group>"; };
+		BC060D81192811CE009989D0 /* PhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoViewController.h; sourceTree = "<group>"; };
+		BC060D82192811CE009989D0 /* PhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoViewController.m; sourceTree = "<group>"; };
+		BC060D84192811E3009989D0 /* PhotoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoCell.h; sourceTree = "<group>"; };
+		BC060D85192811E3009989D0 /* PhotoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoCell.m; sourceTree = "<group>"; };
+		BC060D89192815D4009989D0 /* AssetCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssetCell.h; sourceTree = "<group>"; };
+		BC060D8A192815D4009989D0 /* AssetCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssetCell.m; sourceTree = "<group>"; };
+		BC060D8C19281F69009989D0 /* AssetHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssetHeaderView.h; sourceTree = "<group>"; };
+		BC060D8D19281F69009989D0 /* AssetHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssetHeaderView.m; sourceTree = "<group>"; };
+		BC060D92192825BB009989D0 /* LKAssetsDayGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKAssetsDayGroup.h; sourceTree = "<group>"; };
+		BC060D93192825BB009989D0 /* LKAssetsDayGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKAssetsDayGroup.m; sourceTree = "<group>"; };
+		C1902148A8D54059B9633066 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		C5216A84106443DC8AAA2854 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +98,7 @@
 				BC060CD619246CC1009989D0 /* CoreGraphics.framework in Frameworks */,
 				BC060CD819246CC1009989D0 /* UIKit.framework in Frameworks */,
 				BC060CD419246CC1009989D0 /* Foundation.framework in Frameworks */,
+				23E8E7AED783490C96B62FC3 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,10 +120,11 @@
 			children = (
 				BC060D0919246D4D009989D0 /* LKAssetsLibrary.podspec */,
 				BC060D0819246D0B009989D0 /* Classes */,
-				BC060CD919246CC1009989D0 /* LKAssetsLibrary */,
+				BC060CD919246CC1009989D0 /* Examples */,
 				BC060CF819246CC1009989D0 /* LKAssetsLibraryTests */,
 				BC060CD219246CC1009989D0 /* Frameworks */,
 				BC060CD119246CC1009989D0 /* Products */,
+				C1902148A8D54059B9633066 /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -108,22 +144,32 @@
 				BC060CD519246CC1009989D0 /* CoreGraphics.framework */,
 				BC060CD719246CC1009989D0 /* UIKit.framework */,
 				BC060CF219246CC1009989D0 /* XCTest.framework */,
+				C5216A84106443DC8AAA2854 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		BC060CD919246CC1009989D0 /* LKAssetsLibrary */ = {
+		BC060CD919246CC1009989D0 /* Examples */ = {
 			isa = PBXGroup;
 			children = (
 				BC060CE219246CC1009989D0 /* AppDelegate.h */,
 				BC060CE319246CC1009989D0 /* AppDelegate.m */,
 				BC060CE519246CC1009989D0 /* Main.storyboard */,
-				BC060CE819246CC1009989D0 /* ViewController.h */,
-				BC060CE919246CC1009989D0 /* ViewController.m */,
+				BC060D7519280662009989D0 /* TableViewController.h */,
+				BC060D7619280662009989D0 /* TableViewController.m */,
+				BC060D7819280674009989D0 /* CollectionViewController.h */,
+				BC060D7919280674009989D0 /* CollectionViewController.m */,
+				BC060D89192815D4009989D0 /* AssetCell.h */,
+				BC060D8A192815D4009989D0 /* AssetCell.m */,
+				BC060D8C19281F69009989D0 /* AssetHeaderView.h */,
+				BC060D8D19281F69009989D0 /* AssetHeaderView.m */,
+				BC060D81192811CE009989D0 /* PhotoViewController.h */,
+				BC060D82192811CE009989D0 /* PhotoViewController.m */,
+				BC060D84192811E3009989D0 /* PhotoCell.h */,
+				BC060D85192811E3009989D0 /* PhotoCell.m */,
 				BC060CEB19246CC1009989D0 /* Images.xcassets */,
 				BC060CDA19246CC1009989D0 /* Supporting Files */,
 			);
-			name = LKAssetsLibrary;
 			path = Examples;
 			sourceTree = "<group>";
 		};
@@ -160,6 +206,15 @@
 		BC060D0819246D0B009989D0 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				BC060D7B19280758009989D0 /* LKAssetsLibrary.h */,
+				BC060D1A19246ECB009989D0 /* LKAssetsGroupManager.h */,
+				BC060D1B19246ECB009989D0 /* LKAssetsGroupManager.m */,
+				BC060D1C19246ECB009989D0 /* LKAssetsGroup.h */,
+				BC060D1D19246ECB009989D0 /* LKAssetsGroup.m */,
+				BC060D92192825BB009989D0 /* LKAssetsDayGroup.h */,
+				BC060D93192825BB009989D0 /* LKAssetsDayGroup.m */,
+				BC060D1E19246ECB009989D0 /* LKAsset.h */,
+				BC060D1F19246ECB009989D0 /* LKAsset.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -171,9 +226,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BC060D0219246CC1009989D0 /* Build configuration list for PBXNativeTarget "LKAssetsLibrary" */;
 			buildPhases = (
+				2A5970CA5EC6465EBF659C18 /* Check Pods Manifest.lock */,
 				BC060CCC19246CC1009989D0 /* Sources */,
 				BC060CCD19246CC1009989D0 /* Frameworks */,
 				BC060CCE19246CC1009989D0 /* Resources */,
+				B809FA162A114950956B79D0 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -256,14 +313,56 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		2A5970CA5EC6465EBF659C18 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		B809FA162A114950956B79D0 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		BC060CCC19246CC1009989D0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BC060CEA19246CC1009989D0 /* ViewController.m in Sources */,
+				BC060D7A19280674009989D0 /* CollectionViewController.m in Sources */,
+				BC060D2619246ECB009989D0 /* LKAsset.m in Sources */,
+				BC060D2419246ECB009989D0 /* LKAssetsGroup.m in Sources */,
+				BC060D8E19281F69009989D0 /* AssetHeaderView.m in Sources */,
+				BC060D94192825BB009989D0 /* LKAssetsDayGroup.m in Sources */,
 				BC060CE419246CC1009989D0 /* AppDelegate.m in Sources */,
+				BC060D8B192815D4009989D0 /* AssetCell.m in Sources */,
 				BC060CE019246CC1009989D0 /* main.m in Sources */,
+				BC060D7719280662009989D0 /* TableViewController.m in Sources */,
+				BC060D86192811E3009989D0 /* PhotoCell.m in Sources */,
+				BC060D83192811CE009989D0 /* PhotoViewController.m in Sources */,
+				BC060D2219246ECB009989D0 /* LKAssetsGroupManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,6 +371,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				BC060CFF19246CC1009989D0 /* LKAssetsLibraryTests.m in Sources */,
+				BC060D2319246ECB009989D0 /* LKAssetsGroupManager.m in Sources */,
+				BC060D2519246ECB009989D0 /* LKAssetsGroup.m in Sources */,
+				BC060D2719246ECB009989D0 /* LKAsset.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -385,6 +487,7 @@
 		};
 		BC060D0319246CC1009989D0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C1902148A8D54059B9633066 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -398,6 +501,7 @@
 		};
 		BC060D0419246CC1009989D0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C1902148A8D54059B9633066 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -468,6 +572,7 @@
 				BC060D0419246CC1009989D0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BC060D0519246CC1009989D0 /* Build configuration list for PBXNativeTarget "LKAssetsLibraryTests" */ = {
 			isa = XCConfigurationList;
@@ -476,6 +581,7 @@
 				BC060D0719246CC1009989D0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
