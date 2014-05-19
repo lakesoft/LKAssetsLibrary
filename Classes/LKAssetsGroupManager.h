@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <AssetsLibrary/AssetsLibrary.h>
 
 extern NSString * const LKAssetsGroupManagerDidSetup;
 
@@ -19,8 +20,11 @@ extern NSString * const LKAssetsGroupManagerDidSetup;
 // API (Setup) * must call at first*
 + (BOOL)isAuthorizationStatusDenied;
 
-// API
+// API (Factories)
 + (LKAssetsGroupManager*)sharedManager;
+
+- (void)applyTypeFilter:(ALAssetsGroupType)typeFilter;         // ALAssetsGroupType bit combinations (e.g. ALAssetsGroupLibrary|ALAssetsGroupFaces)
+- (void)clearTypeFilter;
 
 - (LKAssetsGroup*)assetsGroupAtIndex:(NSInteger)index;
 

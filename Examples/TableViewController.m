@@ -20,6 +20,7 @@
 #pragma mark - Privates
 - (void)_assetsGroupManagerDidSetup:(NSNotification*)notification
 {
+//    [LKAssetsGroupManager.sharedManager applyTypeFilter:ALAssetsGroupSavedPhotos];
     [self.tableView reloadData];
 }
 

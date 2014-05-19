@@ -15,6 +15,8 @@ NSString* const LKAssetsGroupManagerDidSetup = @"LKAssetsGroupManagerDidSetup";
 @interface LKAssetsGroupManager()
 @property (strong, nonatomic) ALAssetsLibrary* assetsLibrary;
 @property (strong, nonatomic) NSMutableArray* assetsGroups;
+@property (strong, nonatomic) NSArray* filteredAssetsGroups;
+@property (assign, nonatomic) NSUInteger typeFilter;
 @end
 
 @implementation LKAssetsGroupManager
@@ -33,11 +35,25 @@ NSString* const LKAssetsGroupManagerDidSetup = @"LKAssetsGroupManagerDidSetup";
     [self.assetsGroups addObjectsFromArray:groups];
 }
 
+- (void)_applyTypeFilter
+{
+    if (self.typeFilter) {
+        NSMutableArray* groups = @[].mutableCopy;
+        for (LKAssetsGroup* assetsGroup in self.assetsGroups) {
+            if (self.typeFilter & assetsGroup.type) {
+                [groups addObject:assetsGroup];
+            }
+        }
+        self.filteredAssetsGroups = groups;
+    } else {
+        self.filteredAssetsGroups = nil;
+    }
+}
+
 - (void)_updateAssetsGroups
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         for (LKAssetsGroup* assetsGroup in self.assetsGroups) {
-//            NSLog(@"%@: %d", assetsGroup.name, assetsGroup.type);
             [assetsGroup reload];
         }
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -54,7 +70,7 @@ NSString* const LKAssetsGroupManagerDidSetup = @"LKAssetsGroupManagerDidSetup";
     [self.assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAll
                                       usingBlock:^(ALAssetsGroup* group, BOOL* stop) {
                                           if (group) {
-                                              LKAssetsGroup* assetsGroup = [LKAssetsGroup assetsGroupFrom:group];
+                                              LKAssetsGroup* assetsGroup = [LKAssetsGroup assetsGroupFrom:group groupFilter:LKAssetsGroupFilterAllAssets];
                                               [self.assetsGroups addObject:assetsGroup];
                                           } else {
                                               [self _sortAssetsGroup];
@@ -83,6 +99,9 @@ NSString* const LKAssetsGroupManagerDidSetup = @"LKAssetsGroupManagerDidSetup";
 #pragma mark Properties
 - (NSInteger)numberOfAssetsGroups
 {
+    if (self.filteredAssetsGroups) {
+        return self.filteredAssetsGroups.count;
+    }
     return self.assetsGroups.count;
 }
 
@@ -95,8 +114,7 @@ NSString* const LKAssetsGroupManagerDidSetup = @"LKAssetsGroupManagerDidSetup";
 }
 
 
-#pragma mark -
-#pragma mark APIs
+#pragma mark - API
 
 static __strong LKAssetsGroupManager* _sharedManager = nil;
 
@@ -111,10 +129,21 @@ static __strong LKAssetsGroupManager* _sharedManager = nil;
 
 - (LKAssetsGroup*)assetsGroupAtIndex:(NSInteger)index
 {
-    if (index < self.numberOfAssetsGroups) {
-        return self.assetsGroups[index];
+    if (self.filteredAssetsGroups) {
+        return self.filteredAssetsGroups[index];
     }
-    return nil;
+    return self.assetsGroups[index];
+}
+
+- (void)applyTypeFilter:(ALAssetsGroupType)typeFilter
+{
+    _typeFilter = typeFilter;
+    [self _applyTypeFilter];
+}
+
+- (void)clearTypeFilter
+{
+    [self applyTypeFilter:0];
 }
 
 @end

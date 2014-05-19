@@ -13,6 +13,14 @@
 @property (strong, nonatomic) ALAsset* asset;
 @property (assign, nonatomic) NSInteger yyyymmdd;
 @property (assign, nonatomic) NSTimeInterval timeInterval;
+@property (strong, nonatomic) NSString* fileExtension;
+
+// Properties (ALAsset)
+@property (strong, nonatomic) NSURL* url;
+@property (strong, nonatomic) CLLocation* location;
+@property (strong, nonatomic) NSDate* date;
+@property (assign, nonatomic) LKAssetType type;
+
 @end
 
 @implementation LKAsset
@@ -20,10 +28,6 @@
 #pragma mark -
 #pragma mark Privates (Date formatter)
 static NSDateFormatter* _YYYYMMDDDateFormatter = nil;
-- (NSInteger)_YYYYMMDDIntegerFromDate:(NSDate*)date
-{
-    return [_YYYYMMDDDateFormatter stringFromDate:date].integerValue;
-}
 + (void)_setupDateFormatter
 {
     _YYYYMMDDDateFormatter = [[NSDateFormatter alloc] init];
@@ -39,11 +43,12 @@ static NSDateFormatter* _YYYYMMDDDateFormatter = nil;
     if (self) {
         self.asset = asset;
         NSDate* date = self.date;
-        self.yyyymmdd = [self _YYYYMMDDIntegerFromDate:date];
+        self.yyyymmdd = [_YYYYMMDDDateFormatter stringFromDate:date].integerValue;
         if (self.yyyymmdd < 19000000) {
             self.yyyymmdd += 19000000;
         }
         self.timeInterval = date.timeIntervalSince1970;
+        self.type = LKAssetTypeUnInitiliazed;
     }
     return self;
 }
@@ -120,45 +125,92 @@ static NSDateFormatter* _YYYYMMDDDateFormatter = nil;
 }
 
 #pragma mark -
-#pragma mark Properites (Date)
-- (NSString*)fullDateDescription
-{
-    NSDateFormatter* df = [[NSDateFormatter alloc] init];
-    df.dateStyle = NSDateFormatterLongStyle;
-    df.timeStyle = NSDateFormatterShortStyle;
-    return [df stringFromDate:self.date];
-}
-
-- (NSString*)timeDescription
-{
-    NSDateFormatter* df = [[NSDateFormatter alloc] init];
-    [df setDateFormat:[NSDateFormatter dateFormatFromTemplate:@"Hm" options:0 locale:[NSLocale currentLocale]]];
-    return [df stringFromDate:self.date];
-}
-
-
-#pragma mark -
 #pragma mark Properties (ALAsset)
 - (NSURL*)url
 {
-    return [self.asset valueForProperty:ALAssetPropertyAssetURL];
+    if (_url == nil) {
+        _url = [self.asset valueForProperty:ALAssetPropertyAssetURL];
+    }
+    return _url;
 }
 
 - (CLLocation*)location
 {
-    return [self.asset valueForProperty:ALAssetPropertyLocation];
+    if (_location == nil) {
+        _location = [self.asset valueForProperty:ALAssetPropertyLocation];
+    }
+    return _location;
 }
 
 - (NSDate*)date
 {
-    return [self.asset valueForProperty:ALAssetPropertyDate];
+    if (_date == nil) {
+        _date = [self.asset valueForProperty:ALAssetPropertyDate];
+    }
+    return _date;
+}
+
+- (CGSize)size
+{
+    return self.asset.defaultRepresentation.dimensions;
+}
+
+- (LKAssetType)type
+{
+    if (_type == LKAssetTypeUnInitiliazed) {
+        NSString* typeString = [self.asset valueForProperty:ALAssetPropertyType];
+        if ([typeString isEqualToString:ALAssetTypePhoto]) {
+            self.type = LKAssetTypePhoto;
+        } else if ([typeString isEqualToString:ALAssetTypeVideo]) {
+            self.type = LKAssetTypeVideo;
+        } else if ([typeString isEqualToString:ALAssetTypeUnknown]) {
+            self.type = LKAssetTypeUnknown;
+        }
+    }
+    return _type;
+}
+
+- (NSString*)fileExtension
+{
+    if (_fileExtension == nil) {
+        _fileExtension = self.url.pathExtension.uppercaseString;
+    }
+    return _fileExtension;
 }
 
 #pragma mark -
 #pragma mark Properties (Attribute)
-- (BOOL)isJPEGPhoto
+- (BOOL)isJPEG
 {
-    return [self.url.pathExtension isEqualToString:@"JPG"];
+    NSString* fileExtension = self.fileExtension;
+    return [fileExtension isEqualToString:@"JPG"] | [fileExtension isEqualToString:@"JPEG"];
+}
+
+- (BOOL)isPNG
+{
+    return [self.fileExtension isEqualToString:@"PNG"];
+}
+
+- (BOOL)isVideo
+{
+    return self.type == LKAssetTypeVideo;
+}
+
+- (BOOL)isPhoto
+{
+    return self.type == LKAssetTypePhoto;
+}
+
+- (BOOL)isScreenshot
+{
+
+    if (self.isPNG) {
+        CGSize size = UIScreen.mainScreen.bounds.size;
+        size.width *= UIScreen.mainScreen.scale;
+        size.height *= UIScreen.mainScreen.scale;
+        return CGSizeEqualToSize(size, self.size);
+    }
+    return NO;
 }
 
 

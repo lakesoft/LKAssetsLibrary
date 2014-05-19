@@ -31,6 +31,7 @@
 {
     [super viewDidLoad];
     self.assetsGroup = [LKAssetsGroupManager.sharedManager assetsGroupAtIndex:self.groupIndex];
+    [self.assetsGroup applySubFilter:LKAssetsGroupSubFilterJPEG];
 }
 
 - (void)didReceiveMemoryWarning
@@ -43,12 +44,12 @@
 #pragma mark - UICollectionViewDataSource
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return self.assetsGroup.dayAssets.count;
+    return self.assetsGroup.numberOfAssetDayGroups;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    LKAssetsDayGroup* dayGroup = self.assetsGroup.dayAssets[section];
+    LKAssetsDayGroup* dayGroup = [self.assetsGroup assetDayGroupAtIndex:section];
     return dayGroup.assets.count;
 }
 
@@ -56,7 +57,7 @@
 {
     AssetCell* cell = (AssetCell*)[collectionView dequeueReusableCellWithReuseIdentifier:@"AssetCell"
                                                                            forIndexPath:indexPath];
-    LKAssetsDayGroup* dayGroup = self.assetsGroup.dayAssets[indexPath.section];
+    LKAssetsDayGroup* dayGroup = [self.assetsGroup assetDayGroupAtIndex:indexPath.section];
     LKAsset* asset = dayGroup.assets[indexPath.row];
     cell.imageView.image = asset.thumbnail;
     return cell;
@@ -68,7 +69,7 @@
     
     if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
         AssetHeaderView *view = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"AssetHeaderView" forIndexPath:indexPath];
-        LKAssetsDayGroup* dayGroup = self.assetsGroup.dayAssets[indexPath.section];
+        LKAssetsDayGroup* dayGroup = [self.assetsGroup assetDayGroupAtIndex:indexPath.section];
         view.title.text = dayGroup.description;
         reusableView = view;
     }
@@ -82,7 +83,7 @@
     NSIndexPath* indexPath = [self.collectionView indexPathForCell:sender];
     NSLog(@"selected: %lx", indexPath.row);
     PhotoViewController* vc = segue.destinationViewController;
-    vc.dayGroup = self.assetsGroup.dayAssets[indexPath.section];
+    vc.dayGroup = [self.assetsGroup assetDayGroupAtIndex:indexPath.section];
     vc.photoIndex = indexPath.row;
 }
 
