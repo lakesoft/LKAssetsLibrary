@@ -12,10 +12,6 @@
 #import "AssetHeaderView.h"
 #import "PhotoViewController.h"
 
-@interface CollectionViewController ()
-@property (nonatomic, strong) LKAssetsGroup* assetsGroup;
-@end
-
 @implementation CollectionViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -30,8 +26,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.assetsGroup = [LKAssetsGroupManager.sharedManager assetsGroupAtIndex:self.groupIndex];
-    [self.assetsGroup applySubFilter:LKAssetsGroupSubFilterJPEG];
 }
 
 - (void)didReceiveMemoryWarning
@@ -44,21 +38,21 @@
 #pragma mark - UICollectionViewDataSource
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return self.assetsGroup.numberOfAssetDayGroups;
+    return self.subGroups.count;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    LKAssetsDayGroup* dayGroup = [self.assetsGroup assetDayGroupAtIndex:section];
-    return dayGroup.assets.count;
+    LKAssetsSubGroup* subGroup = [self.subGroups objectAtIndex:section];
+    return subGroup.numberOfAssets;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     AssetCell* cell = (AssetCell*)[collectionView dequeueReusableCellWithReuseIdentifier:@"AssetCell"
                                                                            forIndexPath:indexPath];
-    LKAssetsDayGroup* dayGroup = [self.assetsGroup assetDayGroupAtIndex:indexPath.section];
-    LKAsset* asset = dayGroup.assets[indexPath.row];
+    LKAssetsSubGroup* subGroup = [self.subGroups objectAtIndex:indexPath.section];
+    LKAsset* asset = [subGroup assetAtIndex:indexPath.row];
     cell.imageView.image = asset.thumbnail;
     return cell;
 }
@@ -69,8 +63,8 @@
     
     if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
         AssetHeaderView *view = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"AssetHeaderView" forIndexPath:indexPath];
-        LKAssetsDayGroup* dayGroup = [self.assetsGroup assetDayGroupAtIndex:indexPath.section];
-        view.title.text = dayGroup.description;
+        LKAssetsSubGroup* subGroup = [self.subGroups objectAtIndex:indexPath.section];
+        view.title.text = subGroup.description;
         reusableView = view;
     }
     return reusableView;
@@ -83,7 +77,7 @@
     NSIndexPath* indexPath = [self.collectionView indexPathForCell:sender];
     NSLog(@"selected: %lx", indexPath.row);
     PhotoViewController* vc = segue.destinationViewController;
-    vc.dayGroup = [self.assetsGroup assetDayGroupAtIndex:indexPath.section];
+    vc.subGroup = [self.subGroups objectAtIndex:indexPath.section];
     vc.photoIndex = indexPath.row;
 }
 

@@ -8,7 +8,10 @@
 
 #import "LKAssetsGroup.h"
 #import "LKAsset.h"
-#import "LKAssetsDayGroup.h"
+#import "LKAssetsSubGroup.h"
+#import "LKAssetsMonthlyGroup.h"
+#import "LKAssetsDailyGroup.h"
+#import "LKAssetsHourlyGroup.h"
 
 /*
 #pragma mark -
@@ -35,8 +38,11 @@
 @property (strong, nonatomic) ALAssetsGroup* assetsGroup;
 @property (strong, nonatomic) NSArray* assets;
 @property (strong, nonatomic) NSArray* filteredAssets;
-@property (strong, nonatomic) NSMutableArray* dayAssets;
 @property (assign, nonatomic) LKAssetsGroupSubFilter subFilter;
+
+@property (strong, nonatomic) NSMutableArray* monthlyGroups;
+@property (strong, nonatomic) NSMutableArray* dailyGroups;
+@property (strong, nonatomic) NSMutableArray* hourlyGroups;
 
 // private
 @property (strong, nonatomic) NSMutableArray* temporaryAssets;
@@ -81,6 +87,13 @@ typedef BOOL (^SubFilterBlock)(LKAsset* asset);
     return block;
 }
 
+- (void)_clearSubGroups
+{
+    self.monthlyGroups = nil;
+    self.dailyGroups = nil;
+    self.hourlyGroups = nil;
+}
+
 - (void)_applySubFilter
 {
     if (self.subFilter) {
@@ -93,29 +106,29 @@ typedef BOOL (^SubFilterBlock)(LKAsset* asset);
             }
         }
         self.filteredAssets = assets;
-        [self _setupDayAssetsFromAssets:self.filteredAssets];
-
     } else {
         self.filteredAssets = nil;
-        [self _setupDayAssetsFromAssets:self.assets];
     }
-    
+
+    [self _clearSubGroups];
 }
 
-- (void)_setupDayAssetsFromAssets:(NSArray*)assets
+- (NSMutableArray*)_subGroupsWithFactory:(LKAssetsSubGroup*(^)(NSInteger dateTimeInteger))factory scale:(NSInteger)scale
 {
-    self.dayAssets = @[].mutableCopy;
-    LKAssetsDayGroup* dayGroup = nil;
-    NSInteger yyyymmdd = -1;
-
+    NSArray* assets = self.filteredAssets ? self.filteredAssets : self.assets;
+    NSMutableArray* subGroups = @[].mutableCopy;
+    NSInteger dateTimeInteger = -1;
+    LKAssetsSubGroup* subGroup =  nil;
+    
     for (LKAsset* asset in assets) {
-        if (asset.yyyymmdd != yyyymmdd) {
-            yyyymmdd = asset.yyyymmdd;
-            dayGroup = [[LKAssetsDayGroup alloc] initWithYYYYMMMDD:yyyymmdd];
-            [self.dayAssets addObject:dayGroup];
+        if (dateTimeInteger != asset.dateTimeInteger/scale) {
+            dateTimeInteger = asset.dateTimeInteger/scale;
+            subGroup = factory(dateTimeInteger);
+            [subGroups addObject:subGroup];
         }
-        [dayGroup addAsset:asset];
+        [subGroup addAsset:asset];
     }
+    return subGroups;
 }
 
 
@@ -154,12 +167,7 @@ typedef BOOL (^SubFilterBlock)(LKAsset* asset);
 }
 - (UIImage*)posterImage
 {
-//    if (self.assets.count) {
-//        LKAsset* asset = self.assets[self.assets.count-1];
-//        return asset.fullScreenImage;
-//    } else {
-        return [UIImage imageWithCGImage:self.assetsGroup.posterImage];
-//    }
+    return [UIImage imageWithCGImage:self.assetsGroup.posterImage];
 }
 
 
@@ -241,27 +249,59 @@ typedef BOOL (^SubFilterBlock)(LKAsset* asset);
 }
 
 
-#pragma mark - API (Day Group)
+#pragma mark - API (Group)
 - (NSInteger)numberOfAssets
 {
     return self.filteredAssets ? self.filteredAssets.count : self.assets.count;
 }
 
-- (LKAssetsDayGroup*)assetAtIndex:(NSInteger)index
+- (LKAsset*)assetAtIndex:(NSInteger)index
 {
     return self.filteredAssets ? self.filteredAssets[index] : self.assets[index];
 }
 
 
-#pragma mark - API (Day Group)
-- (NSInteger)numberOfAssetDayGroups
+#pragma mark - API (Sub Groups)
+- (NSMutableArray*)monthlyGroups
 {
-    return self.dayAssets.count;
+    if (_monthlyGroups == nil) {
+        _monthlyGroups = [self _subGroupsWithFactory:^LKAssetsSubGroup *(NSInteger dateTimeInteger) {
+            return [[LKAssetsMonthlyGroup alloc] initWithDateTimeInteger:dateTimeInteger];
+        } scale:10000];    // yyyyMMddHH / 10000 = yyyyMM
+    }
+    return _monthlyGroups;
+}
+- (NSArray*)assetsMonthlyGroups
+{
+    return self.monthlyGroups;
 }
 
-- (LKAssetsDayGroup*)assetDayGroupAtIndex:(NSInteger)index
+- (NSMutableArray*)dailyGroups
 {
-    return self.dayAssets[index];
+    if (_dailyGroups == nil) {
+        _dailyGroups = [self _subGroupsWithFactory:^LKAssetsSubGroup *(NSInteger dateTimeInteger) {
+            return [[LKAssetsDailyGroup alloc] initWithDateTimeInteger:dateTimeInteger];
+        } scale:100];    // yyyyMMddHH / 100 = yyyyMMdd
+    }
+    return _dailyGroups;
+}
+- (NSArray*)assetsDailyGroups
+{
+    return self.dailyGroups;
+}
+
+- (NSMutableArray*)hourlyGroups
+{
+    if (_hourlyGroups == nil) {
+        _hourlyGroups = [self _subGroupsWithFactory:^LKAssetsSubGroup *(NSInteger dateTimeInteger) {
+            return [[LKAssetsHourlyGroup alloc] initWithDateTimeInteger:dateTimeInteger];
+        } scale:1];    // yyyyMMddHH / 1 = yyyyMMddHH
+    }
+    return _hourlyGroups;
+}
+- (NSArray*)assetsHourlyGroups
+{
+    return self.hourlyGroups;
 }
 
 

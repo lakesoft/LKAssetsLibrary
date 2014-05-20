@@ -44,14 +44,14 @@
 #pragma mark - UICollectionViewDatasource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return self.dayGroup.assets.count;
+    return self.subGroup.numberOfAssets;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     PhotoCell* cell = (PhotoCell*)[collectionView dequeueReusableCellWithReuseIdentifier:@"PhotoCell"
                                                                             forIndexPath:indexPath];
-    LKAsset* asset = self.dayGroup.assets[indexPath.row];
+    LKAsset* asset = [self.subGroup assetAtIndex:indexPath.row];
     cell.imageView.image = asset.fullScreenImage;
     return cell;
 }

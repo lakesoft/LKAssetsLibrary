@@ -11,7 +11,7 @@
 
 @interface PhotoViewController : UICollectionViewController
 
-@property (nonatomic, weak) LKAssetsDayGroup* dayGroup;
+@property (nonatomic, weak) LKAssetsSubGroup* subGroup;
 @property (nonatomic, assign) NSInteger photoIndex;
 
 @end

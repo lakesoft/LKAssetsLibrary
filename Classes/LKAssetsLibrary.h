@@ -8,5 +8,7 @@
 
 #import "LKAssetsGroupManager.h"
 #import "LKAssetsGroup.h"
-#import "LKAssetsDayGroup.h"
+#import "LKAssetsMonthlyGroup.h"
+#import "LKAssetsDailyGroup.h"
+#import "LKAssetsHourlyGroup.h"
 #import "LKAsset.h"

@@ -23,7 +23,8 @@ extern NSString * const LKAssetsGroupManagerDidSetup;
 // API (Factories)
 + (LKAssetsGroupManager*)sharedManager;
 
-- (void)applyTypeFilter:(ALAssetsGroupType)typeFilter;         // ALAssetsGroupType bit combinations (e.g. ALAssetsGroupLibrary|ALAssetsGroupFaces)
+// ALAssetsGroupType bit combinations (e.g. ALAssetsGroupLibrary|ALAssetsGroupFaces)
+- (void)applyTypeFilter:(ALAssetsGroupType)typeFilter;
 - (void)clearTypeFilter;
 
 - (LKAssetsGroup*)assetsGroupAtIndex:(NSInteger)index;

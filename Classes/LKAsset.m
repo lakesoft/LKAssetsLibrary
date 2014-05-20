@@ -11,7 +11,7 @@
 
 @interface LKAsset()
 @property (strong, nonatomic) ALAsset* asset;
-@property (assign, nonatomic) NSInteger yyyymmdd;
+@property (assign, nonatomic) NSInteger dateTimeInteger; // yyyyMMddHH < long max:2147483647
 @property (assign, nonatomic) NSTimeInterval timeInterval;
 @property (strong, nonatomic) NSString* fileExtension;
 
@@ -27,12 +27,12 @@
 
 #pragma mark -
 #pragma mark Privates (Date formatter)
-static NSDateFormatter* _YYYYMMDDDateFormatter = nil;
+static NSDateFormatter* _dateFormatter = nil;
 + (void)_setupDateFormatter
 {
-    _YYYYMMDDDateFormatter = [[NSDateFormatter alloc] init];
-    _YYYYMMDDDateFormatter.calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    [_YYYYMMDDDateFormatter setDateFormat:@"yyyyMMdd"];
+    _dateFormatter = [[NSDateFormatter alloc] init];
+    _dateFormatter.calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    [_dateFormatter setDateFormat:@"yyyyMMddHH"];
 }
 
 #pragma mark -
@@ -43,9 +43,9 @@ static NSDateFormatter* _YYYYMMDDDateFormatter = nil;
     if (self) {
         self.asset = asset;
         NSDate* date = self.date;
-        self.yyyymmdd = [_YYYYMMDDDateFormatter stringFromDate:date].integerValue;
-        if (self.yyyymmdd < 19000000) {
-            self.yyyymmdd += 19000000;
+        self.dateTimeInteger = [_dateFormatter stringFromDate:date].integerValue;
+        if (self.dateTimeInteger < 1900000000) {
+            self.dateTimeInteger += 1900000000;
         }
         self.timeInterval = date.timeIntervalSince1970;
         self.type = LKAssetTypeUnInitiliazed;
@@ -115,13 +115,6 @@ static NSDateFormatter* _YYYYMMDDDateFormatter = nil;
         // deleted
         return nil;
     }
-}
-
-#pragma mark -
-#pragma mark Properties (Date number)
-- (NSInteger)yyyymm
-{
-    return self.yyyymmdd / 100;
 }
 
 #pragma mark -

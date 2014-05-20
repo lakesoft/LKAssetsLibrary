@@ -53,7 +53,8 @@ NSString* const LKAssetsGroupManagerDidSetup = @"LKAssetsGroupManagerDidSetup";
 - (void)_updateAssetsGroups
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        for (LKAssetsGroup* assetsGroup in self.assetsGroups) {
+        NSArray* groups = self.filteredAssetsGroups ? self.filteredAssetsGroups : self.assetsGroups;
+        for (LKAssetsGroup* assetsGroup in groups) {
             [assetsGroup reload];
         }
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -74,6 +75,7 @@ NSString* const LKAssetsGroupManagerDidSetup = @"LKAssetsGroupManagerDidSetup";
                                               [self.assetsGroups addObject:assetsGroup];
                                           } else {
                                               [self _sortAssetsGroup];
+                                              [self _applyTypeFilter];
                                               [self _updateAssetsGroups];
                                           }
                                       }

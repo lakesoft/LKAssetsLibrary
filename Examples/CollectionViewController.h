@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LKAssetsLibrary.h"
 
 @interface CollectionViewController : UICollectionViewController
 
-@property (nonatomic, assign) NSInteger groupIndex;
+@property (nonatomic, weak) NSArray* subGroups;
 
 @end

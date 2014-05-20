@@ -29,8 +29,7 @@ typedef NS_ENUM(NSInteger, LKAssetType) {
 
 // Properties (Date number)
 @property (assign, nonatomic, readonly) NSTimeInterval timeInterval;
-@property (assign, nonatomic, readonly) NSInteger yyyymmdd;
-@property (assign, nonatomic, readonly) NSInteger yyyymm;
+@property (assign, nonatomic, readonly) NSInteger dateTimeInteger;  // yyyymmddHHMM
 
 // Properties (ALAsset)
 @property (strong, nonatomic, readonly) NSURL* url;

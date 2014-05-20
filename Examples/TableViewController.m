@@ -8,7 +8,7 @@
 
 #import "TableViewController.h"
 #import "LKAssetsLibrary.h"
-#import "CollectionViewController.h"
+#import "TabBarController.h"
 
 @interface TableViewController ()
 
@@ -20,7 +20,6 @@
 #pragma mark - Privates
 - (void)_assetsGroupManagerDidSetup:(NSNotification*)notification
 {
-//    [LKAssetsGroupManager.sharedManager applyTypeFilter:ALAssetsGroupSavedPhotos];
     [self.tableView reloadData];
 }
 
@@ -43,6 +42,7 @@
                                                  name:LKAssetsGroupManagerDidSetup
                                                object:nil];
     
+//    [LKAssetsGroupManager.sharedManager applyTypeFilter:ALAssetsGroupSavedPhotos];
     [LKAssetsGroupManager sharedManager];   // load albums and photos
 
 }
@@ -78,8 +78,8 @@
 {
     NSIndexPath* indexPath = [self.tableView indexPathForCell:sender];
     NSLog(@"selected: %lx", indexPath.row);
-    CollectionViewController* vc = segue.destinationViewController;
-    vc.groupIndex = indexPath.row;
+    TabBarController* vc = segue.destinationViewController;
+    vc.assetsGroup = [LKAssetsGroupManager.sharedManager assetsGroupAtIndex:indexPath.row];
 }
 
 @end

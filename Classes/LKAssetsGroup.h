@@ -25,7 +25,7 @@ typedef NS_ENUM(NSInteger, LKAssetsGroupSubFilter) {
 
 
 @class LKAsset;
-@class LKAssetsDayGroup;
+@class LKAssetsDailyGroup;
 
 @interface LKAssetsGroup : NSObject
 
@@ -51,11 +51,13 @@ typedef NS_ENUM(NSInteger, LKAssetsGroupSubFilter) {
 
 // API (Assets)
 @property (assign, nonatomic, readonly) NSInteger numberOfAssets;
-- (LKAssetsDayGroup*)assetAtIndex:(NSInteger)index;
+- (LKAsset*)assetAtIndex:(NSInteger)index;
 
-// API (Day Group)
-@property (assign, nonatomic, readonly) NSInteger numberOfAssetDayGroups;
-- (LKAssetsDayGroup*)assetDayGroupAtIndex:(NSInteger)index;
+// API (Sub Groups)
+@property (weak, nonatomic, readonly) NSArray* assetsMonthlyGroups;
+@property (weak, nonatomic, readonly) NSArray* assetsDailyGroups;
+@property (weak, nonatomic, readonly) NSArray* assetsHourlyGroups;
+
 
 // API (Filter)
 - (void)applySubFilter:(LKAssetsGroupSubFilter)subFilter;
@@ -65,5 +67,10 @@ typedef NS_ENUM(NSInteger, LKAssetsGroupSubFilter) {
 // TODO:
 //- (NSArray*)shuffledAssets;
 
-
 @end
+
+
+@interface LKAssetsGroup (SubGroup)
+@end
+
+

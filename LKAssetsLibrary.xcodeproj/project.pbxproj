@@ -33,7 +33,13 @@
 		BC060D86192811E3009989D0 /* PhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC060D85192811E3009989D0 /* PhotoCell.m */; };
 		BC060D8B192815D4009989D0 /* AssetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC060D8A192815D4009989D0 /* AssetCell.m */; };
 		BC060D8E19281F69009989D0 /* AssetHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC060D8D19281F69009989D0 /* AssetHeaderView.m */; };
-		BC060D94192825BB009989D0 /* LKAssetsDayGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = BC060D93192825BB009989D0 /* LKAssetsDayGroup.m */; };
+		BC060D94192825BB009989D0 /* LKAssetsDailyGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = BC060D93192825BB009989D0 /* LKAssetsDailyGroup.m */; };
+		BC060D97192B52E1009989D0 /* LKAssetsSubGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = BC060D96192B52E1009989D0 /* LKAssetsSubGroup.m */; };
+		BC060D9B192BEE20009989D0 /* LKAssetsMonthlyGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = BC060D9A192BEE20009989D0 /* LKAssetsMonthlyGroup.m */; };
+		BC060D9E192BEE6F009989D0 /* LKAssetsHourlyGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = BC060D9D192BEE6F009989D0 /* LKAssetsHourlyGroup.m */; };
+		BC060DA7192BF957009989D0 /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC060DA6192BF956009989D0 /* TabBarController.m */; };
+		BC060DAA192C0406009989D0 /* FilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC060DA9192C0406009989D0 /* FilterViewController.m */; };
+		BC060DAD192C0A3C009989D0 /* PlaceHolderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC060DAC192C0A3C009989D0 /* PlaceHolderViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,8 +90,20 @@
 		BC060D8A192815D4009989D0 /* AssetCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssetCell.m; sourceTree = "<group>"; };
 		BC060D8C19281F69009989D0 /* AssetHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssetHeaderView.h; sourceTree = "<group>"; };
 		BC060D8D19281F69009989D0 /* AssetHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssetHeaderView.m; sourceTree = "<group>"; };
-		BC060D92192825BB009989D0 /* LKAssetsDayGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKAssetsDayGroup.h; sourceTree = "<group>"; };
-		BC060D93192825BB009989D0 /* LKAssetsDayGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKAssetsDayGroup.m; sourceTree = "<group>"; };
+		BC060D92192825BB009989D0 /* LKAssetsDailyGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKAssetsDailyGroup.h; sourceTree = "<group>"; };
+		BC060D93192825BB009989D0 /* LKAssetsDailyGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKAssetsDailyGroup.m; sourceTree = "<group>"; };
+		BC060D95192B52E1009989D0 /* LKAssetsSubGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKAssetsSubGroup.h; sourceTree = "<group>"; };
+		BC060D96192B52E1009989D0 /* LKAssetsSubGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKAssetsSubGroup.m; sourceTree = "<group>"; };
+		BC060D99192BEE20009989D0 /* LKAssetsMonthlyGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKAssetsMonthlyGroup.h; sourceTree = "<group>"; };
+		BC060D9A192BEE20009989D0 /* LKAssetsMonthlyGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKAssetsMonthlyGroup.m; sourceTree = "<group>"; };
+		BC060D9C192BEE6F009989D0 /* LKAssetsHourlyGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKAssetsHourlyGroup.h; sourceTree = "<group>"; };
+		BC060D9D192BEE6F009989D0 /* LKAssetsHourlyGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKAssetsHourlyGroup.m; sourceTree = "<group>"; };
+		BC060DA5192BF956009989D0 /* TabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarController.h; sourceTree = "<group>"; };
+		BC060DA6192BF956009989D0 /* TabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarController.m; sourceTree = "<group>"; };
+		BC060DA8192C0406009989D0 /* FilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterViewController.h; sourceTree = "<group>"; };
+		BC060DA9192C0406009989D0 /* FilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterViewController.m; sourceTree = "<group>"; };
+		BC060DAB192C0A3C009989D0 /* PlaceHolderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaceHolderViewController.h; sourceTree = "<group>"; };
+		BC060DAC192C0A3C009989D0 /* PlaceHolderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaceHolderViewController.m; sourceTree = "<group>"; };
 		C1902148A8D54059B9633066 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		C5216A84106443DC8AAA2854 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -157,6 +175,12 @@
 				BC060CE519246CC1009989D0 /* Main.storyboard */,
 				BC060D7519280662009989D0 /* TableViewController.h */,
 				BC060D7619280662009989D0 /* TableViewController.m */,
+				BC060DA5192BF956009989D0 /* TabBarController.h */,
+				BC060DA6192BF956009989D0 /* TabBarController.m */,
+				BC060DAB192C0A3C009989D0 /* PlaceHolderViewController.h */,
+				BC060DAC192C0A3C009989D0 /* PlaceHolderViewController.m */,
+				BC060DA8192C0406009989D0 /* FilterViewController.h */,
+				BC060DA9192C0406009989D0 /* FilterViewController.m */,
 				BC060D7819280674009989D0 /* CollectionViewController.h */,
 				BC060D7919280674009989D0 /* CollectionViewController.m */,
 				BC060D89192815D4009989D0 /* AssetCell.h */,
@@ -211,12 +235,26 @@
 				BC060D1B19246ECB009989D0 /* LKAssetsGroupManager.m */,
 				BC060D1C19246ECB009989D0 /* LKAssetsGroup.h */,
 				BC060D1D19246ECB009989D0 /* LKAssetsGroup.m */,
-				BC060D92192825BB009989D0 /* LKAssetsDayGroup.h */,
-				BC060D93192825BB009989D0 /* LKAssetsDayGroup.m */,
+				BC060D98192B52E8009989D0 /* Sub Groups */,
 				BC060D1E19246ECB009989D0 /* LKAsset.h */,
 				BC060D1F19246ECB009989D0 /* LKAsset.m */,
 			);
 			path = Classes;
+			sourceTree = "<group>";
+		};
+		BC060D98192B52E8009989D0 /* Sub Groups */ = {
+			isa = PBXGroup;
+			children = (
+				BC060D95192B52E1009989D0 /* LKAssetsSubGroup.h */,
+				BC060D96192B52E1009989D0 /* LKAssetsSubGroup.m */,
+				BC060D99192BEE20009989D0 /* LKAssetsMonthlyGroup.h */,
+				BC060D9A192BEE20009989D0 /* LKAssetsMonthlyGroup.m */,
+				BC060D92192825BB009989D0 /* LKAssetsDailyGroup.h */,
+				BC060D93192825BB009989D0 /* LKAssetsDailyGroup.m */,
+				BC060D9C192BEE6F009989D0 /* LKAssetsHourlyGroup.h */,
+				BC060D9D192BEE6F009989D0 /* LKAssetsHourlyGroup.m */,
+			);
+			name = "Sub Groups";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -352,17 +390,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				BC060D7A19280674009989D0 /* CollectionViewController.m in Sources */,
+				BC060D97192B52E1009989D0 /* LKAssetsSubGroup.m in Sources */,
 				BC060D2619246ECB009989D0 /* LKAsset.m in Sources */,
+				BC060D9B192BEE20009989D0 /* LKAssetsMonthlyGroup.m in Sources */,
 				BC060D2419246ECB009989D0 /* LKAssetsGroup.m in Sources */,
 				BC060D8E19281F69009989D0 /* AssetHeaderView.m in Sources */,
-				BC060D94192825BB009989D0 /* LKAssetsDayGroup.m in Sources */,
+				BC060DAD192C0A3C009989D0 /* PlaceHolderViewController.m in Sources */,
+				BC060D94192825BB009989D0 /* LKAssetsDailyGroup.m in Sources */,
 				BC060CE419246CC1009989D0 /* AppDelegate.m in Sources */,
 				BC060D8B192815D4009989D0 /* AssetCell.m in Sources */,
+				BC060DAA192C0406009989D0 /* FilterViewController.m in Sources */,
 				BC060CE019246CC1009989D0 /* main.m in Sources */,
 				BC060D7719280662009989D0 /* TableViewController.m in Sources */,
 				BC060D86192811E3009989D0 /* PhotoCell.m in Sources */,
 				BC060D83192811CE009989D0 /* PhotoViewController.m in Sources */,
+				BC060DA7192BF957009989D0 /* TabBarController.m in Sources */,
 				BC060D2219246ECB009989D0 /* LKAssetsGroupManager.m in Sources */,
+				BC060D9E192BEE6F009989D0 /* LKAssetsHourlyGroup.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
