@@ -37,7 +37,30 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     CollectionViewController* vc = segue.destinationViewController;
-    vc.subGroups = self.subGroups;
+    vc.assetsGroup = self.assetsGroup;
+}
+
+- (IBAction)changedSegments:(UISegmentedControl*)sender {
+    
+    switch (sender.selectedSegmentIndex) {
+        case 1:
+            // JPEG
+            self.assetsGroup.categoryType = LKAssetsGroupCategoryTypeJPEG;
+            break;
+        case 2:
+            // Screen
+            self.assetsGroup.categoryType = LKAssetsGroupCategoryTypeScreenShot;
+            break;
+        case 3:
+            // video
+            self.assetsGroup.categoryType = LKAssetsGroupCategoryTypeVideo;
+            break;
+        case 0:
+        default:
+            // All
+            self.assetsGroup.categoryType = LKAssetsGroupCategoryTypeAll;
+            break;
+    }
 }
 
 @end

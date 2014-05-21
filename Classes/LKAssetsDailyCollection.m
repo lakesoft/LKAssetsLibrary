@@ -1,21 +1,22 @@
 //
-//  LKAssetsHourlyGroup.m
+//  LKAssetsDayGroup.m
 //  LKAssetsLibrary
 //
-//  Created by Hiroshi Hashiguchi on 2014/05/21.
+//  Created by Hiroshi Hashiguchi on 2014/05/18.
 //  Copyright (c) 2014年 lakesoft. All rights reserved.
 //
 
-#import "LKAssetsHourlyGroup.h"
+#import "LKAssetsDailyCollection.h"
 
-@implementation LKAssetsHourlyGroup
+@implementation LKAssetsDailyCollection
 
 #pragma mark - Properties
 - (NSDate *)date
 {
     NSDateFormatter* df = NSDateFormatter.new;
-    df.dateFormat = @"yyyyMMddHH";
+    df.dateFormat = @"yyyyMMdd";
     return [df dateFromString:[NSString stringWithFormat:@"%zd", self.dateTimeInteger]];
 }
+
 
 @end

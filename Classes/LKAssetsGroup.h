@@ -7,6 +7,7 @@
 //
 #import <Foundation/Foundation.h>
 #import <AssetsLibrary/AssetsLibrary.h>
+#import "LKAssetsCollection.h"
 
 typedef NS_ENUM(NSInteger, LKAssetsGroupFilter) {
     LKAssetsGroupFilterAllAssets = 1,
@@ -14,18 +15,19 @@ typedef NS_ENUM(NSInteger, LKAssetsGroupFilter) {
     LKAssetsGroupFilterAllVideos = 3
 };
 
-typedef NS_ENUM(NSInteger, LKAssetsGroupSubFilter) {
-    LKAssetsGroupSubFilterNo         = 0,
-    LKAssetsGroupSubFilterPhoto      = 11,
-    LKAssetsGroupSubFilterVideo      = 12,
-    LKAssetsGroupSubFilterJPEG       = 21,
-    LKAssetsGroupSubFilterPNG        = 22,
-    LKAssetsGroupSubFilterScreenShot = 23,
+typedef NS_ENUM(NSInteger, LKAssetsGroupCategoryType) {
+    LKAssetsGroupCategoryTypeAll        = 0,
+    LKAssetsGroupCategoryTypePhoto      = 11,
+    LKAssetsGroupCategoryTypeVideo      = 12,
+    LKAssetsGroupCategoryTypeJPEG       = 21,
+    LKAssetsGroupCategoryTypePNG        = 22,
+    LKAssetsGroupCategoryTypeScreenShot = 23,
 };
 
+extern NSString * const LKAssetsGroupDidSetCategoryNotification;
 
 @class LKAsset;
-@class LKAssetsDailyGroup;
+@class LKAssetsDayCollection;
 
 @interface LKAssetsGroup : NSObject
 
@@ -43,25 +45,26 @@ typedef NS_ENUM(NSInteger, LKAssetsGroupSubFilter) {
 @property (assign, nonatomic, readonly) BOOL isSavedPhoto;
 @property (assign, nonatomic, readonly) BOOL isPhotoStream;
 
+// API (Assets)
+@property (strong, nonatomic, readonly) NSArray* assets;
+
+// Properties (Category)
+@property (assign, nonatomic) LKAssetsGroupCategoryType categoryType;
+
+// Properties (Collection)
+@property (assign, nonatomic) LKAssetsCollectionType collectionType;
+@property (strong, nonatomic, readonly) NSArray* collections;   // <LKAssetsCollection>
+
+
 // API (Factories)
 + (LKAssetsGroup*)assetsGroupFrom:(ALAssetsGroup*)assetsGroup groupFilter:(LKAssetsGroupFilter)filter;
 
 // API (Operations)
 - (void)reload;
 
-// API (Assets)
-@property (assign, nonatomic, readonly) NSInteger numberOfAssets;
-- (LKAsset*)assetAtIndex:(NSInteger)index;
 
-// API (Sub Groups)
-@property (weak, nonatomic, readonly) NSArray* assetsMonthlyGroups;
-@property (weak, nonatomic, readonly) NSArray* assetsDailyGroups;
-@property (weak, nonatomic, readonly) NSArray* assetsHourlyGroups;
-
-
-// API (Filter)
-- (void)applySubFilter:(LKAssetsGroupSubFilter)subFilter;
-- (void)clearSubFilter;
+//- (NSInteger)indexFromIndexPath:(NSIndexPath*)indexPath assetsSubGroupsType:(LKAssetsCollectionType)collectionType;
+//- (NSIndexPath*)indexPathFromIndex:(NSInteger)index assetsSubGroupsType:(LKAssetsGroupCollection)assetsSubGroupType;
 
 
 // TODO:

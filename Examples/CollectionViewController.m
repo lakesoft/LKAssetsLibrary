@@ -14,6 +14,11 @@
 
 @implementation CollectionViewController
 
+- (void)_didApplySubFilter:(NSNotification*)notification
+{
+    [self.collectionView reloadData];
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -26,6 +31,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [NSNotificationCenter.defaultCenter addObserver:self
+                                           selector:@selector(_didApplySubFilter:)
+                                               name:LKAssetsGroupDidSetCategoryNotification
+                                             object:NO];
 }
 
 - (void)didReceiveMemoryWarning
@@ -34,25 +43,30 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)dealloc
+{
+    [NSNotificationCenter.defaultCenter removeObserver:self];
+}
+
 
 #pragma mark - UICollectionViewDataSource
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return self.subGroups.count;
+    return self.assetsGroup.collections.count;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    LKAssetsSubGroup* subGroup = [self.subGroups objectAtIndex:section];
-    return subGroup.numberOfAssets;
+    LKAssetsCollection* collection = self.assetsGroup.collections[section];
+    return collection.numberOfAssets;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     AssetCell* cell = (AssetCell*)[collectionView dequeueReusableCellWithReuseIdentifier:@"AssetCell"
                                                                            forIndexPath:indexPath];
-    LKAssetsSubGroup* subGroup = [self.subGroups objectAtIndex:indexPath.section];
-    LKAsset* asset = [subGroup assetAtIndex:indexPath.row];
+    LKAssetsCollection* collection = self.assetsGroup.collections[indexPath.section];
+    LKAsset* asset = [collection assetAtIndex:indexPath.row];
     cell.imageView.image = asset.thumbnail;
     return cell;
 }
@@ -63,8 +77,8 @@
     
     if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
         AssetHeaderView *view = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"AssetHeaderView" forIndexPath:indexPath];
-        LKAssetsSubGroup* subGroup = [self.subGroups objectAtIndex:indexPath.section];
-        view.title.text = subGroup.description;
+        LKAssetsCollection* collection = self.assetsGroup.collections[indexPath.section];
+        view.title.text = collection.description;
         reusableView = view;
     }
     return reusableView;
@@ -77,7 +91,7 @@
     NSIndexPath* indexPath = [self.collectionView indexPathForCell:sender];
     NSLog(@"selected: %lx", indexPath.row);
     PhotoViewController* vc = segue.destinationViewController;
-    vc.subGroup = [self.subGroups objectAtIndex:indexPath.section];
+    vc.subGroup = self.assetsGroup.collections[indexPath.section];
     vc.photoIndex = indexPath.row;
 }
 

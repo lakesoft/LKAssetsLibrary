@@ -39,7 +39,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(_assetsGroupManagerDidSetup:)
-                                                 name:LKAssetsGroupManagerDidSetup
+                                                 name:LKAssetsGroupManagerDidSetupNotification
                                                object:nil];
     
 //    [LKAssetsGroupManager.sharedManager applyTypeFilter:ALAssetsGroupSavedPhotos];

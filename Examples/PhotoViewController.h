@@ -11,7 +11,7 @@
 
 @interface PhotoViewController : UICollectionViewController
 
-@property (nonatomic, weak) LKAssetsSubGroup* subGroup;
+@property (nonatomic, weak) LKAssetsCollection* subGroup;
 @property (nonatomic, assign) NSInteger photoIndex;
 
 @end

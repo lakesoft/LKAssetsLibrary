@@ -6,8 +6,8 @@
 //  Copyright (c) 2014年 lakesoft. All rights reserved.
 //
 
-#import "LKAssetsSubGroup.h"
+#import "LKAssetsCollection.h"
 
-@interface LKAssetsMonthlyGroup : LKAssetsSubGroup
+@interface LKAssetsMonthlyCollection : LKAssetsCollection
 
 @end

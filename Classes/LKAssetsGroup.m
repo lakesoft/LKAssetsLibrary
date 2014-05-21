@@ -8,10 +8,13 @@
 
 #import "LKAssetsGroup.h"
 #import "LKAsset.h"
-#import "LKAssetsSubGroup.h"
-#import "LKAssetsMonthlyGroup.h"
-#import "LKAssetsDailyGroup.h"
-#import "LKAssetsHourlyGroup.h"
+#import "LKAssetsMonthlyCollection.h"
+#import "LKAssetsDailyCollection.h"
+#import "LKAssetsHourlyCollection.h"
+#import "LKAssetsAllCollection.h"
+
+NSString* const LKAssetsGroupDidSetCategoryNotification = @"LKAssetsGroupDidSetCategoryNotification";
+
 
 /*
 #pragma mark -
@@ -36,47 +39,43 @@
 
 @interface LKAssetsGroup()
 @property (strong, nonatomic) ALAssetsGroup* assetsGroup;
-@property (strong, nonatomic) NSArray* assets;
-@property (strong, nonatomic) NSArray* filteredAssets;
-@property (assign, nonatomic) LKAssetsGroupSubFilter subFilter;
-
-@property (strong, nonatomic) NSMutableArray* monthlyGroups;
-@property (strong, nonatomic) NSMutableArray* dailyGroups;
-@property (strong, nonatomic) NSMutableArray* hourlyGroups;
+@property (strong, nonatomic) NSArray* originalAssets;
+@property (strong, nonatomic) NSArray* categorisedAssets;
+@property (strong, nonatomic) NSArray* collections;
 
 // private
 @property (strong, nonatomic) NSMutableArray* temporaryAssets;
 @end
 
 
-typedef BOOL (^SubFilterBlock)(LKAsset* asset);
+typedef BOOL (^CategoryFilter)(LKAsset* asset);
 
 @implementation LKAssetsGroup
 
 #pragma mark -
-#pragma makr Privates
-- (SubFilterBlock)_subFilterBlock
+#pragma makr Privates (Category)
+- (CategoryFilter)_categoyFilter
 {
     BOOL (^block)(LKAsset* asset) = nil;
     
-    switch (self.subFilter) {
-        case LKAssetsGroupSubFilterPhoto:
+    switch (self.categoryType) {
+        case LKAssetsGroupCategoryTypePhoto:
             block = ^(LKAsset* asset) { return asset.isPhoto; };
             break;
             
-        case LKAssetsGroupSubFilterVideo:
+        case LKAssetsGroupCategoryTypeVideo:
             block = ^(LKAsset* asset) { return asset.isVideo; };
             break;
             
-        case LKAssetsGroupSubFilterJPEG:
+        case LKAssetsGroupCategoryTypeJPEG:
             block = ^(LKAsset* asset) { return asset.isJPEG; };
             break;
             
-        case LKAssetsGroupSubFilterPNG:
+        case LKAssetsGroupCategoryTypePNG:
             block = ^(LKAsset* asset) { return asset.isPNG; };
             break;
             
-        case LKAssetsGroupSubFilterScreenShot:
+        case LKAssetsGroupCategoryTypeScreenShot:
             block = ^(LKAsset* asset) { return asset.isScreenshot; };
             break;
             
@@ -87,50 +86,85 @@ typedef BOOL (^SubFilterBlock)(LKAsset* asset);
     return block;
 }
 
-- (void)_clearSubGroups
+- (void)_setupCategorizedAssets
 {
-    self.monthlyGroups = nil;
-    self.dailyGroups = nil;
-    self.hourlyGroups = nil;
-}
-
-- (void)_applySubFilter
-{
-    if (self.subFilter) {
+    if (self.categoryType) {
         NSMutableArray* assets = @[].mutableCopy;
-        SubFilterBlock block = [self _subFilterBlock];
+        CategoryFilter categolyFilter = [self _categoyFilter];
 
-        for (LKAsset* asset in self.assets) {
-            if (block(asset)) {
+        for (LKAsset* asset in self.originalAssets) {
+            if (categolyFilter(asset)) {
                 [assets addObject:asset];
             }
         }
-        self.filteredAssets = assets;
+        self.categorisedAssets = assets;
     } else {
-        self.filteredAssets = nil;
+        self.categorisedAssets = nil;
     }
 
-    [self _clearSubGroups];
+    [self _setupCollections];
+
+    [NSNotificationCenter.defaultCenter postNotificationName:LKAssetsGroupDidSetCategoryNotification object:self];
 }
 
-- (NSMutableArray*)_subGroupsWithFactory:(LKAssetsSubGroup*(^)(NSInteger dateTimeInteger))factory scale:(NSInteger)scale
+
+#pragma mark -
+#pragma makr Privates (Collection)
+
+- (void)_setupCollections
 {
-    NSArray* assets = self.filteredAssets ? self.filteredAssets : self.assets;
-    NSMutableArray* subGroups = @[].mutableCopy;
+    self.collections = [self _collectionsWithType:self.collectionType];
+}
+
+- (NSArray*)_collectionsWithFactory:(LKAssetsCollection*(^)(NSInteger dateTimeInteger))factory scale:(NSInteger)scale
+{
+    NSMutableArray* collections = @[].mutableCopy;
     NSInteger dateTimeInteger = -1;
-    LKAssetsSubGroup* subGroup =  nil;
+    LKAssetsCollection* collection =  nil;
     
-    for (LKAsset* asset in assets) {
+    for (LKAsset* asset in self.assets) {
         if (dateTimeInteger != asset.dateTimeInteger/scale) {
             dateTimeInteger = asset.dateTimeInteger/scale;
-            subGroup = factory(dateTimeInteger);
-            [subGroups addObject:subGroup];
+            collection = factory(dateTimeInteger);
+            [collections addObject:collection];
         }
-        [subGroup addAsset:asset];
+        [collection addAsset:asset];
     }
-    return subGroups;
+    return collections;
+}
+- (NSArray*)_collectionsTypeAll
+{
+    LKAssetsCollection* collection =  [[LKAssetsCollection alloc] initWithDateTimeInteger:0];
+    NSArray* collections = @[collection];
+    
+    for (LKAsset* asset in self.assets) {
+        [collection addAsset:asset];
+    }
+    return collections;
 }
 
+- (NSArray*)_collectionsWithType:(LKAssetsCollectionType)collectionType
+{
+    switch (collectionType) {
+        case LKAssetsCollectionTypeMonthly:
+            return [self _collectionsWithFactory:^LKAssetsCollection *(NSInteger dateTimeInteger) {
+                return [[LKAssetsMonthlyCollection alloc] initWithDateTimeInteger:dateTimeInteger];
+            } scale:10000];    // yyyyMMddHH / 10000 = yyyyMM
+            
+        case LKAssetsCollectionTypeDaily:
+            return [self _collectionsWithFactory:^LKAssetsCollection *(NSInteger dateTimeInteger) {
+                return [[LKAssetsDailyCollection alloc] initWithDateTimeInteger:dateTimeInteger];
+            } scale:100];    // yyyyMMddHH / 100 = yyyyMMdd
+
+        case LKAssetsCollectionTypeHourly:
+            return [self _collectionsWithFactory:^LKAssetsCollection *(NSInteger dateTimeInteger) {
+                return [[LKAssetsHourlyCollection alloc] initWithDateTimeInteger:dateTimeInteger];
+            } scale:1];    // yyyyMMddHH / 1 = yyyyMMddHH
+        
+        default:
+            return self._collectionsTypeAll;
+    }
+}
 
 #pragma mark -
 #pragma mark Basics
@@ -202,10 +236,10 @@ typedef BOOL (^SubFilterBlock)(LKAsset* asset);
             [self.temporaryAssets addObject:asset];
         } else {
             // completed
-            self.assets = [self.temporaryAssets sortedArrayUsingSelector:@selector(compare:)];
+            self.originalAssets = [self.temporaryAssets sortedArrayUsingSelector:@selector(compare:)];
             self.temporaryAssets = nil;
             
-            [self _applySubFilter];
+            [self _setupCategorizedAssets];
         }
     }];
 }
@@ -236,73 +270,52 @@ typedef BOOL (^SubFilterBlock)(LKAsset* asset);
     return (self.type & ALAssetsGroupPhotoStream);
 }
 
-#pragma mark - API (Filter)
-- (void)applySubFilter:(LKAssetsGroupSubFilter)subFilter
+
+#pragma mark - API (Category)
+- (void)setCategory:(LKAssetsGroupCategoryType)categoryType
 {
-    _subFilter = subFilter;
-    [self _applySubFilter];
-}
-
-- (void)clearSubFilter
-{
-    [self applySubFilter:LKAssetsGroupSubFilterNo];
-}
-
-
-#pragma mark - API (Group)
-- (NSInteger)numberOfAssets
-{
-    return self.filteredAssets ? self.filteredAssets.count : self.assets.count;
-}
-
-- (LKAsset*)assetAtIndex:(NSInteger)index
-{
-    return self.filteredAssets ? self.filteredAssets[index] : self.assets[index];
-}
-
-
-#pragma mark - API (Sub Groups)
-- (NSMutableArray*)monthlyGroups
-{
-    if (_monthlyGroups == nil) {
-        _monthlyGroups = [self _subGroupsWithFactory:^LKAssetsSubGroup *(NSInteger dateTimeInteger) {
-            return [[LKAssetsMonthlyGroup alloc] initWithDateTimeInteger:dateTimeInteger];
-        } scale:10000];    // yyyyMMddHH / 10000 = yyyyMM
+    if (categoryType == _categoryType) {
+        return;
     }
-    return _monthlyGroups;
-}
-- (NSArray*)assetsMonthlyGroups
-{
-    return self.monthlyGroups;
+    _categoryType = categoryType;
+    [self _setupCategorizedAssets];
 }
 
-- (NSMutableArray*)dailyGroups
+#pragma mark - API (Collection)
+- (void)setCollectionType:(LKAssetsCollectionType)collectionType
 {
-    if (_dailyGroups == nil) {
-        _dailyGroups = [self _subGroupsWithFactory:^LKAssetsSubGroup *(NSInteger dateTimeInteger) {
-            return [[LKAssetsDailyGroup alloc] initWithDateTimeInteger:dateTimeInteger];
-        } scale:100];    // yyyyMMddHH / 100 = yyyyMMdd
+    if (collectionType == _collectionType) {
+        return;
     }
-    return _dailyGroups;
-}
-- (NSArray*)assetsDailyGroups
-{
-    return self.dailyGroups;
+    _collectionType = collectionType;
+    [self _setupCollections];
 }
 
-- (NSMutableArray*)hourlyGroups
+
+#pragma mark - API (Assets)
+- (NSArray*)assets
 {
-    if (_hourlyGroups == nil) {
-        _hourlyGroups = [self _subGroupsWithFactory:^LKAssetsSubGroup *(NSInteger dateTimeInteger) {
-            return [[LKAssetsHourlyGroup alloc] initWithDateTimeInteger:dateTimeInteger];
-        } scale:1];    // yyyyMMddHH / 1 = yyyyMMddHH
-    }
-    return _hourlyGroups;
+    return self.categorisedAssets ? self.categorisedAssets : self.originalAssets;
 }
-- (NSArray*)assetsHourlyGroups
-{
-    return self.hourlyGroups;
-}
+
+
+#pragma mark - API ()
+
+//- (NSInteger)indexFromIndexPath:(NSIndexPath*)indexPath assetsSubGroupsType:(LKAssetsCollectionType)collectionType
+//{
+//    NSInteger index = 0;
+//   
+//    NSArray* assetsSubGroups = [self assetsCollectionArrayWithType:collectionType];
+//
+//    for (NSInteger section = 0; section < indexPath.section; section++) {
+//        LKAssetsCollection* assetsSubGroup = assetsSubGroups[section];
+//         index += assetsSubGroup.numberOfAssets;
+//    }
+//    index += indexPath.row;
+//    
+//    return index;
+//}
+
 
 
 #pragma mark -

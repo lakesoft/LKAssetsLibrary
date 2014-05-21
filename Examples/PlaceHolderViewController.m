@@ -43,20 +43,8 @@
 {
     TabBarController* tbc = (TabBarController*)self.tabBarController;
     FilterViewController* vc = segue.destinationViewController;
-    switch (self.tabBarItem.tag) {
-        case 1:
-            vc.subGroups = tbc.assetsGroup.assetsMonthlyGroups;
-            break;
-            
-        case 3:
-            vc.subGroups = tbc.assetsGroup.assetsHourlyGroups;
-            break;
-            
-        case 2:
-        default:
-            vc.subGroups = tbc.assetsGroup.assetsDailyGroups;
-            break;
-    }
+    vc.assetsGroup = tbc.assetsGroup;
+    vc.assetsGroup.collectionType = self.tabBarItem.tag;
 }
 
 @end

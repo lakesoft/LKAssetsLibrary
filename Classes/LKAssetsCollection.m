@@ -6,15 +6,15 @@
 //  Copyright (c) 2014年 lakesoft. All rights reserved.
 //
 
-#import "LKAssetsSubGroup.h"
+#import "LKAssetsCollection.h"
 #import "LKAssetsGroup.h"
 
-@interface LKAssetsSubGroup()
+@interface LKAssetsCollection()
 @property (assign, nonatomic) NSInteger dateTimeInteger;
 @property (strong, nonatomic) NSMutableArray* assets;
 @end
 
-@implementation LKAssetsSubGroup
+@implementation LKAssetsCollection
 
 - (id)initWithDateTimeInteger:(NSInteger)dateTimeInteger
 {
@@ -29,7 +29,7 @@
 - (NSComparisonResult)compare:(id)other
 {
     if ([other isKindOfClass:self.class]) {
-        LKAssetsSubGroup* subGroup = (LKAssetsSubGroup*)other;
+        LKAssetsCollection* subGroup = (LKAssetsCollection*)other;
         if (self.dateTimeInteger == subGroup.dateTimeInteger) {
             return NSOrderedSame;
         }

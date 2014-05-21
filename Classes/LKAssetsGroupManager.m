@@ -10,7 +10,7 @@
 #import "LKAssetsGroupManager.h"
 #import "LKAssetsGroup.h"
 
-NSString* const LKAssetsGroupManagerDidSetup = @"LKAssetsGroupManagerDidSetup";
+NSString* const LKAssetsGroupManagerDidSetupNotification = @"LKAssetsGroupManagerDidSetupNotification";
 
 @interface LKAssetsGroupManager()
 @property (strong, nonatomic) ALAssetsLibrary* assetsLibrary;
@@ -58,7 +58,7 @@ NSString* const LKAssetsGroupManagerDidSetup = @"LKAssetsGroupManagerDidSetup";
             [assetsGroup reload];
         }
         dispatch_async(dispatch_get_main_queue(), ^{
-            [NSNotificationCenter.defaultCenter postNotificationName:LKAssetsGroupManagerDidSetup object:self];
+            [NSNotificationCenter.defaultCenter postNotificationName:LKAssetsGroupManagerDidSetupNotification object:self];
         });
     });
 }

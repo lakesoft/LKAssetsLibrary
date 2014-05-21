@@ -13,6 +13,10 @@
 @end
 
 @implementation PhotoViewController
+- (void)_didApplySubFilter:(NSNotification*)notification
+{
+    [self.collectionView reloadData];
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -33,6 +37,11 @@
     [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:self.photoIndex inSection:0]
                                 atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally
                                         animated:NO];
+    
+    [NSNotificationCenter.defaultCenter addObserver:self
+                                           selector:@selector(_didApplySubFilter:)
+                                               name:LKAssetsGroupDidSetCategoryNotification
+                                             object:NO];
 }
 
 - (void)didReceiveMemoryWarning
@@ -40,6 +49,12 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (void)dealloc
+{
+    [NSNotificationCenter.defaultCenter removeObserver:self];
+}
+
 
 #pragma mark - UICollectionViewDatasource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section

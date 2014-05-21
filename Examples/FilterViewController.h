@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LKAssetsLibrary.h"
 
 @interface FilterViewController : UIViewController
-@property (nonatomic, weak) NSArray* subGroups;
+@property (nonatomic, weak) LKAssetsGroup* assetsGroup;
 @end

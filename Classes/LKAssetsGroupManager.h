@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 
-extern NSString * const LKAssetsGroupManagerDidSetup;
+extern NSString * const LKAssetsGroupManagerDidSetupNotification;
 
 @class LKAssetsGroup;
 @interface LKAssetsGroupManager : NSObject
