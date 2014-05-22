@@ -37,9 +37,7 @@
 		BC060D97192B52E1009989D0 /* LKAssetsCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = BC060D96192B52E1009989D0 /* LKAssetsCollection.m */; };
 		BC060D9B192BEE20009989D0 /* LKAssetsMonthlyCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = BC060D9A192BEE20009989D0 /* LKAssetsMonthlyCollection.m */; };
 		BC060D9E192BEE6F009989D0 /* LKAssetsHourlyCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = BC060D9D192BEE6F009989D0 /* LKAssetsHourlyCollection.m */; };
-		BC060DA7192BF957009989D0 /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC060DA6192BF956009989D0 /* TabBarController.m */; };
 		BC060DAA192C0406009989D0 /* FilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC060DA9192C0406009989D0 /* FilterViewController.m */; };
-		BC060DAD192C0A3C009989D0 /* PlaceHolderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC060DAC192C0A3C009989D0 /* PlaceHolderViewController.m */; };
 		BCE6AED4192D6A4A00CEB654 /* LKAssetsAllCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = BCE6AED3192D6A4A00CEB654 /* LKAssetsAllCollection.m */; };
 /* End PBXBuildFile section */
 
@@ -99,12 +97,8 @@
 		BC060D9A192BEE20009989D0 /* LKAssetsMonthlyCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKAssetsMonthlyCollection.m; sourceTree = "<group>"; };
 		BC060D9C192BEE6F009989D0 /* LKAssetsHourlyCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKAssetsHourlyCollection.h; sourceTree = "<group>"; };
 		BC060D9D192BEE6F009989D0 /* LKAssetsHourlyCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKAssetsHourlyCollection.m; sourceTree = "<group>"; };
-		BC060DA5192BF956009989D0 /* TabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarController.h; sourceTree = "<group>"; };
-		BC060DA6192BF956009989D0 /* TabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarController.m; sourceTree = "<group>"; };
 		BC060DA8192C0406009989D0 /* FilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterViewController.h; sourceTree = "<group>"; };
 		BC060DA9192C0406009989D0 /* FilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterViewController.m; sourceTree = "<group>"; };
-		BC060DAB192C0A3C009989D0 /* PlaceHolderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaceHolderViewController.h; sourceTree = "<group>"; };
-		BC060DAC192C0A3C009989D0 /* PlaceHolderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaceHolderViewController.m; sourceTree = "<group>"; };
 		BCE6AED2192D6A4A00CEB654 /* LKAssetsAllCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKAssetsAllCollection.h; sourceTree = "<group>"; };
 		BCE6AED3192D6A4A00CEB654 /* LKAssetsAllCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKAssetsAllCollection.m; sourceTree = "<group>"; };
 		C1902148A8D54059B9633066 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
@@ -178,10 +172,6 @@
 				BC060CE519246CC1009989D0 /* Main.storyboard */,
 				BC060D7519280662009989D0 /* TableViewController.h */,
 				BC060D7619280662009989D0 /* TableViewController.m */,
-				BC060DA5192BF956009989D0 /* TabBarController.h */,
-				BC060DA6192BF956009989D0 /* TabBarController.m */,
-				BC060DAB192C0A3C009989D0 /* PlaceHolderViewController.h */,
-				BC060DAC192C0A3C009989D0 /* PlaceHolderViewController.m */,
 				BC060DA8192C0406009989D0 /* FilterViewController.h */,
 				BC060DA9192C0406009989D0 /* FilterViewController.m */,
 				BC060D7819280674009989D0 /* CollectionViewController.h */,
@@ -400,7 +390,6 @@
 				BC060D9B192BEE20009989D0 /* LKAssetsMonthlyCollection.m in Sources */,
 				BC060D2419246ECB009989D0 /* LKAssetsGroup.m in Sources */,
 				BC060D8E19281F69009989D0 /* AssetHeaderView.m in Sources */,
-				BC060DAD192C0A3C009989D0 /* PlaceHolderViewController.m in Sources */,
 				BC060D94192825BB009989D0 /* LKAssetsDailyCollection.m in Sources */,
 				BC060CE419246CC1009989D0 /* AppDelegate.m in Sources */,
 				BC060D8B192815D4009989D0 /* AssetCell.m in Sources */,
@@ -410,7 +399,6 @@
 				BC060D86192811E3009989D0 /* PhotoCell.m in Sources */,
 				BC060D83192811CE009989D0 /* PhotoViewController.m in Sources */,
 				BCE6AED4192D6A4A00CEB654 /* LKAssetsAllCollection.m in Sources */,
-				BC060DA7192BF957009989D0 /* TabBarController.m in Sources */,
 				BC060D2219246ECB009989D0 /* LKAssetsGroupManager.m in Sources */,
 				BC060D9E192BEE6F009989D0 /* LKAssetsHourlyCollection.m in Sources */,
 			);

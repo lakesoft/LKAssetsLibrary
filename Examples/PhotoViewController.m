@@ -13,7 +13,7 @@
 @end
 
 @implementation PhotoViewController
-- (void)_didApplySubFilter:(NSNotification*)notification
+- (void)_didChangeCategory:(NSNotification*)notification
 {
     [self.collectionView reloadData];
 }
@@ -30,6 +30,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [NSNotificationCenter.defaultCenter addObserver:self
+                                           selector:@selector(_didChangeCategory:)
+                                               name:LKAssetsGroupDidChangeCategoryNotification
+                                             object:NO];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -37,11 +41,6 @@
     [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:self.photoIndex inSection:0]
                                 atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally
                                         animated:NO];
-    
-    [NSNotificationCenter.defaultCenter addObserver:self
-                                           selector:@selector(_didApplySubFilter:)
-                                               name:LKAssetsGroupDidSetCategoryNotification
-                                             object:NO];
 }
 
 - (void)didReceiveMemoryWarning

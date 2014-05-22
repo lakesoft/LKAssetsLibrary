@@ -13,7 +13,7 @@
 #import "LKAssetsHourlyCollection.h"
 #import "LKAssetsAllCollection.h"
 
-NSString* const LKAssetsGroupDidSetCategoryNotification = @"LKAssetsGroupDidSetCategoryNotification";
+NSString* const LKAssetsGroupDidChangeCategoryNotification = @"LKAssetsGroupDidChangeCategoryNotification";
 
 
 /*
@@ -104,7 +104,7 @@ typedef BOOL (^CategoryFilter)(LKAsset* asset);
 
     [self _setupCollections];
 
-    [NSNotificationCenter.defaultCenter postNotificationName:LKAssetsGroupDidSetCategoryNotification object:self];
+    [NSNotificationCenter.defaultCenter postNotificationName:LKAssetsGroupDidChangeCategoryNotification object:self];
 }
 
 
@@ -272,7 +272,7 @@ typedef BOOL (^CategoryFilter)(LKAsset* asset);
 
 
 #pragma mark - API (Category)
-- (void)setCategory:(LKAssetsGroupCategoryType)categoryType
+- (void)setCategoryType:(LKAssetsGroupCategoryType)categoryType
 {
     if (categoryType == _categoryType) {
         return;
@@ -288,6 +288,7 @@ typedef BOOL (^CategoryFilter)(LKAsset* asset);
         return;
     }
     _collectionType = collectionType;
+    [self _setupCategorizedAssets];
     [self _setupCollections];
 }
 

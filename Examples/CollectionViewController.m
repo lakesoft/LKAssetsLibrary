@@ -14,7 +14,7 @@
 
 @implementation CollectionViewController
 
-- (void)_didApplySubFilter:(NSNotification*)notification
+- (void)_didChangeCategory:(NSNotification*)notification
 {
     [self.collectionView reloadData];
 }
@@ -32,8 +32,8 @@
 {
     [super viewDidLoad];
     [NSNotificationCenter.defaultCenter addObserver:self
-                                           selector:@selector(_didApplySubFilter:)
-                                               name:LKAssetsGroupDidSetCategoryNotification
+                                           selector:@selector(_didChangeCategory:)
+                                               name:LKAssetsGroupDidChangeCategoryNotification
                                              object:NO];
 }
 

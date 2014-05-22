@@ -24,7 +24,7 @@ typedef NS_ENUM(NSInteger, LKAssetsGroupCategoryType) {
     LKAssetsGroupCategoryTypeScreenShot = 23,
 };
 
-extern NSString * const LKAssetsGroupDidSetCategoryNotification;
+extern NSString * const LKAssetsGroupDidChangeCategoryNotification;
 
 @class LKAsset;
 @class LKAssetsDayCollection;

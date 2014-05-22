@@ -8,7 +8,7 @@
 
 #import "TableViewController.h"
 #import "LKAssetsLibrary.h"
-#import "TabBarController.h"
+#import "FilterViewController.h"
 
 @interface TableViewController ()
 
@@ -78,7 +78,7 @@
 {
     NSIndexPath* indexPath = [self.tableView indexPathForCell:sender];
     NSLog(@"selected: %lx", indexPath.row);
-    TabBarController* vc = segue.destinationViewController;
+    FilterViewController* vc = segue.destinationViewController;
     vc.assetsGroup = [LKAssetsGroupManager.sharedManager assetsGroupAtIndex:indexPath.row];
 }
 

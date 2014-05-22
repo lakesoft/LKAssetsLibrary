@@ -62,5 +62,24 @@
             break;
     }
 }
+- (IBAction)changedCollection:(UISegmentedControl*)sender {
+    
+    switch (sender.selectedSegmentIndex) {
+        case 1:
+            self.assetsGroup.collectionType = LKAssetsCollectionTypeMonthly;
+            break;
+        case 2:
+            self.assetsGroup.collectionType = LKAssetsCollectionTypeDaily;
+            break;
+        case 3:
+            self.assetsGroup.collectionType = LKAssetsCollectionTypeHourly;
+            break;
+        case 0:
+        default:
+            // All
+            self.assetsGroup.collectionType = LKAssetsCollectionTypeAll;
+            break;
+    }
+}
 
 @end
