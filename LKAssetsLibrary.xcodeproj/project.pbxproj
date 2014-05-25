@@ -33,12 +33,12 @@
 		BC060D86192811E3009989D0 /* PhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC060D85192811E3009989D0 /* PhotoCell.m */; };
 		BC060D8B192815D4009989D0 /* AssetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC060D8A192815D4009989D0 /* AssetCell.m */; };
 		BC060D8E19281F69009989D0 /* AssetHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC060D8D19281F69009989D0 /* AssetHeaderView.m */; };
-		BC060D94192825BB009989D0 /* LKAssetsDailyCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = BC060D93192825BB009989D0 /* LKAssetsDailyCollection.m */; };
-		BC060D97192B52E1009989D0 /* LKAssetsCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = BC060D96192B52E1009989D0 /* LKAssetsCollection.m */; };
-		BC060D9B192BEE20009989D0 /* LKAssetsMonthlyCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = BC060D9A192BEE20009989D0 /* LKAssetsMonthlyCollection.m */; };
-		BC060D9E192BEE6F009989D0 /* LKAssetsHourlyCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = BC060D9D192BEE6F009989D0 /* LKAssetsHourlyCollection.m */; };
 		BC060DAA192C0406009989D0 /* FilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC060DA9192C0406009989D0 /* FilterViewController.m */; };
-		BCE6AED4192D6A4A00CEB654 /* LKAssetsAllCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = BCE6AED3192D6A4A00CEB654 /* LKAssetsAllCollection.m */; };
+		BC120FB1192EF57E004F34BA /* LKAssetsCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = BCE6AED7192DA76D00CEB654 /* LKAssetsCollection.m */; };
+		BC120FB5192EF774004F34BA /* LKAssetsCollectionGrouping.m in Sources */ = {isa = PBXBuildFile; fileRef = BC120FB4192EF774004F34BA /* LKAssetsCollectionGrouping.m */; };
+		BC120FB8192EF785004F34BA /* LKAssetsCollectionFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = BC120FB7192EF785004F34BA /* LKAssetsCollectionFilter.m */; };
+		BC120FBB192EF79E004F34BA /* LKAssetsCollectionSorter.m in Sources */ = {isa = PBXBuildFile; fileRef = BC120FBA192EF79E004F34BA /* LKAssetsCollectionSorter.m */; };
+		BC120FBE192EF8CC004F34BA /* LKAssetsCollectionEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = BC120FBD192EF8CC004F34BA /* LKAssetsCollectionEntry.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,18 +89,18 @@
 		BC060D8A192815D4009989D0 /* AssetCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssetCell.m; sourceTree = "<group>"; };
 		BC060D8C19281F69009989D0 /* AssetHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssetHeaderView.h; sourceTree = "<group>"; };
 		BC060D8D19281F69009989D0 /* AssetHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssetHeaderView.m; sourceTree = "<group>"; };
-		BC060D92192825BB009989D0 /* LKAssetsDailyCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKAssetsDailyCollection.h; sourceTree = "<group>"; };
-		BC060D93192825BB009989D0 /* LKAssetsDailyCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKAssetsDailyCollection.m; sourceTree = "<group>"; };
-		BC060D95192B52E1009989D0 /* LKAssetsCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKAssetsCollection.h; sourceTree = "<group>"; };
-		BC060D96192B52E1009989D0 /* LKAssetsCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKAssetsCollection.m; sourceTree = "<group>"; };
-		BC060D99192BEE20009989D0 /* LKAssetsMonthlyCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKAssetsMonthlyCollection.h; sourceTree = "<group>"; };
-		BC060D9A192BEE20009989D0 /* LKAssetsMonthlyCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKAssetsMonthlyCollection.m; sourceTree = "<group>"; };
-		BC060D9C192BEE6F009989D0 /* LKAssetsHourlyCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKAssetsHourlyCollection.h; sourceTree = "<group>"; };
-		BC060D9D192BEE6F009989D0 /* LKAssetsHourlyCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKAssetsHourlyCollection.m; sourceTree = "<group>"; };
 		BC060DA8192C0406009989D0 /* FilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterViewController.h; sourceTree = "<group>"; };
 		BC060DA9192C0406009989D0 /* FilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterViewController.m; sourceTree = "<group>"; };
-		BCE6AED2192D6A4A00CEB654 /* LKAssetsAllCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKAssetsAllCollection.h; sourceTree = "<group>"; };
-		BCE6AED3192D6A4A00CEB654 /* LKAssetsAllCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKAssetsAllCollection.m; sourceTree = "<group>"; };
+		BC120FB3192EF774004F34BA /* LKAssetsCollectionGrouping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKAssetsCollectionGrouping.h; sourceTree = "<group>"; };
+		BC120FB4192EF774004F34BA /* LKAssetsCollectionGrouping.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKAssetsCollectionGrouping.m; sourceTree = "<group>"; };
+		BC120FB6192EF784004F34BA /* LKAssetsCollectionFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKAssetsCollectionFilter.h; sourceTree = "<group>"; };
+		BC120FB7192EF785004F34BA /* LKAssetsCollectionFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKAssetsCollectionFilter.m; sourceTree = "<group>"; };
+		BC120FB9192EF79E004F34BA /* LKAssetsCollectionSorter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKAssetsCollectionSorter.h; sourceTree = "<group>"; };
+		BC120FBA192EF79E004F34BA /* LKAssetsCollectionSorter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKAssetsCollectionSorter.m; sourceTree = "<group>"; };
+		BC120FBC192EF8CC004F34BA /* LKAssetsCollectionEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKAssetsCollectionEntry.h; sourceTree = "<group>"; };
+		BC120FBD192EF8CC004F34BA /* LKAssetsCollectionEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKAssetsCollectionEntry.m; sourceTree = "<group>"; };
+		BCE6AED6192DA76D00CEB654 /* LKAssetsCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKAssetsCollection.h; sourceTree = "<group>"; };
+		BCE6AED7192DA76D00CEB654 /* LKAssetsCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKAssetsCollection.m; sourceTree = "<group>"; };
 		C1902148A8D54059B9633066 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		C5216A84106443DC8AAA2854 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -228,26 +228,26 @@
 				BC060D1B19246ECB009989D0 /* LKAssetsGroupManager.m */,
 				BC060D1C19246ECB009989D0 /* LKAssetsGroup.h */,
 				BC060D1D19246ECB009989D0 /* LKAssetsGroup.m */,
-				BC060D98192B52E8009989D0 /* Collection */,
 				BC060D1E19246ECB009989D0 /* LKAsset.h */,
 				BC060D1F19246ECB009989D0 /* LKAsset.m */,
+				BCE6AEDF192DADF000CEB654 /* Collection */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
 		};
-		BC060D98192B52E8009989D0 /* Collection */ = {
+		BCE6AEDF192DADF000CEB654 /* Collection */ = {
 			isa = PBXGroup;
 			children = (
-				BC060D95192B52E1009989D0 /* LKAssetsCollection.h */,
-				BC060D96192B52E1009989D0 /* LKAssetsCollection.m */,
-				BCE6AED2192D6A4A00CEB654 /* LKAssetsAllCollection.h */,
-				BCE6AED3192D6A4A00CEB654 /* LKAssetsAllCollection.m */,
-				BC060D99192BEE20009989D0 /* LKAssetsMonthlyCollection.h */,
-				BC060D9A192BEE20009989D0 /* LKAssetsMonthlyCollection.m */,
-				BC060D92192825BB009989D0 /* LKAssetsDailyCollection.h */,
-				BC060D93192825BB009989D0 /* LKAssetsDailyCollection.m */,
-				BC060D9C192BEE6F009989D0 /* LKAssetsHourlyCollection.h */,
-				BC060D9D192BEE6F009989D0 /* LKAssetsHourlyCollection.m */,
+				BCE6AED6192DA76D00CEB654 /* LKAssetsCollection.h */,
+				BCE6AED7192DA76D00CEB654 /* LKAssetsCollection.m */,
+				BC120FBC192EF8CC004F34BA /* LKAssetsCollectionEntry.h */,
+				BC120FBD192EF8CC004F34BA /* LKAssetsCollectionEntry.m */,
+				BC120FB3192EF774004F34BA /* LKAssetsCollectionGrouping.h */,
+				BC120FB4192EF774004F34BA /* LKAssetsCollectionGrouping.m */,
+				BC120FB6192EF784004F34BA /* LKAssetsCollectionFilter.h */,
+				BC120FB7192EF785004F34BA /* LKAssetsCollectionFilter.m */,
+				BC120FB9192EF79E004F34BA /* LKAssetsCollectionSorter.h */,
+				BC120FBA192EF79E004F34BA /* LKAssetsCollectionSorter.m */,
 			);
 			name = Collection;
 			sourceTree = "<group>";
@@ -385,22 +385,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				BC060D7A19280674009989D0 /* CollectionViewController.m in Sources */,
-				BC060D97192B52E1009989D0 /* LKAssetsCollection.m in Sources */,
+				BC120FBB192EF79E004F34BA /* LKAssetsCollectionSorter.m in Sources */,
 				BC060D2619246ECB009989D0 /* LKAsset.m in Sources */,
-				BC060D9B192BEE20009989D0 /* LKAssetsMonthlyCollection.m in Sources */,
 				BC060D2419246ECB009989D0 /* LKAssetsGroup.m in Sources */,
+				BC120FB5192EF774004F34BA /* LKAssetsCollectionGrouping.m in Sources */,
 				BC060D8E19281F69009989D0 /* AssetHeaderView.m in Sources */,
-				BC060D94192825BB009989D0 /* LKAssetsDailyCollection.m in Sources */,
+				BC120FBE192EF8CC004F34BA /* LKAssetsCollectionEntry.m in Sources */,
 				BC060CE419246CC1009989D0 /* AppDelegate.m in Sources */,
+				BC120FB1192EF57E004F34BA /* LKAssetsCollection.m in Sources */,
 				BC060D8B192815D4009989D0 /* AssetCell.m in Sources */,
 				BC060DAA192C0406009989D0 /* FilterViewController.m in Sources */,
 				BC060CE019246CC1009989D0 /* main.m in Sources */,
 				BC060D7719280662009989D0 /* TableViewController.m in Sources */,
+				BC120FB8192EF785004F34BA /* LKAssetsCollectionFilter.m in Sources */,
 				BC060D86192811E3009989D0 /* PhotoCell.m in Sources */,
 				BC060D83192811CE009989D0 /* PhotoViewController.m in Sources */,
-				BCE6AED4192D6A4A00CEB654 /* LKAssetsAllCollection.m in Sources */,
 				BC060D2219246ECB009989D0 /* LKAssetsGroupManager.m in Sources */,
-				BC060D9E192BEE6F009989D0 /* LKAssetsHourlyCollection.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,7 +11,7 @@
 #import "FilterViewController.h"
 
 @interface TableViewController ()
-
+@property (strong, nonatomic) LKAssetsGroupManager* assetsGroupManager;
 @end
 
 @implementation TableViewController
@@ -42,9 +42,7 @@
                                                  name:LKAssetsGroupManagerDidSetupNotification
                                                object:nil];
     
-//    [LKAssetsGroupManager.sharedManager applyTypeFilter:ALAssetsGroupSavedPhotos];
-    [LKAssetsGroupManager sharedManager];   // load albums and photos
-
+    self.assetsGroupManager = [LKAssetsGroupManager assetsGroupManager];
 }
 
 - (void)didReceiveMemoryWarning
@@ -57,18 +55,17 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSLog(@"numberOfAssetsGroups: %lx", LKAssetsGroupManager.sharedManager.numberOfAssetsGroups);
-    return LKAssetsGroupManager.sharedManager.numberOfAssetsGroups;
+    return self.assetsGroupManager.assetsGroups.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GroupCell" forIndexPath:indexPath];
 
-    LKAssetsGroup* group = [LKAssetsGroupManager.sharedManager assetsGroupAtIndex:indexPath.row];
+    LKAssetsGroup* assetsGroup = self.assetsGroupManager.assetsGroups[indexPath.row];
     
-    cell.imageView.image = group.posterImage;
-    cell.textLabel.text = group.name;
+    cell.imageView.image = assetsGroup.posterImage;
+    cell.textLabel.text = assetsGroup.name;
     return cell;
 }
 
@@ -77,9 +74,8 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     NSIndexPath* indexPath = [self.tableView indexPathForCell:sender];
-    NSLog(@"selected: %lx", indexPath.row);
     FilterViewController* vc = segue.destinationViewController;
-    vc.assetsGroup = [LKAssetsGroupManager.sharedManager assetsGroupAtIndex:indexPath.row];
+    vc.assetsGroup = self.assetsGroupManager.assetsGroups[indexPath.row];
 }
 
 @end

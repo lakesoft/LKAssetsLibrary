@@ -1,68 +1,70 @@
 //
-//  LKAssetsSubGroup.m
+//  LKAssetsCollection.m
 //  LKAssetsLibrary
 //
-//  Created by Hiroshi Hashiguchi on 2014/05/20.
+//  Created by Hiroshi Hashiguchi on 2014/05/22.
 //  Copyright (c) 2014年 lakesoft. All rights reserved.
 //
 
 #import "LKAssetsCollection.h"
-#import "LKAssetsGroup.h"
 
 @interface LKAssetsCollection()
-@property (assign, nonatomic) NSInteger dateTimeInteger;
-@property (strong, nonatomic) NSMutableArray* assets;
+@property (nonatomic, weak) LKAssetsGroup* group;
+@property (nonatomic, strong) LKAssetsCollectionGrouping* grouping;
+
+@property (nonatomic, strong) NSArray* entries;         // <LKAssetsCollectionEntry>
+@property (nonatomic, strong) NSArray* processedEntries; // <LKAssetsCollectionEntry>
+
 @end
 
 @implementation LKAssetsCollection
 
-- (id)initWithDateTimeInteger:(NSInteger)dateTimeInteger
++ (instancetype)assetsCollectionWithGroup:(LKAssetsGroup*)group grouping:(LKAssetsCollectionGrouping*)grouping
 {
-    self = [super init];
-    if (self) {
-        self.dateTimeInteger = dateTimeInteger;
-        self.assets = @[].mutableCopy;
+    LKAssetsCollection* collection = self.new;
+    collection.group = group;
+    collection.grouping = grouping;
+    collection.entries = [grouping collectionEntriesWithAssetsGroup:group];
+    return collection;
+}
+
+- (NSArray*)entries
+{
+    if (self.filter || self.sorter) {
+        return self.processedEntries;
     }
-    return self;
+    return _entries;
 }
 
-- (NSComparisonResult)compare:(id)other
+- (NSArray*)processedEntries
 {
-    if ([other isKindOfClass:self.class]) {
-        LKAssetsCollection* subGroup = (LKAssetsCollection*)other;
-        if (self.dateTimeInteger == subGroup.dateTimeInteger) {
-            return NSOrderedSame;
+    if (_processedEntries == nil) {
+        NSArray* resultEntries = nil;
+        if (self.filter) {
+            resultEntries = [self.filter filteredCollectionEntriesWithEntries:_entries];
+        } else {
+            resultEntries = _entries;
         }
-        if (self.dateTimeInteger < subGroup.dateTimeInteger) {
-            return NSOrderedAscending;
-        }
+        if (self.sorter) {
+            resultEntries = [self.sorter sortedCollectionEntriesWithEntries:resultEntries];
+        }        
+        _processedEntries = resultEntries;
     }
-    return NSOrderedDescending;
+    return _processedEntries;
 }
 
-- (NSString *)description
+- (void)setFilter:(LKAssetsCollectionFilter *)filter
 {
-    NSDateFormatter* df = NSDateFormatter.new;
-    df.dateStyle = kCFDateFormatterShortStyle;
-    df.timeStyle = kCFDateFormatterShortStyle;
-    return [NSString stringWithFormat:@"%@, %zdpics", [df stringFromDate:self.date], self.assets.count];
+    _filter = filter;
+    self.processedEntries = nil;
 }
 
-
-#pragma mark - API
-- (void)addAsset:(LKAsset*)asset
+- (void)setSorter:(LKAssetsCollectionSorter *)sorter
 {
-    [self.assets addObject:asset];
+    _sorter = sorter;
+    self.processedEntries = nil;
 }
 
-- (NSInteger)numberOfAssets
-{
-    return self.assets.count;
-}
 
-- (LKAsset*)assetAtIndex:(NSInteger)index
-{
-    return self.assets[index];
-}
 
 @end

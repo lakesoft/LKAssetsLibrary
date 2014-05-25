@@ -8,9 +8,29 @@
 
 #import "FilterViewController.h"
 #import "CollectionViewController.h"
+#import "LKAssetsLibrary.h"
 
+@interface FilterViewController()
+@property (nonatomic, strong) LKAssetsCollection* assetsCollection;
+@property (nonatomic, strong) LKAssetsCollectionFilter* filter;
+@property (nonatomic, strong) LKAssetsCollectionSorter* sorter;
+@property (nonatomic, assign) LKAssetsCollectionGroupingType groupingType;
+@end
 
 @implementation FilterViewController
+
+- (void)_setupAssetsCollection
+{
+    if (self.groupingType == 0) {
+        self.groupingType = LKAssetsCollectionGroupingTypeAll;
+    }
+    
+    LKAssetsCollectionGrouping* grouping = [LKAssetsCollectionGrouping assetsCollectionGroupingWithType:self.groupingType];
+    
+    self.assetsCollection = [LKAssetsCollection assetsCollectionWithGroup:self.assetsGroup grouping:grouping];
+    self.assetsCollection.filter = self.filter;
+    self.assetsCollection.sorter = self.sorter;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -20,6 +40,7 @@
     }
     return self;
 }
+
 
 - (void)viewDidLoad
 {
@@ -37,7 +58,8 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     CollectionViewController* vc = segue.destinationViewController;
-    vc.assetsGroup = self.assetsGroup;
+    [self _setupAssetsCollection];
+    vc.assetsCollection = self.assetsCollection;
 }
 
 - (IBAction)changedSegments:(UISegmentedControl*)sender {
@@ -45,41 +67,62 @@
     switch (sender.selectedSegmentIndex) {
         case 1:
             // JPEG
-            self.assetsGroup.categoryType = LKAssetsGroupCategoryTypeJPEG;
+            self.filter = [LKAssetsCollectionFilter assetsCollectorFilterWithType:LKAssetsCollectionFilterTypeJPEG];
             break;
         case 2:
             // Screen
-            self.assetsGroup.categoryType = LKAssetsGroupCategoryTypeScreenShot;
+            self.filter = [LKAssetsCollectionFilter assetsCollectorFilterWithType:LKAssetsCollectionFilterTypeScreenShot];
             break;
         case 3:
             // video
-            self.assetsGroup.categoryType = LKAssetsGroupCategoryTypeVideo;
+            self.filter = [LKAssetsCollectionFilter assetsCollectorFilterWithType:LKAssetsCollectionFilterTypeVideo];
             break;
         case 0:
         default:
             // All
-            self.assetsGroup.categoryType = LKAssetsGroupCategoryTypeAll;
+            self.filter = [LKAssetsCollectionFilter assetsCollectorFilterWithType:LKAssetsCollectionFilterTypeAll];
             break;
     }
+    self.filter.shouldOmitEmptyEntry = YES;
+    self.assetsCollection.filter = self.filter;
+    [NSNotificationCenter.defaultCenter postNotificationName:FilterViewControllerDidChangeAssetsCollectionNotification
+                                                      object:nil];
 }
+
 - (IBAction)changedCollection:(UISegmentedControl*)sender {
     
     switch (sender.selectedSegmentIndex) {
         case 1:
-            self.assetsGroup.collectionType = LKAssetsCollectionTypeMonthly;
+            self.groupingType = LKAssetsCollectionGroupingTypeYearly;
             break;
         case 2:
-            self.assetsGroup.collectionType = LKAssetsCollectionTypeDaily;
+            self.groupingType = LKAssetsCollectionGroupingTypeMonthly;
             break;
         case 3:
-            self.assetsGroup.collectionType = LKAssetsCollectionTypeHourly;
+            self.groupingType = LKAssetsCollectionGroupingTypeDaily;
+            break;
+        case 4:
+            self.groupingType = LKAssetsCollectionGroupingTypeHourly;
             break;
         case 0:
         default:
             // All
-            self.assetsGroup.collectionType = LKAssetsCollectionTypeAll;
+            self.groupingType = LKAssetsCollectionGroupingTypeAll;
             break;
     }
+    [self _setupAssetsCollection];
+    [NSNotificationCenter.defaultCenter postNotificationName:FilterViewControllerDidChangeAssetsCollectionNotification
+                                                      object:self.assetsCollection];
+}
+- (IBAction)changedSorter:(UISegmentedControl*)sender {
+    if (sender.selectedSegmentIndex == 0) {
+        self.sorter = [LKAssetsCollectionSorter assetsCollectorSorterWithType:LKAssetsCollectionSorterTypeAscending];
+    } else {
+        self.sorter = [LKAssetsCollectionSorter assetsCollectorSorterWithType:LKAssetsCollectionSorterTypeDescending];
+    }
+    self.assetsCollection.sorter = self.sorter;
+    [NSNotificationCenter.defaultCenter postNotificationName:FilterViewControllerDidChangeAssetsCollectionNotification
+                                                      object:self.assetsCollection];
 }
 
 @end

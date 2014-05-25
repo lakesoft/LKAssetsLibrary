@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "LKAssetsLibrary.h"
 
+#define FilterViewControllerDidChangeAssetsCollectionNotification   @"FilterViewControllerDidChangeAssetsCollectionNotification"
+
 @interface FilterViewController : UIViewController
 @property (nonatomic, weak) LKAssetsGroup* assetsGroup;
 @end

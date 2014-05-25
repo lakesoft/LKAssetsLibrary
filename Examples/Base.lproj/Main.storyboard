@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Q7Q-Tq-JCV">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Q7Q-Tq-JCV">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -24,10 +24,13 @@
                                     <segue destination="SWk-wi-edH" kind="embed" id="23i-As-XI5"/>
                                 </connections>
                             </containerView>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="VG8-wR-no6">
-                                <rect key="frame" x="20" y="476" width="280" height="29"/>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="VG8-wR-no6">
+                                <rect key="frame" x="20" y="525" width="280" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="0.73999999999999999" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="WCy-8s-9lb"/>
+                                </constraints>
                                 <segments>
                                     <segment title="All"/>
                                     <segment title="JPEG"/>
@@ -39,23 +42,53 @@
                                     <action selector="changedSegments:" destination="kuL-f6-qfd" eventType="valueChanged" id="gVn-up-e6c"/>
                                 </connections>
                             </segmentedControl>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="TKE-rU-5WW">
-                                <rect key="frame" x="20" y="520" width="280" height="29"/>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="TKE-rU-5WW">
+                                <rect key="frame" x="20" y="444" width="280" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="0.73999999999999999" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="xrM-bT-1Tn"/>
+                                </constraints>
                                 <segments>
                                     <segment title="All"/>
-                                    <segment title="Monthly"/>
-                                    <segment title="Daily"/>
-                                    <segment title="Hourly"/>
+                                    <segment title="Year"/>
+                                    <segment title="Month"/>
+                                    <segment title="Day"/>
+                                    <segment title="Hour"/>
                                 </segments>
                                 <color key="tintColor" red="0.33597344810000002" green="0.59117583529999995" blue="0.1615488101" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <action selector="changedCollection:" destination="kuL-f6-qfd" eventType="valueChanged" id="kmM-EV-6Pk"/>
                                 </connections>
                             </segmentedControl>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="hL9-wD-f0D">
+                                <rect key="frame" x="74" y="485" width="173" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="0.75" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="fhS-IP-SPj"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="Ascending"/>
+                                    <segment title="Descending"/>
+                                </segments>
+                                <connections>
+                                    <action selector="changedSorter:" destination="kuL-f6-qfd" eventType="valueChanged" id="vQg-os-tUB"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Tyl-fe-ad8" firstAttribute="top" secondItem="VG8-wR-no6" secondAttribute="bottom" constant="15" id="45I-Fk-7Q0"/>
+                            <constraint firstItem="VG8-wR-no6" firstAttribute="top" secondItem="TKE-rU-5WW" secondAttribute="bottom" constant="53" id="6EZ-Tm-qBe"/>
+                            <constraint firstItem="TKE-rU-5WW" firstAttribute="leading" secondItem="JoB-v6-b8L" secondAttribute="leading" constant="20" id="Qbb-8c-nDT"/>
+                            <constraint firstAttribute="trailing" secondItem="hL9-wD-f0D" secondAttribute="trailing" constant="73" id="aWB-95-zW8"/>
+                            <constraint firstAttribute="trailing" secondItem="VG8-wR-no6" secondAttribute="trailing" constant="20" id="jfE-J3-8GV"/>
+                            <constraint firstAttribute="trailing" secondItem="TKE-rU-5WW" secondAttribute="trailing" constant="20" id="opO-FV-okP"/>
+                            <constraint firstItem="VG8-wR-no6" firstAttribute="top" secondItem="hL9-wD-f0D" secondAttribute="bottom" constant="12" id="q6T-iX-sDn"/>
+                            <constraint firstItem="VG8-wR-no6" firstAttribute="leading" secondItem="JoB-v6-b8L" secondAttribute="leading" constant="20" id="sCC-pV-vJe"/>
+                            <constraint firstItem="hL9-wD-f0D" firstAttribute="leading" secondItem="JoB-v6-b8L" secondAttribute="leading" constant="74" id="tXi-En-gdP"/>
+                        </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <tabBarItem key="tabBarItem" tag="2" title="Item" id="RQX-s0-5oj"/>

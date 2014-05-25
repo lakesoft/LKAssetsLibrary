@@ -11,6 +11,6 @@
 
 @interface CollectionViewController : UICollectionViewController
 
-@property (nonatomic, weak) LKAssetsGroup* assetsGroup;
+@property (nonatomic, strong) LKAssetsCollection* assetsCollection;
 
 @end

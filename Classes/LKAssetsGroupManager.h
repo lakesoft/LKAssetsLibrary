@@ -9,24 +9,22 @@
 #import <Foundation/Foundation.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 
+// Notifications
 extern NSString * const LKAssetsGroupManagerDidSetupNotification;
 
 @class LKAssetsGroup;
 @interface LKAssetsGroupManager : NSObject
 
 // Properties
-@property (assign, nonatomic, readonly) NSInteger numberOfAssetsGroups;
+@property (weak, nonatomic, readonly) NSArray* assetsGroups;    // <LKAssetsGroup>
 
-// API (Setup) * must call at first*
+// API
 + (BOOL)isAuthorizationStatusDenied;
-
-// API (Factories)
-+ (LKAssetsGroupManager*)sharedManager;
++ (instancetype)assetsGroupManager;
++ (instancetype)assetsGroupManagerWithAssetFilter:(ALAssetsFilter*)assetsFilter;
 
 // ALAssetsGroupType bit combinations (e.g. ALAssetsGroupLibrary|ALAssetsGroupFaces)
 - (void)applyTypeFilter:(ALAssetsGroupType)typeFilter;
 - (void)clearTypeFilter;
-
-- (LKAssetsGroup*)assetsGroupAtIndex:(NSInteger)index;
 
 @end
