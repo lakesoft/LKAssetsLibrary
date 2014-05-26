@@ -25,6 +25,10 @@
         self.assetsCollection = notification.object;
     }
     [self.collectionView reloadData];
+    [UIView animateWithDuration:0.2
+                     animations:^{
+                         self.collectionView.alpha = 1.0;
+                     }];
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -39,6 +43,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.collectionView.alpha = 0.0;
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(_didChangeCollection:)
                                                name:FilterViewControllerDidChangeAssetsCollectionNotification

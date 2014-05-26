@@ -61,8 +61,8 @@
 
 - (void)dealloc
 {
-    NSLog(@"dealloc");
     [self.assetsGroup unloadAssets];
+    [NSNotificationCenter.defaultCenter removeObserver:self];
 }
 
 - (void)didReceiveMemoryWarning

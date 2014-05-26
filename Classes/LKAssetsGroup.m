@@ -33,7 +33,7 @@ NSString* const LKAssetsGroupDidReloadNotification = @"LKAssetsGroupDidReloadNot
 
 - (NSString*)description
 {
-    return self.name;
+    return [NSString stringWithFormat:@"%@, %zdpics", self.name, self.numberOfAssets];
 }
 
 
@@ -48,6 +48,13 @@ NSString* const LKAssetsGroupDidReloadNotification = @"LKAssetsGroupDidReloadNot
     return [UIImage imageWithCGImage:self.assetsGroup.posterImage];
 }
 
+- (NSInteger)numberOfAssets
+{
+    if (self.assets) {
+        return self.assets.count;
+    }
+    return self.assetsGroup.numberOfAssets;
+}
 
 #pragma mark - Properites (Assets)
 - (NSURL*)url

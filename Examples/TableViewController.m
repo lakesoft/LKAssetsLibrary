@@ -65,7 +65,7 @@
     LKAssetsGroup* assetsGroup = self.assetsGroupManager.assetsGroups[indexPath.row];
     
     cell.imageView.image = assetsGroup.posterImage;
-    cell.textLabel.text = assetsGroup.name;
+    cell.textLabel.text = assetsGroup.description;
     return cell;
 }
 

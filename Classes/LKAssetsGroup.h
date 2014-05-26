@@ -20,7 +20,7 @@ extern NSString * const LKAssetsGroupDidReloadNotification;
 @property (strong, nonatomic, readonly) UIImage*    posterImage;
 @property (weak  , nonatomic, readonly) NSURL*      url;
 @property (assign, nonatomic, readonly) NSUInteger  type;    // ALAssetsGroupType
-
+@property (assign, nonatomic, readonly) NSInteger   numberOfAssets;
 // Properties (Assets)
 // NOTE: Should call -reload before using assets
 @property (strong, nonatomic, readonly) NSArray* assets;
