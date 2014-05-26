@@ -16,8 +16,7 @@ typedef NS_ENUM(NSUInteger, LKAssetsCollectionSorterType) {
 @interface LKAssetsCollectionSorter : NSObject
 
 // Options
-@property (nonatomic, assign) BOOL shouldSortAssets;    // YES=Sort assets in entries / NO=Do not sort these (default)
-// TODO: *****
+@property (nonatomic, assign) BOOL shouldSortAssetsInEntry;    // YES=Sort assets in entry / NO=Do not sort these (default)
 
 // Factories
 + (instancetype)assetsCollectorSorter;  //LKAssetsCollectionSorterTypeAscending

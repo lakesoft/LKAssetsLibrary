@@ -16,6 +16,8 @@
 
 @implementation LKAssetsCollectionSorter
 
+#pragma mark - Privates
+
 #pragma mark - Factories
 + (instancetype)assetsCollectorSorter
 {
@@ -35,9 +37,15 @@
     if (self.type == LKAssetsCollectionSorterTypeAscending) {
         return entries;
     } else {
-        NSMutableArray* sortedEntries = @[].mutableCopy;
-        for (LKAssetsCollectionEntry* entry in entries.reverseObjectEnumerator) {
-            [sortedEntries addObject:entry];
+        NSArray* sortedEntries = entries.reverseObjectEnumerator.allObjects;
+ 
+        if (_shouldSortAssetsInEntry) {
+            NSMutableArray* newEntries = @[].mutableCopy;
+            for (LKAssetsCollectionEntry* entry in sortedEntries) {
+                LKAssetsCollectionEntry* newEntry = [LKAssetsCollectionEntry assetsCollectionEntryWithDateTimeInteger:entry.dateTimeInteger assets:entry.assets.reverseObjectEnumerator.allObjects];
+                [newEntries addObject:newEntry];
+            }
+            sortedEntries = newEntries;
         }
         return sortedEntries;
     }

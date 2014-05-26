@@ -50,19 +50,6 @@ NSString* const LKAssetsGroupManagerDidSetupNotification = @"LKAssetsGroupManage
     }
 }
 
-- (void)_updateAssetsGroups
-{
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        for (LKAssetsGroup* assetsGroup in self.assetsGroups) {
-            [assetsGroup reload];
-        }
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [NSNotificationCenter.defaultCenter postNotificationName:LKAssetsGroupManagerDidSetupNotification object:self];
-        });
-    });
-}
-
-
 - (void)_setupGroupsWithAssetsFilter:(ALAssetsFilter*)assetsFilter
 {
     self.assetsLibrary = [[ALAssetsLibrary alloc] init];
@@ -76,7 +63,9 @@ NSString* const LKAssetsGroupManagerDidSetupNotification = @"LKAssetsGroupManage
                                           } else {
                                               [self _sortAssetsGroup];
                                               [self _applyTypeFilter];
-                                              [self _updateAssetsGroups];
+                                              dispatch_async(dispatch_get_main_queue(), ^{
+                                                  [NSNotificationCenter.defaultCenter postNotificationName:LKAssetsGroupManagerDidSetupNotification object:self];
+                                              });
                                           }
                                       }
                                     failureBlock:^(NSError* error) {

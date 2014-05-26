@@ -19,6 +19,13 @@
 
 @implementation FilterViewController
 
+- (void)_assetsGroupDidReload:(NSNotification*)notification
+{
+    [self _setupAssetsCollection];
+    [NSNotificationCenter.defaultCenter postNotificationName:FilterViewControllerDidChangeAssetsCollectionNotification
+                                                      object:self.assetsCollection];
+}
+
 - (void)_setupAssetsCollection
 {
     if (self.groupingType == 0) {
@@ -45,6 +52,17 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(_assetsGroupDidReload:)
+                                                 name:LKAssetsGroupDidReloadNotification
+                                               object:nil];
+    [self.assetsGroup reloadAssets];
+}
+
+- (void)dealloc
+{
+    NSLog(@"dealloc");
+    [self.assetsGroup unloadAssets];
 }
 
 - (void)didReceiveMemoryWarning
@@ -54,13 +72,6 @@
 }
 
 #pragma mark - Navigation
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    CollectionViewController* vc = segue.destinationViewController;
-    [self _setupAssetsCollection];
-    vc.assetsCollection = self.assetsCollection;
-}
 
 - (IBAction)changedSegments:(UISegmentedControl*)sender {
     
@@ -119,6 +130,7 @@
         self.sorter = [LKAssetsCollectionSorter assetsCollectorSorterWithType:LKAssetsCollectionSorterTypeAscending];
     } else {
         self.sorter = [LKAssetsCollectionSorter assetsCollectorSorterWithType:LKAssetsCollectionSorterTypeDescending];
+        self.sorter.shouldSortAssetsInEntry = YES;
     }
     self.assetsCollection.sorter = self.sorter;
     [NSNotificationCenter.defaultCenter postNotificationName:FilterViewControllerDidChangeAssetsCollectionNotification

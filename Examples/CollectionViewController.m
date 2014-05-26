@@ -13,6 +13,10 @@
 #import "PhotoViewController.h"
 #import "FilterViewController.h"
 
+@interface CollectionViewController()
+@property (nonatomic, strong) LKAssetsCollection* assetsCollection;
+@end
+
 @implementation CollectionViewController
 
 - (void)_didChangeCollection:(NSNotification*)notification

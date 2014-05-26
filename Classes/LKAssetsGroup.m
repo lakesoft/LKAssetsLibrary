@@ -9,6 +9,8 @@
 #import "LKAssetsGroup.h"
 #import "LKAsset.h"
 
+NSString* const LKAssetsGroupDidReloadNotification = @"LKAssetsGroupDidReloadNotification";
+
 @interface LKAssetsGroup()
 @property (strong, nonatomic) ALAssetsGroup* assetsGroup;
 @property (strong, nonatomic) NSArray* assets;
@@ -64,136 +66,32 @@
     return [[self alloc] initWithAssetsGroup:assetsGroup];
 }
 
-- (void)reload
+- (void)reloadAssets
 {
     __weak __typeof__(self) _weak_self = self;
     self.temporaryAssets = @[].mutableCopy;
 
-    [_weak_self.assetsGroup enumerateAssetsUsingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
-        if (result) {
-            LKAsset* asset = [LKAsset assetFrom:result];
-            [self.temporaryAssets addObject:asset];
-        } else {
-            // completed
-            self.assets = [self.temporaryAssets sortedArrayUsingSelector:@selector(compare:)];
-            self.temporaryAssets = nil;
-        }
-    }];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [_weak_self.assetsGroup enumerateAssetsUsingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
+            if (result) {
+                LKAsset* asset = [LKAsset assetFrom:result];
+                [_weak_self.temporaryAssets addObject:asset];
+            } else {
+                // completed
+                _weak_self.assets = [_weak_self.temporaryAssets sortedArrayUsingSelector:@selector(compare:)];
+                _weak_self.temporaryAssets = nil;
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [NSNotificationCenter.defaultCenter postNotificationName:LKAssetsGroupDidReloadNotification
+                                                                      object:_weak_self];
+                });
+            }
+        }];
+    });
+}
+
+- (void)unloadAssets
+{
+    self.assets = nil;
 }
 
 @end
-
-
-
-
-
-/*
- #pragma mark - API (Types)
- - (BOOL)isLibrary
- {
- return (self.type & ALAssetsGroupLibrary);
- }
- - (BOOL)isAlbum
- {
- return (self.type & ALAssetsGroupAlbum);
- }
- - (BOOL)isEvent
- {
- return (self.type & ALAssetsGroupEvent);
- }
- - (BOOL)isFaces
- {
- return (self.type & ALAssetsGroupFaces);
- }
- - (BOOL)isSavedPhoto
- {
- return (self.type & ALAssetsGroupSavedPhotos);
- }
- - (BOOL)isPhotoStream
- {
- return (self.type & ALAssetsGroupPhotoStream);
- }
- */
-
-
-
-
-/*
- typedef BOOL (^CategoryFilter)(LKAsset* asset);
- #pragma mark -
- #pragma makr Privates (Category)
- - (CategoryFilter)_categoyFilter
- {
- BOOL (^block)(LKAsset* asset) = nil;
- 
- switch (self.categoryType) {
- case LKAssetsGroupCategoryTypePhoto:
- block = ^(LKAsset* asset) { return asset.isPhoto; };
- break;
- 
- case LKAssetsGroupCategoryTypeVideo:
- block = ^(LKAsset* asset) { return asset.isVideo; };
- break;
- 
- case LKAssetsGroupCategoryTypeJPEG:
- block = ^(LKAsset* asset) { return asset.isJPEG; };
- break;
- 
- case LKAssetsGroupCategoryTypePNG:
- block = ^(LKAsset* asset) { return asset.isPNG; };
- break;
- 
- case LKAssetsGroupCategoryTypeScreenShot:
- block = ^(LKAsset* asset) { return asset.isScreenshot; };
- break;
- 
- default:
- break;
- }
- 
- return block;
- }
- */
-/*
- #pragma mark -
- #pragma mark NUMutableArray Extension
- @interface NSMutableArray (Shuffling)
- - (void)shuffle;
- @end
- @implementation NSMutableArray (Shuffling)
- 
- - (void)shuffle
- {
- NSUInteger count = [self count];
- for (NSUInteger i = 0; i < count; ++i) {
- // Select a random element between i and end of array to swap with.
- NSInteger nElements = count - i;
- NSInteger n = (arc4random() % nElements) + i;
- [self exchangeObjectAtIndex:i withObjectAtIndex:n];
- }
- }
- @end
- - (void)_setupCategorizedAssets
- {
- if (self.categoryType) {
- NSMutableArray* assets = @[].mutableCopy;
- CategoryFilter categolyFilter = [self _categoyFilter];
- 
- for (LKAsset* asset in self.originalAssets) {
- if (categolyFilter(asset)) {
- [assets addObject:asset];
- }
- }
- self.categorisedAssets = assets;
- } else {
- self.categorisedAssets = nil;
- }
- 
- [self _setupCollections];
- 
- [NSNotificationCenter.defaultCenter postNotificationName:LKAssetsGroupDidChangeCategoryNotification object:self];
- }
- NSString* const LKAssetsGroupDidChangeCategoryNotification = @"LKAssetsGroupDidChangeCategoryNotification";
- extern NSString * const LKAssetsGroupDidChangeCategoryNotification;
-
- */
