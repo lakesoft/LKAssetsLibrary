@@ -11,35 +11,35 @@
 #import "FilterViewController.h"
 
 @interface TableViewController ()
-@property (strong, nonatomic) LKAssetsGroupManager* assetsGroupManager;
+@property (strong, nonatomic) LKAssetsLibrary* assetsLibrary;
 @end
 
 @implementation TableViewController
 
 
 #pragma mark - Privates
-- (void)_assetsGroupManagerDidSetup:(NSNotification*)notification
+- (void)_assetsLibraryDidSetup:(NSNotification*)notification
 {
     [self.tableView reloadData];
 }
 
-- (void)_assetsGroupManagerDidInsertGroup:(NSNotification*)notification
+- (void)_assetsLibraryDidInsertGroup:(NSNotification*)notification
 {
-    NSArray* groups = notification.userInfo[LKAssetsGroupManagerGroupsKey];
+    NSArray* groups = notification.userInfo[LKAssetsLibraryGroupsKey];
     NSLog(@"%s|inserted: %@", __PRETTY_FUNCTION__, groups);
     [self.tableView reloadData];
 }
 
-- (void)_assetsGroupManagerDidUpdateGroup:(NSNotification*)notification
+- (void)_assetsLibraryDidUpdateGroup:(NSNotification*)notification
 {
-    NSArray* groups = notification.userInfo[LKAssetsGroupManagerGroupsKey];
+    NSArray* groups = notification.userInfo[LKAssetsLibraryGroupsKey];
     NSLog(@"%s|updated: %@", __PRETTY_FUNCTION__, groups);
     [self.tableView reloadData];
 }
 
-- (void)_assetsGroupManagerDidDeleteGroup:(NSNotification*)notification
+- (void)_assetsLibraryDidDeleteGroup:(NSNotification*)notification
 {
-    NSArray* groups = notification.userInfo[LKAssetsGroupManagerGroupsKey];
+    NSArray* groups = notification.userInfo[LKAssetsLibraryGroupsKey];
     NSLog(@"%s|deleted: %@", __PRETTY_FUNCTION__, groups);
     [self.tableView reloadData];
 }
@@ -59,28 +59,28 @@
     [super viewDidLoad];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(_assetsGroupManagerDidSetup:)
-                                                 name:LKAssetsGroupManagerDidSetupNotification
+                                             selector:@selector(_assetsLibraryDidSetup:)
+                                                 name:LKAssetsLibraryDidSetupNotification
                                                object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(_assetsGroupManagerDidInsertGroup:)
-                                                 name:LKAssetsGroupManagerDidInsertGroupsNotification
+                                             selector:@selector(_assetsLibraryDidInsertGroup:)
+                                                 name:LKAssetsLibraryDidInsertGroupsNotification
                                                object:nil];
 
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(_assetsGroupManagerDidUpdateGroup:)
-                                                 name:LKAssetsGroupManagerDidUpdateGroupsNotification
+                                             selector:@selector(_assetsLibraryDidUpdateGroup:)
+                                                 name:LKAssetsLibraryDidUpdateGroupsNotification
                                                object:nil];
 
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(_assetsGroupManagerDidDeleteGroup:)
-                                                 name:LKAssetsGroupManagerDidDeleteGroupsNotification
+                                             selector:@selector(_assetsLibraryDidDeleteGroup:)
+                                                 name:LKAssetsLibraryDidDeleteGroupsNotification
                                                object:nil];
 
     
-    self.assetsGroupManager = [LKAssetsGroupManager assetsGroupManager];
-//    self.assetsGroupManager = [LKAssetsGroupManager assetsGroupManagerWithAssetsGroupType:ALAssetsGroupSavedPhotos assetsFilter:ALAssetsFilter.allPhotos];
+    self.assetsLibrary = [LKAssetsLibrary assetsLibrary];
+//    self.assetsLibrary = [LKAssetsLibrary assetsLibraryWithAssetsGroupType:ALAssetsGroupSavedPhotos assetsFilter:ALAssetsFilter.allPhotos];
 }
 
 - (void)didReceiveMemoryWarning
@@ -93,14 +93,14 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.assetsGroupManager.assetsGroups.count;
+    return self.assetsLibrary.assetsGroups.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GroupCell" forIndexPath:indexPath];
 
-    LKAssetsGroup* assetsGroup = self.assetsGroupManager.assetsGroups[indexPath.row];
+    LKAssetsGroup* assetsGroup = self.assetsLibrary.assetsGroups[indexPath.row];
     
     cell.imageView.image = assetsGroup.posterImage;
     cell.textLabel.text = assetsGroup.description;
@@ -113,7 +113,7 @@
 {
     NSIndexPath* indexPath = [self.tableView indexPathForCell:sender];
     FilterViewController* vc = segue.destinationViewController;
-    vc.assetsGroup = self.assetsGroupManager.assetsGroups[indexPath.row];
+    vc.assetsGroup = self.assetsLibrary.assetsGroups[indexPath.row];
 }
 
 @end

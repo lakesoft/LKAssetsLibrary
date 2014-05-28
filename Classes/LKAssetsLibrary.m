@@ -7,23 +7,23 @@
 //
 #import <AssetsLibrary/AssetsLibrary.h>
 
-#import "LKAssetsGroupManager.h"
+#import "LKAssetsLibrary.h"
 #import "LKAssetsGroup.h"
 
-NSString* const LKAssetsGroupManagerDidSetupNotification = @"LKAssetsGroupManagerDidSetupNotification";
-NSString* const LKAssetsGroupManagerDidInsertGroupsNotification = @"LKAssetsGroupManagerDidInsertGroupsNotification";
-NSString* const LKAssetsGroupManagerDidUpdateGroupsNotification = @"LKAssetsGroupManagerDidUpdateGroupsNotification";
-NSString* const LKAssetsGroupManagerDidDeleteGroupsNotification = @"LKAssetsGroupManagerDidDeleteGroupsNotification";
-NSString* const LKAssetsGroupManagerGroupsKey = @"LKAssetsGroupManagerGroupsKey";
+NSString* const LKAssetsLibraryDidSetupNotification = @"LKAssetsLibraryDidSetupNotification";
+NSString* const LKAssetsLibraryDidInsertGroupsNotification = @"LKAssetsLibraryDidInsertGroupsNotification";
+NSString* const LKAssetsLibraryDidUpdateGroupsNotification = @"LKAssetsLibraryDidUpdateGroupsNotification";
+NSString* const LKAssetsLibraryDidDeleteGroupsNotification = @"LKAssetsLibraryDidDeleteGroupsNotification";
+NSString* const LKAssetsLibraryGroupsKey = @"LKAssetsLibraryGroupsKey";
 
-@interface LKAssetsGroupManager()
+@interface LKAssetsLibrary()
 @property (strong, nonatomic) ALAssetsLibrary* assetsLibrary;
 @property (strong, nonatomic) NSMutableArray* mutableAssetsGroups;
 @property (assign, nonatomic) NSUInteger assetsGroupType;
 @property (strong, nonatomic) ALAssetsFilter* assetsFilter;
 @end
 
-@implementation LKAssetsGroupManager
+@implementation LKAssetsLibrary
 
 #pragma mark -
 #pragma mark Privates
@@ -61,7 +61,7 @@ NSString* const LKAssetsGroupManagerGroupsKey = @"LKAssetsGroupManagerGroupsKey"
                                               [self _sortAssetsGroup];
                                               [self _applyAssetsGroupType];
                                               dispatch_async(dispatch_get_main_queue(), ^{
-                                                  [NSNotificationCenter.defaultCenter postNotificationName:LKAssetsGroupManagerDidSetupNotification object:self];
+                                                  [NSNotificationCenter.defaultCenter postNotificationName:LKAssetsLibraryDidSetupNotification object:self];
                                               });
                                           }
                                       }
@@ -95,7 +95,7 @@ NSString* const LKAssetsGroupManagerGroupsKey = @"LKAssetsGroupManagerGroupsKey"
     dispatch_async(dispatch_get_main_queue(), ^{
         [NSNotificationCenter.defaultCenter postNotificationName:notificationName
                                                           object:self
-                                                        userInfo:@{LKAssetsGroupManagerGroupsKey:groups}];
+                                                        userInfo:@{LKAssetsLibraryGroupsKey:groups}];
     });
 }
 
@@ -121,7 +121,7 @@ NSString* const LKAssetsGroupManagerGroupsKey = @"LKAssetsGroupManagerGroupsKey"
                                               }
                                           } else {
                                               [self _sortAssetsGroup];
-                                              [self _finishProcessingChangesWithNotificationName:LKAssetsGroupManagerDidInsertGroupsNotification
+                                              [self _finishProcessingChangesWithNotificationName:LKAssetsLibraryDidInsertGroupsNotification
                                                                                           groups:insertedGroups];
                                           }
                                       }
@@ -139,7 +139,7 @@ NSString* const LKAssetsGroupManagerGroupsKey = @"LKAssetsGroupManagerGroupsKey"
     NSIndexSet * indexSet = [self _indexesOfGroupsWithURLs:urls];
     NSArray* updatedGroups = [self.mutableAssetsGroups objectsAtIndexes:indexSet];
     
-    [self _finishProcessingChangesWithNotificationName:LKAssetsGroupManagerDidUpdateGroupsNotification
+    [self _finishProcessingChangesWithNotificationName:LKAssetsLibraryDidUpdateGroupsNotification
                                                 groups:updatedGroups];
 }
 
@@ -154,7 +154,7 @@ NSString* const LKAssetsGroupManagerGroupsKey = @"LKAssetsGroupManagerGroupsKey"
     
     [self.mutableAssetsGroups removeObjectsAtIndexes:indexSet];
 
-    [self _finishProcessingChangesWithNotificationName:LKAssetsGroupManagerDidInsertGroupsNotification
+    [self _finishProcessingChangesWithNotificationName:LKAssetsLibraryDidInsertGroupsNotification
                                                 groups:deletedGroups];
 }
 
@@ -194,16 +194,16 @@ NSString* const LKAssetsGroupManagerGroupsKey = @"LKAssetsGroupManagerGroupsKey"
 
 
 #pragma mark - API
-+ (instancetype)assetsGroupManager
++ (instancetype)assetsLibrary
 {
-    return [self assetsGroupManagerWithAssetsGroupType:ALAssetsGroupAll assetsFilter:ALAssetsFilter.allAssets];
+    return [self assetsLibraryWithAssetsGroupType:ALAssetsGroupAll assetsFilter:ALAssetsFilter.allAssets];
 }
 
-+ (instancetype)assetsGroupManagerWithAssetsGroupType:(ALAssetsGroupType)assetsGroupType assetsFilter:(ALAssetsFilter*)assetsFilter
++ (instancetype)assetsLibraryWithAssetsGroupType:(ALAssetsGroupType)assetsGroupType assetsFilter:(ALAssetsFilter*)assetsFilter
 {
-    LKAssetsGroupManager* assetsGroupManager = [[LKAssetsGroupManager alloc] initWithAssetsGroupType:assetsGroupType
+    LKAssetsLibrary* assetsLibrary = [[LKAssetsLibrary alloc] initWithAssetsGroupType:assetsGroupType
                                                                                         assetsFilter:assetsFilter];
-    return assetsGroupManager;
+    return assetsLibrary;
 }
 
 - (NSArray*)assetsGroups
