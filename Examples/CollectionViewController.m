@@ -106,7 +106,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     NSIndexPath* indexPath = [self.collectionView indexPathForCell:sender];
-    NSLog(@"selected: %lx", indexPath.row);
+    NSLog(@"selected: %zd", indexPath.row);
     PhotoViewController* vc = segue.destinationViewController;
     vc.entry = self.assetsCollection.entries[indexPath.section];
     vc.photoIndex = indexPath.row;
