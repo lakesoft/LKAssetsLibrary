@@ -11,12 +11,16 @@
 #import "LKAssetsGroup.h"
 
 NSString* const LKAssetsGroupManagerDidSetupNotification = @"LKAssetsGroupManagerDidSetupNotification";
+NSString* const LKAssetsGroupManagerDidInsertGroupsNotification = @"LKAssetsGroupManagerDidInsertGroupsNotification";
+NSString* const LKAssetsGroupManagerDidUpdateGroupsNotification = @"LKAssetsGroupManagerDidUpdateGroupsNotification";
+NSString* const LKAssetsGroupManagerDidDeleteGroupsNotification = @"LKAssetsGroupManagerDidDeleteGroupsNotification";
+NSString* const LKAssetsGroupManagerGroupsKey = @"LKAssetsGroupManagerGroupsKey";
 
 @interface LKAssetsGroupManager()
 @property (strong, nonatomic) ALAssetsLibrary* assetsLibrary;
-@property (strong, nonatomic) NSMutableArray* originalAssetsGroups;
-@property (strong, nonatomic) NSArray* filteredAssetsGroups;
-@property (assign, nonatomic) NSUInteger typeFilter;
+@property (strong, nonatomic) NSMutableArray* mutableAssetsGroups;
+@property (assign, nonatomic) NSUInteger assetsGroupType;
+@property (strong, nonatomic) ALAssetsFilter* assetsFilter;
 @end
 
 @implementation LKAssetsGroupManager
@@ -25,67 +29,160 @@ NSString* const LKAssetsGroupManagerDidSetupNotification = @"LKAssetsGroupManage
 #pragma mark Privates
 - (void)_sortAssetsGroup
 {
-    NSMutableArray* groups = @[].mutableCopy;
-    for (LKAssetsGroup* assetsGroup in self.originalAssetsGroups) {
-        if (assetsGroup.type != ALAssetsGroupPhotoStream) {
-            [groups addObject:assetsGroup];
-        }
+    if (self.sortComparator) {
+        [self.mutableAssetsGroups sortUsingComparator:self.sortComparator];
     }
-    [self.originalAssetsGroups removeObjectsInArray:groups];
-    [self.originalAssetsGroups addObjectsFromArray:groups];
 }
 
-- (void)_applyTypeFilter
+- (void)_applyAssetsGroupType
 {
-    if (self.typeFilter) {
+    if (self.assetsGroupType) {
         NSMutableArray* groups = @[].mutableCopy;
-        for (LKAssetsGroup* assetsGroup in self.originalAssetsGroups) {
-            if (self.typeFilter & assetsGroup.type) {
+        for (LKAssetsGroup* assetsGroup in self.mutableAssetsGroups) {
+            if (self.assetsGroupType & assetsGroup.type) {
                 [groups addObject:assetsGroup];
             }
         }
-        self.filteredAssetsGroups = groups;
-    } else {
-        self.filteredAssetsGroups = nil;
+        self.mutableAssetsGroups = groups;
     }
 }
 
-- (void)_setupGroupsWithAssetsFilter:(ALAssetsFilter*)assetsFilter
+- (void)_reloadGroups
 {
     self.assetsLibrary = [[ALAssetsLibrary alloc] init];
-    self.originalAssetsGroups = @[].mutableCopy;
+    self.mutableAssetsGroups = @[].mutableCopy;
 
     [self.assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAll
                                       usingBlock:^(ALAssetsGroup* group, BOOL* stop) {
                                           if (group) {
-                                              [group setAssetsFilter:assetsFilter];
-                                              [self.originalAssetsGroups addObject:[LKAssetsGroup assetsGroupFrom:group]];
+                                              [group setAssetsFilter:self.assetsFilter];
+                                              [self.mutableAssetsGroups addObject:[LKAssetsGroup assetsGroupFrom:group]];
                                           } else {
                                               [self _sortAssetsGroup];
-                                              [self _applyTypeFilter];
+                                              [self _applyAssetsGroupType];
                                               dispatch_async(dispatch_get_main_queue(), ^{
                                                   [NSNotificationCenter.defaultCenter postNotificationName:LKAssetsGroupManagerDidSetupNotification object:self];
                                               });
                                           }
                                       }
                                     failureBlock:^(NSError* error) {
-                                        NSLog(@"[ERROR] %@", error);
+                                        NSLog(@"%s|%@", __PRETTY_FUNCTION__, error);
                                     }];
 
 }
 
-#pragma mark -
-#pragma mark Basics
+- (NSIndexSet*)_indexesOfGroupsWithURLs:(NSArray*)urls {
+    return [self.mutableAssetsGroups indexesOfObjectsPassingTest:^BOOL(LKAssetsGroup* group, NSUInteger idx, BOOL *stop) {
+        return [urls containsObject:group.url];
+    }];
+}
+
+- (void)_assetsLibrarychanged:(NSNotification*)notification
+{
+    NSDictionary * userInfo = notification.userInfo;
+    if (userInfo) {
+        [self _processInsertedAssetGroupsWithURLS:userInfo[ALAssetLibraryInsertedAssetGroupsKey]];
+        [self _processUpdatedAssetGroupsWithURLS:userInfo[ALAssetLibraryUpdatedAssetGroupsKey]];
+        [self _processDeletedAssetGroupsWithURLS:userInfo[ALAssetLibraryDeletedAssetGroupsKey]];
+        
+    } else {
+        [self _reloadGroups];
+    }
+}
+
+- (void)_finishProcessingChangesWithNotificationName:(NSString*)notificationName groups:(NSArray*)groups
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [NSNotificationCenter.defaultCenter postNotificationName:notificationName
+                                                          object:self
+                                                        userInfo:@{LKAssetsGroupManagerGroupsKey:groups}];
+    });
+}
+
+- (void)_processInsertedAssetGroupsWithURLS:(NSArray*)urls
+{
+    if (urls.count == 0) {
+        return;
+    }
+
+    NSMutableArray* insertedGroups = @[].mutableCopy;
+    
+    [self.assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAll
+                                      usingBlock:^(ALAssetsGroup* group, BOOL* stop) {
+                                          if (group) {
+                                              NSURL* url = [group valueForProperty:ALAssetsGroupPropertyURL];
+                                              if ([urls containsObject:url]) {
+                                                  [group setAssetsFilter:self.assetsFilter];
+                                                  LKAssetsGroup* assetsGroup = [LKAssetsGroup assetsGroupFrom:group];
+                                                  if (assetsGroup.type & self.assetsGroupType) {
+                                                      [self.mutableAssetsGroups addObject:assetsGroup];
+                                                      [insertedGroups addObject:group];
+                                                  }
+                                              }
+                                          } else {
+                                              [self _sortAssetsGroup];
+                                              [self _finishProcessingChangesWithNotificationName:LKAssetsGroupManagerDidInsertGroupsNotification
+                                                                                          groups:insertedGroups];
+                                          }
+                                      }
+                                    failureBlock:^(NSError* error) {
+                                        NSLog(@"%s|%@", __PRETTY_FUNCTION__, error);
+                                    }];
+}
+
+- (void)_processUpdatedAssetGroupsWithURLS:(NSArray*)urls
+{
+    if (urls.count == 0) {
+        return;
+    }
+    
+    NSIndexSet * indexSet = [self _indexesOfGroupsWithURLs:urls];
+    NSArray* updatedGroups = [self.mutableAssetsGroups objectsAtIndexes:indexSet];
+    
+    [self _finishProcessingChangesWithNotificationName:LKAssetsGroupManagerDidUpdateGroupsNotification
+                                                groups:updatedGroups];
+}
+
+- (void)_processDeletedAssetGroupsWithURLS:(NSArray*)urls
+{
+    if (urls.count == 0) {
+        return;
+    }
+    
+    NSIndexSet * indexSet = [self _indexesOfGroupsWithURLs:urls];
+    NSArray* deletedGroups = [self.mutableAssetsGroups objectsAtIndexes:indexSet];
+    
+    [self.mutableAssetsGroups removeObjectsAtIndexes:indexSet];
+
+    [self _finishProcessingChangesWithNotificationName:LKAssetsGroupManagerDidInsertGroupsNotification
+                                                groups:deletedGroups];
+}
 
 #pragma mark -
-#pragma mark Properties
-- (NSInteger)numberOfAssetsGroups
+#pragma mark Basics
+- (id)initWithAssetsGroupType:(ALAssetsGroupType)assetsGroupType assetsFilter:(ALAssetsFilter*)assetsFilter
 {
-    if (self.filteredAssetsGroups) {
-        return self.filteredAssetsGroups.count;
+    self = [super init];
+    if (self) {
+        [NSNotificationCenter.defaultCenter addObserver:self
+                                               selector:@selector(_assetsLibrarychanged:)
+                                                   name:ALAssetsLibraryChangedNotification
+                                                 object:nil];
+        self.assetsFilter = assetsFilter;
+        self.assetsGroupType = assetsGroupType;
+        self.sortComparator = ^NSComparisonResult(LKAssetsGroup* group1, LKAssetsGroup* group2) {
+            return [group1.name compare:group2.name];
+        };
+        [self _reloadGroups];
     }
-    return self.originalAssetsGroups.count;
+    return self;
 }
+
+- (void)dealloc
+{
+    [NSNotificationCenter.defaultCenter removeObserver:self];
+}
+
 
 #pragma mark -
 #pragma makr API (AUthorization)
@@ -99,38 +196,19 @@ NSString* const LKAssetsGroupManagerDidSetupNotification = @"LKAssetsGroupManage
 #pragma mark - API
 + (instancetype)assetsGroupManager
 {
-    return [self assetsGroupManagerWithAssetFilter:ALAssetsFilter.allAssets];
+    return [self assetsGroupManagerWithAssetsGroupType:ALAssetsGroupAll assetsFilter:ALAssetsFilter.allAssets];
 }
 
-+ (instancetype)assetsGroupManagerWithAssetFilter:(ALAssetsFilter*)assetsFilter;
++ (instancetype)assetsGroupManagerWithAssetsGroupType:(ALAssetsGroupType)assetsGroupType assetsFilter:(ALAssetsFilter*)assetsFilter
 {
-    LKAssetsGroupManager* assetsGroupManager = LKAssetsGroupManager.new;
-    [assetsGroupManager _setupGroupsWithAssetsFilter:assetsFilter];
+    LKAssetsGroupManager* assetsGroupManager = [[LKAssetsGroupManager alloc] initWithAssetsGroupType:assetsGroupType
+                                                                                        assetsFilter:assetsFilter];
     return assetsGroupManager;
-}
-
-- (LKAssetsGroup*)assetsGroupAtIndex:(NSInteger)index
-{
-    if (self.filteredAssetsGroups) {
-        return self.filteredAssetsGroups[index];
-    }
-    return self.originalAssetsGroups[index];
-}
-
-- (void)applyTypeFilter:(ALAssetsGroupType)typeFilter
-{
-    _typeFilter = typeFilter;
-    [self _applyTypeFilter];
-}
-
-- (void)clearTypeFilter
-{
-    [self applyTypeFilter:0];
 }
 
 - (NSArray*)assetsGroups
 {
-    return self.filteredAssetsGroups ? self.filteredAssetsGroups : self.originalAssetsGroups;
+    return self.mutableAssetsGroups;
 }
 
 @end

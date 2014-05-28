@@ -38,10 +38,16 @@
 
 - (NSString *)description
 {
-    NSDateFormatter* df = NSDateFormatter.new;
-    df.dateStyle = kCFDateFormatterShortStyle;
-    df.timeStyle = kCFDateFormatterShortStyle;
-    return [NSString stringWithFormat:@"%@, %zdpics", [df stringFromDate:self.date], self.assets.count];
+    NSString* title = nil;
+    if (self.date) {
+        NSDateFormatter* df = NSDateFormatter.new;
+        df.dateStyle = kCFDateFormatterShortStyle;
+        df.timeStyle = kCFDateFormatterShortStyle;
+        title = [df stringFromDate:self.date];
+    } else {
+        title = @"All";
+    }
+    return [NSString stringWithFormat:@"%@, %zdpics", title, self.assets.count];
 }
 
 - (NSDate*)date

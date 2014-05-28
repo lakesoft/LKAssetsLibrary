@@ -22,10 +22,10 @@ typedef NS_ENUM(NSInteger, LKAssetType) {
 @property (assign, nonatomic, readonly) BOOL deleted;
 
 // Properties (Image)
-@property (weak  , nonatomic,readonly) UIImage* thumbnail;
-@property (weak  , nonatomic,readonly) UIImage* aspectRatioThumbnail;
-@property (weak  , nonatomic,readonly) UIImage* fullScreenImage;
-@property (weak  , nonatomic,readonly) UIImage* fullResolutionImage;
+@property (weak  , nonatomic, readonly) UIImage* thumbnail;
+@property (weak  , nonatomic, readonly) UIImage* aspectRatioThumbnail;
+@property (weak  , nonatomic, readonly) UIImage* fullScreenImage;
+@property (weak  , nonatomic, readonly) UIImage* fullResolutionImage;
 
 // Properties (Date number)
 @property (assign, nonatomic, readonly) NSTimeInterval timeInterval;

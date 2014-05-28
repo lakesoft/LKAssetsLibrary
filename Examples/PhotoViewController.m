@@ -8,12 +8,13 @@
 
 #import "PhotoViewController.h"
 #import "PhotoCell.h"
+#import "LKAssetsLibrary.h"
 
 @interface PhotoViewController ()
 @end
 
 @implementation PhotoViewController
-- (void)_didChangeCategory:(NSNotification*)notification
+- (void)_didChangeCollection:(NSNotification*)notification
 {
     [self.collectionView reloadData];
 }
@@ -30,17 +31,17 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    [NSNotificationCenter.defaultCenter addObserver:self
-//                                           selector:@selector(_didChangeCategory:)
-//                                               name:LKAssetsGroupDidChangeCategoryNotification
-//                                             object:NO];
+    [NSNotificationCenter.defaultCenter addObserver:self
+                                           selector:@selector(_didChangeCollection:)
+                                               name:LKAssetsGroupDidReloadNotification
+                                             object:NO];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-//    [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:self.photoIndex inSection:0]
-//                                atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally
-//                                        animated:NO];
+    [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:self.photoIndex inSection:0]
+                                atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally
+                                        animated:NO];
 }
 
 - (void)didReceiveMemoryWarning
@@ -58,18 +59,16 @@
 #pragma mark - UICollectionViewDatasource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 0;
-//return self.subGroup.numberOfAssets;
+    return self.entry.assets.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return nil;
-//    PhotoCell* cell = (PhotoCell*)[collectionView dequeueReusableCellWithReuseIdentifier:@"PhotoCell"
-//                                                                            forIndexPath:indexPath];
-//    LKAsset* asset = [self.subGroup assetAtIndex:indexPath.row];
-//    cell.imageView.image = asset.fullScreenImage;
-//    return cell;
+    PhotoCell* cell = (PhotoCell*)[collectionView dequeueReusableCellWithReuseIdentifier:@"PhotoCell"
+                                                                            forIndexPath:indexPath];
+    LKAsset* asset = self.entry.assets[indexPath.row];
+    cell.imageView.image = asset.fullScreenImage;
+    return cell;
 }
 
 

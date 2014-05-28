@@ -21,12 +21,23 @@ NSString* const LKAssetsGroupDidReloadNotification = @"LKAssetsGroupDidReloadNot
 
 @implementation LKAssetsGroup
 
+#pragma mark - Privates
+- (void)_assetsLibrarychanged:(NSNotification*)notification
+{
+    [self reloadAssets];
+}
+
 #pragma mark - Basics
 - (id)initWithAssetsGroup:(ALAssetsGroup*)assetsGroup
 {
     self = super.init;
     if (self) {
         self.assetsGroup = assetsGroup;
+
+        [NSNotificationCenter.defaultCenter addObserver:self
+                                               selector:@selector(_assetsLibrarychanged:)
+                                                   name:ALAssetsLibraryChangedNotification
+                                                 object:nil];
     }
     return self;
 }
@@ -34,6 +45,11 @@ NSString* const LKAssetsGroupDidReloadNotification = @"LKAssetsGroupDidReloadNot
 - (NSString*)description
 {
     return [NSString stringWithFormat:@"%@, %zdpics", self.name, self.numberOfAssets];
+}
+
+- (void)dealloc
+{
+    [NSNotificationCenter.defaultCenter removeObserver:self];
 }
 
 

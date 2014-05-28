@@ -23,6 +23,27 @@
     [self.tableView reloadData];
 }
 
+- (void)_assetsGroupManagerDidInsertGroup:(NSNotification*)notification
+{
+    NSArray* groups = notification.userInfo[LKAssetsGroupManagerGroupsKey];
+    NSLog(@"%s|inserted: %@", __PRETTY_FUNCTION__, groups);
+    [self.tableView reloadData];
+}
+
+- (void)_assetsGroupManagerDidUpdateGroup:(NSNotification*)notification
+{
+    NSArray* groups = notification.userInfo[LKAssetsGroupManagerGroupsKey];
+    NSLog(@"%s|updated: %@", __PRETTY_FUNCTION__, groups);
+    [self.tableView reloadData];
+}
+
+- (void)_assetsGroupManagerDidDeleteGroup:(NSNotification*)notification
+{
+    NSArray* groups = notification.userInfo[LKAssetsGroupManagerGroupsKey];
+    NSLog(@"%s|deleted: %@", __PRETTY_FUNCTION__, groups);
+    [self.tableView reloadData];
+}
+
 #pragma mark - Basics
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -42,7 +63,24 @@
                                                  name:LKAssetsGroupManagerDidSetupNotification
                                                object:nil];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(_assetsGroupManagerDidInsertGroup:)
+                                                 name:LKAssetsGroupManagerDidInsertGroupsNotification
+                                               object:nil];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(_assetsGroupManagerDidUpdateGroup:)
+                                                 name:LKAssetsGroupManagerDidUpdateGroupsNotification
+                                               object:nil];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(_assetsGroupManagerDidDeleteGroup:)
+                                                 name:LKAssetsGroupManagerDidDeleteGroupsNotification
+                                               object:nil];
+
+    
     self.assetsGroupManager = [LKAssetsGroupManager assetsGroupManager];
+//    self.assetsGroupManager = [LKAssetsGroupManager assetsGroupManagerWithAssetsGroupType:ALAssetsGroupSavedPhotos assetsFilter:ALAssetsFilter.allPhotos];
 }
 
 - (void)didReceiveMemoryWarning

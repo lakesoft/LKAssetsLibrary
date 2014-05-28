@@ -25,10 +25,10 @@
         self.assetsCollection = notification.object;
     }
     [self.collectionView reloadData];
-    [UIView animateWithDuration:0.2
-                     animations:^{
-                         self.collectionView.alpha = 1.0;
-                     }];
+}
+- (void)_didReload:(NSNotification*)notification
+{
+    [self.collectionView reloadData];
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -43,10 +43,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.collectionView.alpha = 0.0;
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(_didChangeCollection:)
                                                name:FilterViewControllerDidChangeAssetsCollectionNotification
+                                             object:NO];
+    [NSNotificationCenter.defaultCenter addObserver:self
+                                           selector:@selector(_didReload:)
+                                               name:LKAssetsGroupDidReloadNotification
                                              object:NO];
 }
 
@@ -100,13 +103,13 @@
 
 #pragma mark - Navigation
 
-//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-//{
-//    NSIndexPath* indexPath = [self.collectionView indexPathForCell:sender];
-//    NSLog(@"selected: %lx", indexPath.row);
-//    PhotoViewController* vc = segue.destinationViewController;
-//    vc.subGroup = self.assetsGroup.collections[indexPath.section];
-//    vc.photoIndex = indexPath.row;
-//}
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    NSIndexPath* indexPath = [self.collectionView indexPathForCell:sender];
+    NSLog(@"selected: %lx", indexPath.row);
+    PhotoViewController* vc = segue.destinationViewController;
+    vc.entry = self.assetsCollection.entries[indexPath.section];
+    vc.photoIndex = indexPath.row;
+}
 
 @end
