@@ -80,6 +80,7 @@
 
     
     self.assetsLibrary = [LKAssetsLibrary assetsLibrary];
+    [self.assetsLibrary reload];
 //    self.assetsLibrary = [LKAssetsLibrary assetsLibraryWithAssetsGroupType:ALAssetsGroupSavedPhotos assetsFilter:ALAssetsFilter.allPhotos];
 }
 

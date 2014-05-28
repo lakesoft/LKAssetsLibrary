@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "LKAssetsLibrary"
-  s.version      = "0.3.0"
+  s.version      = "0.9.0"
   s.summary      = "ALAssetLibrary Utilities"
   s.description  = <<-DESC
 ALAssetLibrary Utilities.

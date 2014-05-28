@@ -26,7 +26,7 @@ typedef NS_ENUM(NSUInteger, LKAssetsCollectionFilterType) {
 + (instancetype)assetsCollectorFilter;  // LKAssetsCollectionFilterTypeAll;
 + (instancetype)assetsCollectorFilterWithType:(LKAssetsCollectionFilterType)type;   // available for bit combinations
 
-// Filtering (customize below)
+// Operations (Override in subclass if necessary)
 - (NSArray*)filteredCollectionEntriesWithEntries:(NSArray*)entries; // <LKAssetsCollectionEntry>
 
 @end

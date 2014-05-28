@@ -31,14 +31,13 @@ typedef NS_ENUM(NSInteger, LKAssetType) {
 @property (assign, nonatomic, readonly) NSTimeInterval timeInterval;
 @property (assign, nonatomic, readonly) NSInteger dateTimeInteger;  // yyyyMMddHH
 
-// Properties (ALAsset)
+// Properties (ALAsset property)
 @property (strong, nonatomic, readonly) NSURL* url;
 @property (strong, nonatomic, readonly) CLLocation* location;
 @property (strong, nonatomic, readonly) NSDate* date;
 @property (strong, nonatomic, readonly) NSString* fileExtension;
 @property (assign, nonatomic, readonly) CGSize size;
 @property (assign, nonatomic, readonly) LKAssetType type;
-
 
 // Properties (Filter)
 @property (assign, nonatomic, readonly) BOOL isJPEG;

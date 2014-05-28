@@ -15,7 +15,7 @@ extern NSString * const LKAssetsGroupDidReloadNotification;
 
 @interface LKAssetsGroup : NSObject
 
-// Properties (Attributes)
+// Properties (Attribute)
 // Note: below properties can be used before calling -reloadAssets
 @property (strong, nonatomic, readonly) NSString*   name;
 @property (strong, nonatomic, readonly) UIImage*    posterImage;
@@ -23,13 +23,19 @@ extern NSString * const LKAssetsGroupDidReloadNotification;
 @property (assign, nonatomic, readonly) NSUInteger  type;               // ALAssetsGroupType
 @property (assign, nonatomic, readonly) NSInteger   numberOfAssets;
 
-// Properties (Assets)
+// Properties (Asset)
 @property (strong, nonatomic, readonly) NSArray* assets;    // should call -reloadAssets before accessing it
 
-// API
+// Factories
 + (LKAssetsGroup*)assetsGroupFrom:(ALAssetsGroup*)assetsGroup;
 
+// Operations
 - (void)reloadAssets;   // should be called before accessing assets
 - (void)unloadAssets;
+
+
+// [Advanced] Custom Asset
+// default: LKAsset.class
+@property (strong, nonatomic) Class assetClass;
 
 @end

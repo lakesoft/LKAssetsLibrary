@@ -26,17 +26,10 @@ extern NSString * const LKAssetsLibraryGroupsKey;
 @class LKAssetsGroup;
 @interface LKAssetsLibrary : NSObject
 
-// Properties
+// Properties (Group)
 @property (weak, nonatomic, readonly) NSArray* assetsGroups;    // <LKAssetsGroup>
 
-// Sorting groups (Option)
-typedef NSComparisonResult(^LKAssetsGroupSortComparator)(LKAssetsGroup* group1, LKAssetsGroup* group2);
-@property (copy, nonatomic) LKAssetsGroupSortComparator sortComparator;     // default: sorted by group's name in ascending
-
-// API
-+ (BOOL)isAuthorizationStatusDenied;
-
-
+// Factories
 // assetsGroupType: e.g. ALAssetsGroupLibrary | ALAssetsGroupFaces
 // assetsFilter   : ALAssetsFilter.allPhotos, ALAssetsFilter.allVideo, ALAssetsFilter.allAssets
 + (instancetype)assetsLibraryWithAssetsGroupType:(ALAssetsGroupType)assetsGroupType assetsFilter:(ALAssetsFilter*)assetsFilter;
@@ -45,5 +38,19 @@ typedef NSComparisonResult(^LKAssetsGroupSortComparator)(LKAssetsGroup* group1, 
 // assetsFilter   : ALAssetsFilter.allAssets
 + (instancetype)assetsLibrary;
 
+// Operations
+- (void)reload; // must be called at first
 
+// Authorizations
++ (BOOL)isAuthorizationStatusDenied;
+
+
+// [Option] Group sorting
+// default: sorted by group's name in ascending
+@property (copy, nonatomic) NSComparisonResult(^sortComparator)(LKAssetsGroup* group1, LKAssetsGroup* group2);
+
+
+// [Advanced] Custom Group
+// default: LKAssetsGroup.class
+@property (strong, nonatomic) Class assetsGroupClass;
 @end

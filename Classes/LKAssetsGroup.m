@@ -33,7 +33,7 @@ NSString* const LKAssetsGroupDidReloadNotification = @"LKAssetsGroupDidReloadNot
     self = super.init;
     if (self) {
         self.assetsGroup = assetsGroup;
-
+        self.assetClass = LKAsset.class;
         [NSNotificationCenter.defaultCenter addObserver:self
                                                selector:@selector(_assetsLibrarychanged:)
                                                    name:ALAssetsLibraryChangedNotification
@@ -97,7 +97,7 @@ NSString* const LKAssetsGroupDidReloadNotification = @"LKAssetsGroupDidReloadNot
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [_weak_self.assetsGroup enumerateAssetsUsingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
             if (result) {
-                LKAsset* asset = [LKAsset assetFrom:result];
+                LKAsset* asset = [self.assetClass assetFrom:result];
                 [_weak_self.temporaryAssets addObject:asset];
             } else {
                 // completed

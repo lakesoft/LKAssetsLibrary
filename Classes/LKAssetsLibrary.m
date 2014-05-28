@@ -56,7 +56,8 @@ NSString* const LKAssetsLibraryGroupsKey = @"LKAssetsLibraryGroupsKey";
                                       usingBlock:^(ALAssetsGroup* group, BOOL* stop) {
                                           if (group) {
                                               [group setAssetsFilter:self.assetsFilter];
-                                              [self.mutableAssetsGroups addObject:[LKAssetsGroup assetsGroupFrom:group]];
+                                              LKAssetsGroup* assetsGroup = [self.assetsGroupClass assetsGroupFrom:group];
+                                              [self.mutableAssetsGroups addObject:assetsGroup];
                                           } else {
                                               [self _sortAssetsGroup];
                                               [self _applyAssetsGroupType];
@@ -113,7 +114,8 @@ NSString* const LKAssetsLibraryGroupsKey = @"LKAssetsLibraryGroupsKey";
                                               NSURL* url = [group valueForProperty:ALAssetsGroupPropertyURL];
                                               if ([urls containsObject:url]) {
                                                   [group setAssetsFilter:self.assetsFilter];
-                                                  LKAssetsGroup* assetsGroup = [LKAssetsGroup assetsGroupFrom:group];
+                                                  LKAssetsGroup* assetsGroup = [self.assetsGroupClass assetsGroupFrom:group];
+;
                                                   if (assetsGroup.type & self.assetsGroupType) {
                                                       [self.mutableAssetsGroups addObject:assetsGroup];
                                                       [insertedGroups addObject:group];
@@ -168,12 +170,12 @@ NSString* const LKAssetsLibraryGroupsKey = @"LKAssetsLibraryGroupsKey";
                                                selector:@selector(_assetsLibrarychanged:)
                                                    name:ALAssetsLibraryChangedNotification
                                                  object:nil];
+        self.assetsGroupClass = LKAssetsGroup.class;
         self.assetsFilter = assetsFilter;
         self.assetsGroupType = assetsGroupType;
         self.sortComparator = ^NSComparisonResult(LKAssetsGroup* group1, LKAssetsGroup* group2) {
             return [group1.name compare:group2.name];
         };
-        [self _reloadGroups];
     }
     return self;
 }
@@ -192,6 +194,10 @@ NSString* const LKAssetsLibraryGroupsKey = @"LKAssetsLibraryGroupsKey";
 
 }
 
+- (void)reload
+{
+    [self _reloadGroups];
+}
 
 #pragma mark - API
 + (instancetype)assetsLibrary
