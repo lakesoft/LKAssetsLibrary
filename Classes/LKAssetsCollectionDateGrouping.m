@@ -6,46 +6,46 @@
 //  Copyright (c) 2014年 lakesoft. All rights reserved.
 //
 
-#import "LKAssetsCollectionGrouping.h"
+#import "LKAssetsCollectionDateGrouping.h"
 #import "LKAsset.h"
 #import "LKAssetsGroup.h"
 #import "LKAssetsCollectionEntry.h"
 
-@interface LKAssetsCollectionGrouping()
-@property (nonatomic, assign) LKAssetsCollectionGroupingType type;
+@interface LKAssetsCollectionDateGrouping()
+@property (nonatomic, assign) LKAssetsCollectionDateGroupingType type;
 @property (nonatomic, assign) NSInteger scale;
 @property (nonatomic, assign) NSInteger previousDateTimeInteger;
 @end
 
-@implementation LKAssetsCollectionGrouping
+@implementation LKAssetsCollectionDateGrouping
 
-+ (instancetype)assetsCollectionGrouping
++ (instancetype)grouping
 {
-    return [self assetsCollectionGroupingWithType:LKAssetsCollectionGroupingTypeAll];
+    return [self groupingWithType:LKAssetsCollectionDateGroupingTypeAll];
 }
 
-+ (instancetype)assetsCollectionGroupingWithType:(LKAssetsCollectionGroupingType)type
++ (instancetype)groupingWithType:(LKAssetsCollectionDateGroupingType)type
 {
-    LKAssetsCollectionGrouping* grouping = self.new;
+    LKAssetsCollectionDateGrouping* grouping = self.new;
     grouping.type = type;
     switch (type) {
-        case LKAssetsCollectionGroupingTypeYearly:
+        case LKAssetsCollectionDateGroupingTypeYearly:
             grouping.scale = 1000000; // yyyyMMddHH / 1000000 = yyyy
             break;
             
-        case LKAssetsCollectionGroupingTypeMonthly:
+        case LKAssetsCollectionDateGroupingTypeMonthly:
             grouping.scale = 10000; // yyyyMMddHH / 10000 = yyyyMM
             break;
             
-        case LKAssetsCollectionGroupingTypeDaily:
+        case LKAssetsCollectionDateGroupingTypeDaily:
             grouping.scale = 100;   // yyyyMMddHH / 100 = yyyyMMdd
             break;
 
-        case LKAssetsCollectionGroupingTypeHourly:
+        case LKAssetsCollectionDateGroupingTypeHourly:
             grouping.scale = 1;     // yyyyMMddHH;
             break;
 
-        case LKAssetsCollectionGroupingTypeAll:
+        case LKAssetsCollectionDateGroupingTypeAll:
         default:
             break;
     }
@@ -68,7 +68,7 @@
     }
 }
 
-- (NSArray*)collectionEntriesWithAssetsGroup:(LKAssetsGroup*)assetsGroup
+- (NSArray*)groupedCollectionEntriesWithAssetsGroup:(LKAssetsGroup*)assetsGroup
 {
     NSMutableArray* entries = @[].mutableCopy;
     __block NSMutableArray* assets = nil;

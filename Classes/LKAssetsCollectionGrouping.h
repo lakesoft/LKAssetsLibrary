@@ -1,29 +1,16 @@
 //
-//  LKAssetsCollectorGrouping.h
+//  LKAssetsCollectionGrouping.h
 //  LKAssetsLibrary
 //
-//  Created by Hiroshi Hashiguchi on 2014/05/23.
+//  Created by Hiroshi Hashiguchi on 2014/05/29.
 //  Copyright (c) 2014年 lakesoft. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
-typedef NS_ENUM(NSInteger, LKAssetsCollectionGroupingType) {
-    LKAssetsCollectionGroupingTypeAll      = 0,
-    LKAssetsCollectionGroupingTypeYearly   = 11,
-    LKAssetsCollectionGroupingTypeMonthly  = 12,
-    LKAssetsCollectionGroupingTypeDaily    = 13,
-    LKAssetsCollectionGroupingTypeHourly   = 14,
-};
+@class  LKAssetsGroup;
+@protocol LKAssetsCollectionGrouping <NSObject>
 
-
-@class LKAssetsGroup;
-
-@interface LKAssetsCollectionGrouping : NSObject
-
-+ (instancetype)assetsCollectionGrouping;   // LKAssetsCollectionGroupingTypeAll
-+ (instancetype)assetsCollectionGroupingWithType:(LKAssetsCollectionGroupingType)type;
-
-- (NSArray*)collectionEntriesWithAssetsGroup:(LKAssetsGroup*)assetsGroup;
+- (NSArray*)groupedCollectionEntriesWithAssetsGroup:(LKAssetsGroup*)assetsGroup;
 
 @end

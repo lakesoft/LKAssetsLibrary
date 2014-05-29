@@ -6,35 +6,29 @@
 //  Copyright (c) 2014年 lakesoft. All rights reserved.
 //
 
-#import "LKAssetsCollectionSorter.h"
+#import "LKAssetsCollectionDateSorter.h"
 #import "LKAssetsCollectionEntry.h"
 #import "LKAsset.h"
 
-@interface LKAssetsCollectionSorter()
-@property (nonatomic, assign) LKAssetsCollectionSorterType type;
+@interface LKAssetsCollectionDateSorter()
 @end
 
-@implementation LKAssetsCollectionSorter
+@implementation LKAssetsCollectionDateSorter
 
 #pragma mark - Privates
 
 #pragma mark - Factories
-+ (instancetype)assetsCollectorSorter
++ (instancetype)sorterAscending:(BOOL)ascending
 {
-    return [self assetsCollectorSorterWithType:LKAssetsCollectionSorterTypeAscending];
-}
-
-+ (instancetype)assetsCollectorSorterWithType:(LKAssetsCollectionSorterType)type
-{
-    LKAssetsCollectionSorter* sorter = self.new;
-    sorter.type = type;
+    LKAssetsCollectionDateSorter* sorter = self.new;
+    sorter.asceding = ascending;
     return sorter;
 }
 
 // Sorting (customize below)
 - (NSArray*)sortedCollectionEntriesWithEntries:(NSArray*)entries
 {
-    if (self.type == LKAssetsCollectionSorterTypeAscending) {
+    if (self.isAscending) {
         return entries;
     } else {
         NSArray* sortedEntries = entries.reverseObjectEnumerator.allObjects;

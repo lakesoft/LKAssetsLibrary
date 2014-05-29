@@ -9,12 +9,15 @@
 #import "FilterViewController.h"
 #import "CollectionViewController.h"
 #import "LKAssetsLibrary.h"
+#import "LKAssetsCollectionDateGrouping.h"
+#import "LKAssetsCollectionDateSorter.h"
+#import "LKAssetsCollectionGenericFilter.h"
 
 @interface FilterViewController()
 @property (nonatomic, strong) LKAssetsCollection* assetsCollection;
-@property (nonatomic, strong) LKAssetsCollectionFilter* filter;
-@property (nonatomic, strong) LKAssetsCollectionSorter* sorter;
-@property (nonatomic, assign) LKAssetsCollectionGroupingType groupingType;
+@property (nonatomic, strong) LKAssetsCollectionGenericFilter* filter;
+@property (nonatomic, strong) LKAssetsCollectionDateSorter* sorter;
+@property (nonatomic, assign) LKAssetsCollectionDateGroupingType groupingType;
 @end
 
 @implementation FilterViewController
@@ -29,10 +32,10 @@
 - (void)_setupAssetsCollection
 {
     if (self.groupingType == 0) {
-        self.groupingType = LKAssetsCollectionGroupingTypeAll;
+        self.groupingType = LKAssetsCollectionDateGroupingTypeAll;
     }
     
-    LKAssetsCollectionGrouping* grouping = [LKAssetsCollectionGrouping assetsCollectionGroupingWithType:self.groupingType];
+    LKAssetsCollectionDateGrouping* grouping = [LKAssetsCollectionDateGrouping groupingWithType:self.groupingType];
     
     self.assetsCollection = [LKAssetsCollection assetsCollectionWithGroup:self.assetsGroup grouping:grouping];
     self.assetsCollection.filter = self.filter;
@@ -78,20 +81,20 @@
     switch (sender.selectedSegmentIndex) {
         case 1:
             // JPEG
-            self.filter = [LKAssetsCollectionFilter assetsCollectorFilterWithType:LKAssetsCollectionFilterTypeJPEG];
+            self.filter = [LKAssetsCollectionGenericFilter filterWithType:LKAssetsCollectionGenericFilterTypeJPEG];
             break;
         case 2:
             // Screen
-            self.filter = [LKAssetsCollectionFilter assetsCollectorFilterWithType:LKAssetsCollectionFilterTypeScreenShot];
+            self.filter = [LKAssetsCollectionGenericFilter filterWithType:LKAssetsCollectionGenericFilterTypeScreenShot];
             break;
         case 3:
             // video
-            self.filter = [LKAssetsCollectionFilter assetsCollectorFilterWithType:LKAssetsCollectionFilterTypeVideo];
+            self.filter = [LKAssetsCollectionGenericFilter filterWithType:LKAssetsCollectionGenericFilterTypeVideo];
             break;
         case 0:
         default:
             // All
-            self.filter = [LKAssetsCollectionFilter assetsCollectorFilterWithType:LKAssetsCollectionFilterTypeAll];
+            self.filter = [LKAssetsCollectionGenericFilter filterWithType:LKAssetsCollectionGenericFilterTypeAll];
             break;
     }
     self.filter.shouldOmitEmptyEntry = YES;
@@ -104,21 +107,21 @@
     
     switch (sender.selectedSegmentIndex) {
         case 1:
-            self.groupingType = LKAssetsCollectionGroupingTypeYearly;
+            self.groupingType = LKAssetsCollectionDateGroupingTypeYearly;
             break;
         case 2:
-            self.groupingType = LKAssetsCollectionGroupingTypeMonthly;
+            self.groupingType = LKAssetsCollectionDateGroupingTypeMonthly;
             break;
         case 3:
-            self.groupingType = LKAssetsCollectionGroupingTypeDaily;
+            self.groupingType = LKAssetsCollectionDateGroupingTypeDaily;
             break;
         case 4:
-            self.groupingType = LKAssetsCollectionGroupingTypeHourly;
+            self.groupingType = LKAssetsCollectionDateGroupingTypeHourly;
             break;
         case 0:
         default:
             // All
-            self.groupingType = LKAssetsCollectionGroupingTypeAll;
+            self.groupingType = LKAssetsCollectionDateGroupingTypeAll;
             break;
     }
     [self _setupAssetsCollection];
@@ -127,9 +130,9 @@
 }
 - (IBAction)changedSorter:(UISegmentedControl*)sender {
     if (sender.selectedSegmentIndex == 0) {
-        self.sorter = [LKAssetsCollectionSorter assetsCollectorSorterWithType:LKAssetsCollectionSorterTypeAscending];
+        self.sorter = [LKAssetsCollectionDateSorter sorterAscending:YES];
     } else {
-        self.sorter = [LKAssetsCollectionSorter assetsCollectorSorterWithType:LKAssetsCollectionSorterTypeDescending];
+        self.sorter = [LKAssetsCollectionDateSorter sorterAscending:NO];
         self.sorter.shouldSortAssetsInEntry = YES;
     }
     self.assetsCollection.sorter = self.sorter;

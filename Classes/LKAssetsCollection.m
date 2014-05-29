@@ -10,7 +10,7 @@
 
 @interface LKAssetsCollection()
 @property (nonatomic, weak) LKAssetsGroup* group;
-@property (nonatomic, strong) LKAssetsCollectionGrouping* grouping;
+@property (nonatomic, strong) id <LKAssetsCollectionGrouping> grouping;
 
 @property (nonatomic, strong) NSArray* entries;         // <LKAssetsCollectionEntry>
 @property (nonatomic, strong) NSArray* processedEntries; // <LKAssetsCollectionEntry>
@@ -19,12 +19,12 @@
 
 @implementation LKAssetsCollection
 
-+ (instancetype)assetsCollectionWithGroup:(LKAssetsGroup*)group grouping:(LKAssetsCollectionGrouping*)grouping
++ (instancetype)assetsCollectionWithGroup:(LKAssetsGroup*)group grouping:(id <LKAssetsCollectionGrouping>)grouping
 {
     LKAssetsCollection* collection = self.new;
     collection.group = group;
     collection.grouping = grouping;
-    collection.entries = [grouping collectionEntriesWithAssetsGroup:group];
+    collection.entries = [grouping groupedCollectionEntriesWithAssetsGroup:group];
     return collection;
 }
 
@@ -53,13 +53,13 @@
     return _processedEntries;
 }
 
-- (void)setFilter:(LKAssetsCollectionFilter *)filter
+- (void)setFilter:(id <LKAssetsCollectionFilter>)filter
 {
     _filter = filter;
     self.processedEntries = nil;
 }
 
-- (void)setSorter:(LKAssetsCollectionSorter *)sorter
+- (void)setSorter:(id <LKAssetsCollectionSorter>)sorter
 {
     _sorter = sorter;
     self.processedEntries = nil;

@@ -16,11 +16,11 @@
 @interface LKAssetsCollection : NSObject
 
 @property (nonatomic, strong, readonly) NSArray* entries;   // <LKAssetsCollectionEntry>
-@property (nonatomic, strong, readonly) LKAssetsCollectionGrouping* grouping;
+@property (nonatomic, strong, readonly) id <LKAssetsCollectionGrouping> grouping;
 
-@property (nonatomic, strong) LKAssetsCollectionFilter* filter;
-@property (nonatomic, strong) LKAssetsCollectionSorter* sorter;
+@property (nonatomic, strong) id <LKAssetsCollectionFilter> filter;
+@property (nonatomic, strong) id <LKAssetsCollectionSorter> sorter;
 
-+ (instancetype)assetsCollectionWithGroup:(LKAssetsGroup*)group grouping:(LKAssetsCollectionGrouping*)grouping;
++ (instancetype)assetsCollectionWithGroup:(LKAssetsGroup*)group grouping:(id <LKAssetsCollectionGrouping>)grouping;
 
 @end

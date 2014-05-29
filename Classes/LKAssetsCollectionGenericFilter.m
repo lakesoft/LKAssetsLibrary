@@ -6,43 +6,43 @@
 //  Copyright (c) 2014年 lakesoft. All rights reserved.
 //
 
-#import "LKAssetsCollectionFilter.h"
+#import "LKAssetsCollectionGenericFilter.h"
 #import "LKAssetsCollectionEntry.h"
 #import "LKAsset.h"
 
-@interface LKAssetsCollectionFilter()
-@property (nonatomic, assign) LKAssetsCollectionFilterType type;
+@interface LKAssetsCollectionGenericFilter()
+@property (nonatomic, assign) LKAssetsCollectionGenericFilterType type;
 @end
 
-@implementation LKAssetsCollectionFilter
+@implementation LKAssetsCollectionGenericFilter
 
-+ (instancetype)assetsCollectorFilterWithType:(LKAssetsCollectionFilterType)type
++ (instancetype)filterWithType:(LKAssetsCollectionGenericFilterType)type
 {
-    LKAssetsCollectionFilter* filter = LKAssetsCollectionFilter.new;
+    LKAssetsCollectionGenericFilter* filter = self.new;
     filter.type = type;
     return filter;
 }
 
-+ (instancetype)assetsCollectorFilter
++ (instancetype)filter
 {
-    return [self assetsCollectorFilterWithType:LKAssetsCollectionFilterTypeAll];
+    return [self filterWithType:LKAssetsCollectionGenericFilterTypeAll];
 }
 
 - (BOOL)_canAdoptAsset:(LKAsset*)asset
 {
-    if ((_type & LKAssetsCollectionFilterTypeJPEG) && asset.isJPEG) {
+    if ((_type & LKAssetsCollectionGenericFilterTypeJPEG) && asset.isJPEG) {
         return YES;
     }
-    if ((_type & LKAssetsCollectionFilterTypePNG) && asset.isPNG) {
+    if ((_type & LKAssetsCollectionGenericFilterTypePNG) && asset.isPNG) {
         return YES;
     }
-    if ((_type & LKAssetsCollectionFilterTypePhoto) && asset.isPhoto) {
+    if ((_type & LKAssetsCollectionGenericFilterTypePhoto) && asset.isPhoto) {
         return YES;
     }
-    if ((_type & LKAssetsCollectionFilterTypeVideo) && asset.isVideo) {
+    if ((_type & LKAssetsCollectionGenericFilterTypeVideo) && asset.isVideo) {
         return YES;
     }
-    if ((_type & LKAssetsCollectionFilterTypeScreenShot) && asset.isScreenshot) {
+    if ((_type & LKAssetsCollectionGenericFilterTypeScreenShot) && asset.isScreenshot) {
         return YES;
     }
     
