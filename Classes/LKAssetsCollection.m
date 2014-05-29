@@ -65,6 +65,15 @@
     self.processedEntries = nil;
 }
 
+@end
 
+
+@implementation  LKAssetsCollection (NSIndexPath)
+
+- (LKAsset*)assetForIndexPath:(NSIndexPath*)indexPath
+{
+    LKAssetsCollectionEntry* entry = self.entries[indexPath.section];
+    return entry.assets[indexPath.row];
+}
 
 @end

@@ -249,14 +249,14 @@
 			name = "Helpers (Generic)";
 			sourceTree = "<group>";
 		};
-		BC2A371B1937650700C672B7 /* Helpers (Protocols) */ = {
+		BC2A371B1937650700C672B7 /* Helpers (Protocol) */ = {
 			isa = PBXGroup;
 			children = (
 				BC2A371819375E5F00C672B7 /* LKAssetsCollectionGrouping.h */,
 				BC2A371A1937611200C672B7 /* LKAssetsCollectionFilter.h */,
 				BC2A371919375FB600C672B7 /* LKAssetsCollectionSorter.h */,
 			);
-			name = "Helpers (Protocols)";
+			name = "Helpers (Protocol)";
 			sourceTree = "<group>";
 		};
 		BC61867D19369D4600D085AF /* Utilities */ = {
@@ -275,7 +275,7 @@
 				BCE6AED7192DA76D00CEB654 /* LKAssetsCollection.m */,
 				BC120FBC192EF8CC004F34BA /* LKAssetsCollectionEntry.h */,
 				BC120FBD192EF8CC004F34BA /* LKAssetsCollectionEntry.m */,
-				BC2A371B1937650700C672B7 /* Helpers (Protocols) */,
+				BC2A371B1937650700C672B7 /* Helpers (Protocol) */,
 				BC2A371719375E4000C672B7 /* Helpers (Generic) */,
 			);
 			name = Collection;

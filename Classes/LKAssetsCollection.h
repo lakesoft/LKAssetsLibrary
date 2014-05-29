@@ -15,12 +15,20 @@
 @class LKAssetsGroup;
 @interface LKAssetsCollection : NSObject
 
+@property (nonatomic, weak  , readonly) LKAssetsGroup* group;
 @property (nonatomic, strong, readonly) NSArray* entries;   // <LKAssetsCollectionEntry>
-@property (nonatomic, strong, readonly) id <LKAssetsCollectionGrouping> grouping;
 
+@property (nonatomic, strong, readonly) id <LKAssetsCollectionGrouping> grouping;
 @property (nonatomic, strong) id <LKAssetsCollectionFilter> filter;
 @property (nonatomic, strong) id <LKAssetsCollectionSorter> sorter;
 
 + (instancetype)assetsCollectionWithGroup:(LKAssetsGroup*)group grouping:(id <LKAssetsCollectionGrouping>)grouping;
 
 @end
+
+
+@class LKAsset;
+@interface LKAssetsCollection (NSIndexPath)
+- (LKAsset*)assetForIndexPath:(NSIndexPath*)indexPath;
+@end
+

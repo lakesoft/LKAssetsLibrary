@@ -11,8 +11,6 @@
 // Notifications
 extern NSString * const LKAssetsGroupDidReloadNotification;
 
-@class LKAsset;
-
 @interface LKAssetsGroup : NSObject
 
 // Properties (Attribute)

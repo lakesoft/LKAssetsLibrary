@@ -81,8 +81,7 @@
 {
     AssetCell* cell = (AssetCell*)[collectionView dequeueReusableCellWithReuseIdentifier:@"AssetCell"
                                                                            forIndexPath:indexPath];
-    LKAssetsCollectionEntry* entry = self.assetsCollection.entries[indexPath.section];
-    LKAsset* asset = entry.assets[indexPath.row];
+    LKAsset* asset = [self.assetsCollection assetForIndexPath:indexPath];
     cell.imageView.image = asset.thumbnail;
     return cell;
     return nil;
