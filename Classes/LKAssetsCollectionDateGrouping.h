@@ -13,8 +13,9 @@ typedef NS_ENUM(NSInteger, LKAssetsCollectionDateGroupingType) {
     LKAssetsCollectionDateGroupingTypeAll      = 0,
     LKAssetsCollectionDateGroupingTypeYearly   = 11,
     LKAssetsCollectionDateGroupingTypeMonthly  = 12,
-    LKAssetsCollectionDateGroupingTypeDaily    = 13,
-    LKAssetsCollectionDateGroupingTypeHourly   = 14,
+    LKAssetsCollectionDateGroupingTypeWeekly   = 13,    // start with Mon (end with Sun)
+    LKAssetsCollectionDateGroupingTypeDaily    = 14,
+    LKAssetsCollectionDateGroupingTypeHourly   = 15,
 };
 
 

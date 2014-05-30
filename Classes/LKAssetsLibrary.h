@@ -13,8 +13,11 @@
 #import "LKAssetsCollection.h"
 #import "LKAsset.h"
 
-// Notifications
+// Notifications (Setup)
 extern NSString * const LKAssetsLibraryDidSetupNotification;
+
+// Notifications (Update)
+// store updated group into userInfo[LKAssetsLibraryGroupsKey]
 extern NSString * const LKAssetsLibraryDidInsertGroupsNotification;
 extern NSString * const LKAssetsLibraryDidUpdateGroupsNotification;
 extern NSString * const LKAssetsLibraryDidDeleteGroupsNotification;

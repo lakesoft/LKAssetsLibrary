@@ -19,7 +19,7 @@
                             <containerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gf6-Ff-bzN">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.75294119119644165" green="0.22352941334247589" blue="0.16862745583057404" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.90196079015731812" green="0.57357387681836991" blue="0.24207408222554308" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <segue destination="SWk-wi-edH" kind="embed" id="23i-As-XI5"/>
                                 </connections>
@@ -53,6 +53,7 @@
                                     <segment title="All"/>
                                     <segment title="Year"/>
                                     <segment title="Month"/>
+                                    <segment title="Week"/>
                                     <segment title="Day"/>
                                     <segment title="Hour"/>
                                 </segments>

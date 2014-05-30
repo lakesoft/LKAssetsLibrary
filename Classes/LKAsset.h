@@ -28,8 +28,8 @@ typedef NS_ENUM(NSInteger, LKAssetType) {
 @property (weak  , nonatomic, readonly) UIImage* fullResolutionImage;
 
 // Properties (Date number)
-@property (assign, nonatomic, readonly) NSTimeInterval timeInterval;
-@property (assign, nonatomic, readonly) NSInteger dateTimeInteger;  // yyyyMMddHH
+@property (assign, nonatomic, readonly) NSTimeInterval timeInterval;    // timeIntervalSince1970
+@property (assign, nonatomic, readonly) NSInteger dateTimeInteger;      // yyyyMMddHH
 
 // Properties (ALAsset property)
 @property (strong, nonatomic, readonly) NSURL* url;

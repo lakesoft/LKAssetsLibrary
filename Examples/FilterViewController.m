@@ -113,9 +113,12 @@
             self.groupingType = LKAssetsCollectionDateGroupingTypeMonthly;
             break;
         case 3:
-            self.groupingType = LKAssetsCollectionDateGroupingTypeDaily;
+            self.groupingType = LKAssetsCollectionDateGroupingTypeWeekly;
             break;
         case 4:
+            self.groupingType = LKAssetsCollectionDateGroupingTypeDaily;
+            break;
+        case 5:
             self.groupingType = LKAssetsCollectionDateGroupingTypeHourly;
             break;
         case 0:
