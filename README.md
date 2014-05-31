@@ -27,7 +27,13 @@ Example: Grouped by month, Filtered with JPEG and PNG, Sorted in descenting
 
 ### Basic
 
-LKAssetsLibrary has 3 basic classes: LKAssetsLibrary, LKAassetsGroup, LKasset. These are wrapper classes for ALAssetsLibrary, ALAssetsGroup, ALAsset. They has convenience methods (e.g. LKAsset.thumbnail, LKAsset.date, ...).
+LKAssetsLibrary has 3 basic classes:
+
+    LKAssetsLibrary
+    LKAassetsGroup
+    LKasset
+    
+These are wrapper classes for ALAssetsLibrary, ALAssetsGroup, ALAsset. They has convenience methods (e.g. LKAsset.thumbnail, LKAsset.date, ...).
 
 LKAssetsLibrary posts a notification after fetchs assets. You can handle the assets by observing the notification.
 
@@ -127,9 +133,12 @@ LKAssetsCollectionGrouping and LKAssetsGroup can not be changed, can be changed 
 ## Demo
 
 LKAssetsGroup's information are listed.
+
 ![Class diagram](Docs/LKAssetsLibrary-Pic1.png)
 
+
 LKAssetsCollection's information are displayed. You can try various groupings, filters and sorters.
+
 ![Class diagram](Docs/LKAssetsLibrary-Pic2.png)
 
 
