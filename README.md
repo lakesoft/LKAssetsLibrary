@@ -1,6 +1,6 @@
 # LKAssetsLibrary
 
-LKAssetsLibrary provides grouping / filter/ sorting functions for ALAssetsLibrary.
+LKAssetsLibrary provides grouping / filtering / sorting functions for ALAssetsLibrary.
 
 Example: Grouped by month, Filtered with JPEG and PNG, Sorted in descenting
 
