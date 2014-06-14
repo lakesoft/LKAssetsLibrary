@@ -112,18 +112,16 @@ The assets are extracted with 3 factors:
 
 These are defined as protocol. The library provides generic classes here.
 
-    LKAssetsCollectionDateGrouping
+    LKAssetsCollectionGenericGrouping
     LKAssetsCollectionGenericFilter
-    LKAssetsCollectionDateSorter
+    LKAssetsCollectionGenericSorter
 
 You can use like below:
 
-    LKAssetsCollectionGrouping* grouping = [LKAssetsCollectionGrouping assetsCollectionGroupingWithType:self.groupingType];
-    
     self.assetsCollection = [LKAssetsCollection assetsCollectionWithGroup:self.assetsGroup
-                              grouping:[LKAssetsCollectionDateGrouping groupingWithType:self.groupingType]];
+                              grouping:[LKAssetsCollectionGenericGrouping groupingWithType:self.groupingType]];
     self.assetsCollection.filter = [LKAssetsCollectionGenericFilter filterWithType:LKAssetsCollectionGenericFilterTypeJPEG|LKAssetsCollectionGenericFilterTypePNG];
-    self.assetsCollection.sorter = [LKAssetsCollectionDateSorter sorterAscending:NO];
+    self.assetsCollection.sorter = [LKAssetsCollectionGenericSorter sorterAscending:NO];
 
 LKAssetsCollectionGrouping and LKAssetsGroup can not be changed, can be changed when initializing. LKAssetsFilter and LKAssetsSorter can be changed after initializing.
 

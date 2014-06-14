@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "LKAssetsCollectionSorter.h"
 
-@interface LKAssetsCollectionDateSorter : NSObject <LKAssetsCollectionSorter>
+@interface LKAssetsCollectionGenericSorter : NSObject <LKAssetsCollectionSorter>
 
 // Options
 @property (nonatomic, assign, getter = isAscending) BOOL asceding;

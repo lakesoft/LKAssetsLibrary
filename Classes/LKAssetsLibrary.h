@@ -12,6 +12,7 @@
 #import "LKAssetsGroup.h"
 #import "LKAssetsCollection.h"
 #import "LKAsset.h"
+#import "LKAssetsCollectionGenericHelpers.h"
 
 // Notifications (Setup)
 extern NSString * const LKAssetsLibraryDidSetupNotification;

@@ -6,49 +6,49 @@
 //  Copyright (c) 2014年 lakesoft. All rights reserved.
 //
 
-#import "LKAssetsCollectionDateGrouping.h"
+#import "LKAssetsCollectionGenericGrouping.h"
 #import "LKAsset.h"
 #import "LKAssetsGroup.h"
 #import "LKAssetsCollectionEntry.h"
 
-@interface LKAssetsCollectionDateGrouping()
-@property (nonatomic, assign) LKAssetsCollectionDateGroupingType type;
+@interface LKAssetsCollectionGenericGrouping()
+@property (nonatomic, assign) LKAssetsCollectionGenericGroupingType type;
 @property (nonatomic, assign) NSInteger scale;
 @end
 
-@implementation LKAssetsCollectionDateGrouping
+@implementation LKAssetsCollectionGenericGrouping
 
 + (instancetype)grouping
 {
-    return [self groupingWithType:LKAssetsCollectionDateGroupingTypeAll];
+    return [self groupingWithType:LKAssetsCollectionGenericGroupingTypeAll];
 }
 
-+ (instancetype)groupingWithType:(LKAssetsCollectionDateGroupingType)type
++ (instancetype)groupingWithType:(LKAssetsCollectionGenericGroupingType)type
 {
-    LKAssetsCollectionDateGrouping* grouping = self.new;
+    LKAssetsCollectionGenericGrouping* grouping = self.new;
     grouping.type = type;
     switch (type) {
-        case LKAssetsCollectionDateGroupingTypeYearly:
+        case LKAssetsCollectionGenericGroupingTypeYearly:
             grouping.scale = 1000000; // yyyyMMddHH / 1000000 = yyyy
             break;
             
-        case LKAssetsCollectionDateGroupingTypeMonthly:
+        case LKAssetsCollectionGenericGroupingTypeMonthly:
             grouping.scale = 10000; // yyyyMMddHH / 10000 = yyyyMM
             break;
             
-        case LKAssetsCollectionDateGroupingTypeWeekly:
+        case LKAssetsCollectionGenericGroupingTypeWeekly:
             // nothing
             break;
 
-        case LKAssetsCollectionDateGroupingTypeDaily:
+        case LKAssetsCollectionGenericGroupingTypeDaily:
             grouping.scale = 100;   // yyyyMMddHH / 100 = yyyyMMdd
             break;
 
-        case LKAssetsCollectionDateGroupingTypeHourly:
+        case LKAssetsCollectionGenericGroupingTypeHourly:
             grouping.scale = 1;     // yyyyMMddHH;
             break;
 
-        case LKAssetsCollectionDateGroupingTypeAll:
+        case LKAssetsCollectionGenericGroupingTypeAll:
         default:
             break;
     }
@@ -87,7 +87,7 @@
     NSMutableArray* entries = @[].mutableCopy;
     __block NSMutableArray* assets = nil;
     
-    if (self.type == LKAssetsCollectionDateGroupingTypeWeekly) {
+    if (self.type == LKAssetsCollectionGenericGroupingTypeWeekly) {
         NSInteger previousWeek = 0;
         NSCalendar *calendar = NSCalendar.currentCalendar;
         

@@ -6,21 +6,21 @@
 //  Copyright (c) 2014年 lakesoft. All rights reserved.
 //
 
-#import "LKAssetsCollectionDateSorter.h"
+#import "LKAssetsCollectionGenericSorter.h"
 #import "LKAssetsCollectionEntry.h"
 #import "LKAsset.h"
 
-@interface LKAssetsCollectionDateSorter()
+@interface LKAssetsCollectionGenericSorter()
 @end
 
-@implementation LKAssetsCollectionDateSorter
+@implementation LKAssetsCollectionGenericSorter
 
 #pragma mark - Privates
 
 #pragma mark - Factories
 + (instancetype)sorterAscending:(BOOL)ascending
 {
-    LKAssetsCollectionDateSorter* sorter = self.new;
+    LKAssetsCollectionGenericSorter* sorter = self.new;
     sorter.asceding = ascending;
     return sorter;
 }

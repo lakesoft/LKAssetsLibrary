@@ -9,15 +9,15 @@
 #import "FilterViewController.h"
 #import "CollectionViewController.h"
 #import "LKAssetsLibrary.h"
-#import "LKAssetsCollectionDateGrouping.h"
-#import "LKAssetsCollectionDateSorter.h"
+#import "LKAssetsCollectionGenericGrouping.h"
+#import "LKAssetsCollectionGenericSorter.h"
 #import "LKAssetsCollectionGenericFilter.h"
 
 @interface FilterViewController()
 @property (nonatomic, strong) LKAssetsCollection* assetsCollection;
 @property (nonatomic, strong) LKAssetsCollectionGenericFilter* filter;
-@property (nonatomic, strong) LKAssetsCollectionDateSorter* sorter;
-@property (nonatomic, assign) LKAssetsCollectionDateGroupingType groupingType;
+@property (nonatomic, strong) LKAssetsCollectionGenericSorter* sorter;
+@property (nonatomic, assign) LKAssetsCollectionGenericGroupingType groupingType;
 @end
 
 @implementation FilterViewController
@@ -32,10 +32,10 @@
 - (void)_setupAssetsCollection
 {
     if (self.groupingType == 0) {
-        self.groupingType = LKAssetsCollectionDateGroupingTypeAll;
+        self.groupingType = LKAssetsCollectionGenericGroupingTypeAll;
     }
     
-    LKAssetsCollectionDateGrouping* grouping = [LKAssetsCollectionDateGrouping groupingWithType:self.groupingType];
+    LKAssetsCollectionGenericGrouping* grouping = [LKAssetsCollectionGenericGrouping groupingWithType:self.groupingType];
     
     self.assetsCollection = [LKAssetsCollection assetsCollectionWithGroup:self.assetsGroup grouping:grouping];
     self.assetsCollection.filter = self.filter;
@@ -107,24 +107,24 @@
     
     switch (sender.selectedSegmentIndex) {
         case 1:
-            self.groupingType = LKAssetsCollectionDateGroupingTypeYearly;
+            self.groupingType = LKAssetsCollectionGenericGroupingTypeYearly;
             break;
         case 2:
-            self.groupingType = LKAssetsCollectionDateGroupingTypeMonthly;
+            self.groupingType = LKAssetsCollectionGenericGroupingTypeMonthly;
             break;
         case 3:
-            self.groupingType = LKAssetsCollectionDateGroupingTypeWeekly;
+            self.groupingType = LKAssetsCollectionGenericGroupingTypeWeekly;
             break;
         case 4:
-            self.groupingType = LKAssetsCollectionDateGroupingTypeDaily;
+            self.groupingType = LKAssetsCollectionGenericGroupingTypeDaily;
             break;
         case 5:
-            self.groupingType = LKAssetsCollectionDateGroupingTypeHourly;
+            self.groupingType = LKAssetsCollectionGenericGroupingTypeHourly;
             break;
         case 0:
         default:
             // All
-            self.groupingType = LKAssetsCollectionDateGroupingTypeAll;
+            self.groupingType = LKAssetsCollectionGenericGroupingTypeAll;
             break;
     }
     [self _setupAssetsCollection];
@@ -133,9 +133,9 @@
 }
 - (IBAction)changedSorter:(UISegmentedControl*)sender {
     if (sender.selectedSegmentIndex == 0) {
-        self.sorter = [LKAssetsCollectionDateSorter sorterAscending:YES];
+        self.sorter = [LKAssetsCollectionGenericSorter sorterAscending:YES];
     } else {
-        self.sorter = [LKAssetsCollectionDateSorter sorterAscending:NO];
+        self.sorter = [LKAssetsCollectionGenericSorter sorterAscending:NO];
         self.sorter.shouldSortAssetsInEntry = YES;
     }
     self.assetsCollection.sorter = self.sorter;
