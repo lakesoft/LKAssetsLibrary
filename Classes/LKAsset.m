@@ -93,7 +93,7 @@ static NSDateFormatter* _dateFormatter = nil;
 {
     ALAssetRepresentation* rep = self.asset.defaultRepresentation;
     if (rep) {
-        UIImage* image = [UIImage imageWithCGImage:rep.fullResolutionImage
+        UIImage* image = [UIImage imageWithCGImage:rep.fullScreenImage
                                              scale:1.0
                                        orientation:(UIImageOrientation)rep.orientation];
         return [LKImageUtility adjustOrientationImage:image];
