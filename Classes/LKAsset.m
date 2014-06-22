@@ -69,6 +69,22 @@ static NSDateFormatter* _dateFormatter = nil;
     }
 }
 
+- (BOOL)isEqual:(LKAsset*)asset
+{
+    if (asset == self) {
+        return YES;
+    }
+    if (!asset || ![asset isKindOfClass:self.class]) {
+        return NO;
+    }
+    return [self.url isEqual:asset.url];
+}
+
+- (NSUInteger)hash
+{
+    return [self.url hash];
+}
+
 
 #pragma mark -
 #pragma mark Properties (Status)

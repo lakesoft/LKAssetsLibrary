@@ -174,7 +174,7 @@ NSString* const LKAssetsLibraryGroupsKey = @"LKAssetsLibraryGroupsKey";
         self.assetsFilter = assetsFilter;
         self.assetsGroupType = assetsGroupType;
         self.sortComparator = ^NSComparisonResult(LKAssetsGroup* group1, LKAssetsGroup* group2) {
-            return [group1.name compare:group2.name];
+            return [group1 compare:group2];
         };
     }
     return self;

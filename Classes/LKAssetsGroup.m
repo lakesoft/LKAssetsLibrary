@@ -52,6 +52,26 @@ NSString* const LKAssetsGroupDidReloadNotification = @"LKAssetsGroupDidReloadNot
     [NSNotificationCenter.defaultCenter removeObserver:self];
 }
 
+- (NSComparisonResult)compare:(LKAssetsGroup*)assetsGroup
+{
+    return [self.name compare:assetsGroup.name];
+}
+
+- (BOOL)isEqual:(LKAssetsGroup*)assetsGroup
+{
+    if (assetsGroup == self) {
+        return YES;
+    }
+    if (!assetsGroup || ![assetsGroup isKindOfClass:self.class]) {
+        return NO;
+    }
+    return [self.url isEqual:assetsGroup.url];
+}
+
+- (NSUInteger)hash
+{
+    return [self.url hash];
+}
 
 #pragma mark - Properites (Attributes)
 - (NSString*)name

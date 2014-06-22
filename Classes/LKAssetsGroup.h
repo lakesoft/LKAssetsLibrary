@@ -31,6 +31,9 @@ extern NSString * const LKAssetsGroupDidReloadNotification;
 - (void)reloadAssets;   // should be called before accessing assets
 - (void)unloadAssets;
 
+// Etc
+- (NSComparisonResult)compare:(LKAssetsGroup*)assetsGroup;
+
 
 // [Advanced] Custom Asset
 // default: LKAsset.class

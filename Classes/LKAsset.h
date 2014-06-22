@@ -49,4 +49,7 @@ typedef NS_ENUM(NSInteger, LKAssetType) {
 // APIs (Factories)
 + (LKAsset*)assetFrom:(ALAsset*)asset;
 
+// Etc
+- (NSComparisonResult)compare:(LKAsset*)asset;
+
 @end
