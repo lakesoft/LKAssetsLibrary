@@ -109,10 +109,14 @@ static NSDateFormatter* _dateFormatter = nil;
 {
     ALAssetRepresentation* rep = self.asset.defaultRepresentation;
     if (rep) {
-        UIImage* image = [UIImage imageWithCGImage:rep.fullScreenImage
-                                             scale:1.0
-                                       orientation:(UIImageOrientation)rep.orientation];
-        return [LKImageUtility adjustOrientationImage:image];
+        UIImage *image = [UIImage imageWithCGImage:rep.fullScreenImage
+                                             scale:rep.scale
+                                       orientation:0];
+        return image;
+//        UIImage* image = [UIImage imageWithCGImage:rep.fullScreenImage
+//                                             scale:1.0
+//                                       orientation:(UIImageOrientation)rep.orientation];
+//        return [LKImageUtility adjustOrientationImage:image];
     } else {
         // deleted
         return nil;
@@ -124,9 +128,10 @@ static NSDateFormatter* _dateFormatter = nil;
     ALAssetRepresentation* rep = self.asset.defaultRepresentation;
     if (rep) {
         UIImage* image = [UIImage imageWithCGImage:rep.fullResolutionImage
-                                             scale:1.0
-                                       orientation:(UIImageOrientation)rep.orientation];
-        return [LKImageUtility adjustOrientationImage:image];
+                                             scale:rep.scale
+                                       orientation:0];
+        return image;
+//        return [LKImageUtility adjustOrientationImage:image];
     } else {
         // deleted
         return nil;
