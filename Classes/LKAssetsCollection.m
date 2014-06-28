@@ -76,4 +76,19 @@
     return entry.assets[indexPath.row];
 }
 
+- (NSIndexPath*)indexPathForAsset:(LKAsset*)asset
+{
+    NSIndexPath* indexPath = nil;
+    for (NSInteger section=0; section < self.entries.count; section++) {
+        LKAssetsCollectionEntry* entry = self.entries[section];
+        NSInteger index = [entry.assets indexOfObject:asset];
+        if (index != NSNotFound) {
+            indexPath = [NSIndexPath indexPathForItem:index inSection:section];
+            break;
+        }
+    }
+    return indexPath;
+}
+
+
 @end
