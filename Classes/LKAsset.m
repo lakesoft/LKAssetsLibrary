@@ -20,7 +20,7 @@
 @property (strong, nonatomic) CLLocation* location;
 @property (strong, nonatomic) NSDate* date;
 @property (assign, nonatomic) LKAssetType type;
-
+@property (assign, nonatomic) double duration;
 @end
 
 @implementation LKAsset
@@ -154,6 +154,15 @@ static NSDateFormatter* _dateFormatter = nil;
         _location = [self.asset valueForProperty:ALAssetPropertyLocation];
     }
     return _location;
+}
+
+- (double)duration
+{
+    if (_duration == 0 && _type == LKAssetTypeVideo) {
+        NSNumber* number = [self.asset valueForProperty:ALAssetPropertyDuration];
+        _duration = number.doubleValue;
+    }
+    return _duration;
 }
 
 - (NSDate*)date

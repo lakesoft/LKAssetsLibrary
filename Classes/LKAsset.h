@@ -37,6 +37,7 @@ typedef NS_ENUM(NSInteger, LKAssetType) {
 @property (strong, nonatomic, readonly) NSDate* date;
 @property (strong, nonatomic, readonly) NSString* fileExtension;    // upper string JPG, PNG, ...
 @property (assign, nonatomic, readonly) CGSize size;
+@property (assign, nonatomic, readonly) double duration;            // 0 if photo
 @property (assign, nonatomic, readonly) LKAssetType type;
 
 // Properties (Filter)
