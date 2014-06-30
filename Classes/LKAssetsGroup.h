@@ -34,6 +34,8 @@ extern NSString * const LKAssetsGroupDidReloadNotification;
 // Etc
 - (NSComparisonResult)compare:(LKAssetsGroup*)assetsGroup;
 
+// Exports
+@property (strong, nonatomic, readonly) ALAssetsGroup* assetsGroup;
 
 // [Advanced] Custom Asset
 // default: LKAsset.class

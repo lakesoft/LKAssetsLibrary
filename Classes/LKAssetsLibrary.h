@@ -48,6 +48,8 @@ extern NSString * const LKAssetsLibraryGroupsKey;
 // Authorizations
 + (BOOL)isAuthorizationStatusDenied;
 
+// Exports
+@property (strong, nonatomic, readonly) ALAssetsLibrary* assetsLibrary;
 
 // [Option] Group sorting
 // default: sorted by group's name in ascending

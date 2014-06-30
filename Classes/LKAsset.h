@@ -50,6 +50,10 @@ typedef NS_ENUM(NSInteger, LKAssetType) {
 // APIs (Factories)
 + (LKAsset*)assetFrom:(ALAsset*)asset;
 
+// Exports
+@property (strong, nonatomic, readonly) ALAsset* asset;
+
+
 // Etc
 - (NSComparisonResult)compare:(LKAsset*)asset;
 
