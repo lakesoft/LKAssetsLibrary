@@ -82,54 +82,54 @@
     return [formatter stringFromDate:normalizedDate].integerValue;
 }
 
-- (NSArray*)groupedCollectionEntriesWithAssetsGroup:(LKAssetsGroup*)assetsGroup
+- (NSArray*)groupedCollectionEntriesWithAssets:(NSArray*)assets
 {
     NSMutableArray* entries = @[].mutableCopy;
-    __block NSMutableArray* assets = nil;
+    __block NSMutableArray* tmpAssets = nil;
     
     if (self.type == LKAssetsCollectionGenericGroupingTypeWeekly) {
         NSInteger previousWeek = 0;
         NSCalendar *calendar = NSCalendar.currentCalendar;
         
         // http://stackoverflow.com/questions/21195926/compute-number-of-weeks-since-epoch-more-accurately-than-days-7
-        for (LKAsset* asset in assetsGroup.assets) {
+        for (LKAsset* asset in assets) {
             NSDate* date = [NSDate dateWithTimeIntervalSince1970:asset.timeInterval];
             NSInteger week = [calendar components:NSCalendarUnitWeekOfYear
                                          fromDate:self._weekReferencedDate
                                            toDate:date
                                           options:0].weekOfYear;
             if (week != previousWeek) {
-                assets = @[].mutableCopy;
+                tmpAssets = @[].mutableCopy;
                 NSInteger dateTimeInteger = [self _dateTimeIntegerOfFirstWeekdayFromDate:asset.date];
-                LKAssetsCollectionEntry* entry = [LKAssetsCollectionEntry assetsCollectionEntryWithDateTimeInteger:dateTimeInteger assets:assets];
+                LKAssetsCollectionEntry* entry = [LKAssetsCollectionEntry assetsCollectionEntryWithDateTimeInteger:dateTimeInteger assets:tmpAssets];
                 [entries addObject:entry];
                 previousWeek = week;
 //                NSLog(@"%05zd : %zd", week, dateTimeInteger);
             }
-            [assets addObject:asset];
+            [tmpAssets addObject:asset];
         }
         
     } else {
         NSInteger previousDateTimeInteger = 0;
         
-        for (LKAsset* asset in assetsGroup.assets) {
+        for (LKAsset* asset in assets) {
             if (_scale) {
                 if (previousDateTimeInteger != asset.dateTimeInteger/_scale) {
                     previousDateTimeInteger = asset.dateTimeInteger/_scale;
-                    assets = @[].mutableCopy;
-                    LKAssetsCollectionEntry* entry = [LKAssetsCollectionEntry assetsCollectionEntryWithDateTimeInteger:previousDateTimeInteger assets:assets];
+                    tmpAssets = @[].mutableCopy;
+                    LKAssetsCollectionEntry* entry = [LKAssetsCollectionEntry assetsCollectionEntryWithDateTimeInteger:previousDateTimeInteger assets:tmpAssets];
                     [entries addObject:entry];
                 }
             } else {
                 if (previousDateTimeInteger == 0) {
-                    assets = @[].mutableCopy;
-                    LKAssetsCollectionEntry* entry = [LKAssetsCollectionEntry assetsCollectionEntryWithDateTimeInteger:previousDateTimeInteger assets:assets];
+                    tmpAssets = @[].mutableCopy;
+                    LKAssetsCollectionEntry* entry = [LKAssetsCollectionEntry assetsCollectionEntryWithDateTimeInteger:previousDateTimeInteger assets:tmpAssets];
                     [entries addObject:entry];
                     previousDateTimeInteger = -1;
                 }
             }
 
-            [assets addObject:asset];
+            [tmpAssets addObject:asset];
         }
     }
     return entries;

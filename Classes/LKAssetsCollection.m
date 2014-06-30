@@ -7,6 +7,7 @@
 //
 
 #import "LKAssetsCollection.h"
+#import "LKAssetsGroup.h"
 
 @interface LKAssetsCollection()
 @property (nonatomic, weak) LKAssetsGroup* group;
@@ -24,9 +25,17 @@
     LKAssetsCollection* collection = self.new;
     collection.group = group;
     collection.grouping = grouping;
-    collection.entries = [grouping groupedCollectionEntriesWithAssetsGroup:group];
+    collection.entries = [grouping groupedCollectionEntriesWithAssets:group.assets];
     return collection;
 }
+
++ (instancetype)assetsCollectionWithAssets:(NSArray*)assets grouping:(id <LKAssetsCollectionGrouping>)grouping
+{
+    LKAssetsCollection* collection = self.new;
+    collection.entries = [grouping groupedCollectionEntriesWithAssets:assets];
+    return collection;
+}
+
 
 - (NSArray*)entries
 {

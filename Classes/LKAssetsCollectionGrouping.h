@@ -11,6 +11,6 @@
 @class  LKAssetsGroup;
 @protocol LKAssetsCollectionGrouping <NSObject>
 
-- (NSArray*)groupedCollectionEntriesWithAssetsGroup:(LKAssetsGroup*)assetsGroup;
+- (NSArray*)groupedCollectionEntriesWithAssets:(NSArray*)assets;
 
 @end
