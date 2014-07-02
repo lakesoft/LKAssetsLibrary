@@ -10,7 +10,7 @@
 #import "LKAssetsGroup.h"
 
 @interface LKAssetsCollection()
-@property (nonatomic, weak) LKAssetsGroup* group;
+@property (nonatomic, weak) LKAssetsGroup* assetsGroup;
 @property (nonatomic, strong) id <LKAssetsCollectionGrouping> grouping;
 
 @property (nonatomic, strong) NSArray* entries;         // <LKAssetsCollectionEntry>
@@ -20,12 +20,12 @@
 
 @implementation LKAssetsCollection
 
-+ (instancetype)assetsCollectionWithGroup:(LKAssetsGroup*)group grouping:(id <LKAssetsCollectionGrouping>)grouping
++ (instancetype)assetsCollectionWithGroup:(LKAssetsGroup*)assetsGroup grouping:(id <LKAssetsCollectionGrouping>)grouping
 {
     LKAssetsCollection* collection = self.new;
-    collection.group = group;
+    collection.assetsGroup = assetsGroup;
     collection.grouping = grouping;
-    collection.entries = [grouping groupedCollectionEntriesWithAssets:group.assets];
+    collection.entries = [grouping groupedCollectionEntriesWithAssets:assetsGroup.assets];
     return collection;
 }
 

@@ -15,7 +15,7 @@
 @class LKAssetsGroup;
 @interface LKAssetsCollection : NSObject
 
-@property (nonatomic, weak  , readonly) LKAssetsGroup* group;
+@property (nonatomic, weak  , readonly) LKAssetsGroup* assetsGroup;
 @property (nonatomic, strong, readonly) NSArray* entries;   // <LKAssetsCollectionEntry>
 
 @property (nonatomic, strong, readonly) id <LKAssetsCollectionGrouping> grouping;   // nil If created from assets
@@ -23,7 +23,7 @@
 @property (nonatomic, strong) id <LKAssetsCollectionSorter> sorter;
 
 // create with LKAssetsGroup
-+ (instancetype)assetsCollectionWithGroup:(LKAssetsGroup*)group grouping:(id <LKAssetsCollectionGrouping>)grouping;
++ (instancetype)assetsCollectionWithGroup:(LKAssetsGroup*)assetsGroup grouping:(id <LKAssetsCollectionGrouping>)grouping;
 
 // create with LKAsset array
 + (instancetype)assetsCollectionWithAssets:(NSArray*)assets grouping:(id <LKAssetsCollectionGrouping>)grouping;
