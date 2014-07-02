@@ -28,8 +28,9 @@
 // create with LKAsset array
 + (instancetype)assetsCollectionWithAssets:(NSArray*)assets grouping:(id <LKAssetsCollectionGrouping>)grouping;
 
-@end
+- (NSInteger)numberOfAssets;
 
+@end
 
 @class LKAsset;
 @interface LKAssetsCollection (NSIndexPath)

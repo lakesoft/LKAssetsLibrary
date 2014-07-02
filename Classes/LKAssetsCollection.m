@@ -74,6 +74,16 @@
     self.processedEntries = nil;
 }
 
+- (NSInteger)numberOfAssets
+{
+    NSInteger numberOfAssets = 0;
+    for (LKAssetsCollectionEntry* entry in self.entries) {
+        numberOfAssets += entry.assets.count;
+    }
+    return numberOfAssets;
+}
+
+
 @end
 
 
