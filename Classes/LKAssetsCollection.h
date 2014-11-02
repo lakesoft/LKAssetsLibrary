@@ -36,6 +36,7 @@
 @interface LKAssetsCollection (NSIndexPath)
 - (LKAsset*)assetForIndexPath:(NSIndexPath*)indexPath;
 - (NSIndexPath*)indexPathForAsset:(LKAsset*)asset;
+- (NSIndexPath*)lastIndexPath;
 
 @end
 

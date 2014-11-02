@@ -109,5 +109,18 @@
     return indexPath;
 }
 
+- (NSIndexPath*)lastIndexPath
+{
+    NSInteger section = self.entries.count - 1;
+    if (section < 0) {
+        return nil;
+    }
+    LKAssetsCollectionEntry* entry = self.entries[section];
+    NSInteger item = entry.assets.count - 1;
+    if (item < 0) {
+        return nil;
+    }
+    return [NSIndexPath indexPathForItem:item inSection:section];
+}
 
 @end
