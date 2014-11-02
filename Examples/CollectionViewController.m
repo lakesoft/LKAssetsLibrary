@@ -46,11 +46,11 @@
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(_didChangeCollection:)
                                                name:FilterViewControllerDidChangeAssetsCollectionNotification
-                                             object:NO];
+                                             object:nil];
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(_didReload:)
                                                name:LKAssetsGroupDidReloadNotification
-                                             object:NO];
+                                             object:nil];
 }
 
 - (void)didReceiveMemoryWarning

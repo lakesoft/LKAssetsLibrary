@@ -33,6 +33,7 @@
 		BC060D8B192815D4009989D0 /* AssetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC060D8A192815D4009989D0 /* AssetCell.m */; };
 		BC060D8E19281F69009989D0 /* AssetHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC060D8D19281F69009989D0 /* AssetHeaderView.m */; };
 		BC060DAA192C0406009989D0 /* FilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC060DA9192C0406009989D0 /* FilterViewController.m */; };
+		BC0F4EB01A059C3300BED417 /* LKAssetsLibrary+GenericCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = BC0F4EAF1A059C3300BED417 /* LKAssetsLibrary+GenericCollection.m */; };
 		BC120FB1192EF57E004F34BA /* LKAssetsCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = BCE6AED7192DA76D00CEB654 /* LKAssetsCollection.m */; };
 		BC120FB5192EF774004F34BA /* LKAssetsCollectionGenericGrouping.m in Sources */ = {isa = PBXBuildFile; fileRef = BC120FB4192EF774004F34BA /* LKAssetsCollectionGenericGrouping.m */; };
 		BC120FB8192EF785004F34BA /* LKAssetsCollectionGenericFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = BC120FB7192EF785004F34BA /* LKAssetsCollectionGenericFilter.m */; };
@@ -90,6 +91,8 @@
 		BC060D8D19281F69009989D0 /* AssetHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssetHeaderView.m; sourceTree = "<group>"; };
 		BC060DA8192C0406009989D0 /* FilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterViewController.h; sourceTree = "<group>"; };
 		BC060DA9192C0406009989D0 /* FilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterViewController.m; sourceTree = "<group>"; };
+		BC0F4EAE1A059C3300BED417 /* LKAssetsLibrary+GenericCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "LKAssetsLibrary+GenericCollection.h"; sourceTree = "<group>"; };
+		BC0F4EAF1A059C3300BED417 /* LKAssetsLibrary+GenericCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "LKAssetsLibrary+GenericCollection.m"; sourceTree = "<group>"; };
 		BC120FB3192EF774004F34BA /* LKAssetsCollectionGenericGrouping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKAssetsCollectionGenericGrouping.h; sourceTree = "<group>"; };
 		BC120FB4192EF774004F34BA /* LKAssetsCollectionGenericGrouping.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKAssetsCollectionGenericGrouping.m; sourceTree = "<group>"; };
 		BC120FB6192EF784004F34BA /* LKAssetsCollectionGenericFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKAssetsCollectionGenericFilter.h; sourceTree = "<group>"; };
@@ -227,6 +230,8 @@
 			children = (
 				BC060D1A19246ECB009989D0 /* LKAssetsLibrary.h */,
 				BC060D1B19246ECB009989D0 /* LKAssetsLibrary.m */,
+				BC0F4EAE1A059C3300BED417 /* LKAssetsLibrary+GenericCollection.h */,
+				BC0F4EAF1A059C3300BED417 /* LKAssetsLibrary+GenericCollection.m */,
 				BC060D1C19246ECB009989D0 /* LKAssetsGroup.h */,
 				BC060D1D19246ECB009989D0 /* LKAssetsGroup.m */,
 				BC060D1E19246ECB009989D0 /* LKAsset.h */,
@@ -388,6 +393,7 @@
 				BC060D8E19281F69009989D0 /* AssetHeaderView.m in Sources */,
 				BC120FBE192EF8CC004F34BA /* LKAssetsCollectionEntry.m in Sources */,
 				BC060CE419246CC1009989D0 /* AppDelegate.m in Sources */,
+				BC0F4EB01A059C3300BED417 /* LKAssetsLibrary+GenericCollection.m in Sources */,
 				BC120FB1192EF57E004F34BA /* LKAssetsCollection.m in Sources */,
 				BC060D8B192815D4009989D0 /* AssetCell.m in Sources */,
 				BC060DAA192C0406009989D0 /* FilterViewController.m in Sources */,

@@ -9,7 +9,7 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 
 // Notifications
-extern NSString * const LKAssetsGroupDidReloadNotification;
+extern NSString * const LKAssetsGroupDidReloadNotification;     // NSNoticication.object == <LKAssetsGroup>
 
 @interface LKAssetsGroup : NSObject
 

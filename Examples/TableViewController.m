@@ -9,9 +9,11 @@
 #import "TableViewController.h"
 #import "LKAssetsLibrary.h"
 #import "FilterViewController.h"
+#import "LKAssetsLibrary+GenericCollection.h"
 
 @interface TableViewController ()
 @property (strong, nonatomic) LKAssetsLibrary* assetsLibrary;
+@property (strong, nonatomic) LKAssetsLibrary* assetsLibrary2;
 @end
 
 @implementation TableViewController
@@ -82,6 +84,15 @@
     self.assetsLibrary = [LKAssetsLibrary assetsLibrary];
     [self.assetsLibrary reload];
 //    self.assetsLibrary = [LKAssetsLibrary assetsLibraryWithAssetsGroupType:ALAssetsGroupSavedPhotos assetsFilter:ALAssetsFilter.allPhotos];
+    
+    
+    // test generic
+    self.assetsLibrary2 = LKAssetsLibrary.assetsLibrary;
+    [self.assetsLibrary2 loadGenericAssetsCollectionWithAssetsGroupURL:nil
+                                                          groupingType:LKAssetsCollectionGenericGroupingTypeAll
+                                                            completion:^(LKAssetsCollection *assetsCollection) {
+                                                                NSLog(@"2:%@", assetsCollection);
+                                                            }];
 }
 
 - (void)didReceiveMemoryWarning
