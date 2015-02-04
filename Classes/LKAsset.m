@@ -7,7 +7,6 @@
 //
 
 #import "LKAsset.h"
-#import "LKImageUtility.h"
 
 @interface LKAsset()
 @property (strong, nonatomic) ALAsset* asset;

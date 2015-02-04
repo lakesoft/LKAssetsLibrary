@@ -39,7 +39,6 @@
 		BC120FB8192EF785004F34BA /* LKAssetsCollectionGenericFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = BC120FB7192EF785004F34BA /* LKAssetsCollectionGenericFilter.m */; };
 		BC120FBB192EF79E004F34BA /* LKAssetsCollectionGenericSorter.m in Sources */ = {isa = PBXBuildFile; fileRef = BC120FBA192EF79E004F34BA /* LKAssetsCollectionGenericSorter.m */; };
 		BC120FBE192EF8CC004F34BA /* LKAssetsCollectionEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = BC120FBD192EF8CC004F34BA /* LKAssetsCollectionEntry.m */; };
-		BC61868019369D5F00D085AF /* LKImageUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = BC61867F19369D5F00D085AF /* LKImageUtility.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -104,8 +103,6 @@
 		BC2A371819375E5F00C672B7 /* LKAssetsCollectionGrouping.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKAssetsCollectionGrouping.h; sourceTree = "<group>"; };
 		BC2A371919375FB600C672B7 /* LKAssetsCollectionSorter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKAssetsCollectionSorter.h; sourceTree = "<group>"; };
 		BC2A371A1937611200C672B7 /* LKAssetsCollectionFilter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKAssetsCollectionFilter.h; sourceTree = "<group>"; };
-		BC61867E19369D5F00D085AF /* LKImageUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKImageUtility.h; sourceTree = "<group>"; };
-		BC61867F19369D5F00D085AF /* LKImageUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKImageUtility.m; sourceTree = "<group>"; };
 		BCE6AED6192DA76D00CEB654 /* LKAssetsCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKAssetsCollection.h; sourceTree = "<group>"; };
 		BCE6AED7192DA76D00CEB654 /* LKAssetsCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKAssetsCollection.m; sourceTree = "<group>"; };
 		BCEA5FB2194D0A5600F32276 /* LKAssetsCollectionGenericHelpers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKAssetsCollectionGenericHelpers.h; sourceTree = "<group>"; };
@@ -237,7 +234,6 @@
 				BC060D1E19246ECB009989D0 /* LKAsset.h */,
 				BC060D1F19246ECB009989D0 /* LKAsset.m */,
 				BCE6AEDF192DADF000CEB654 /* Collection */,
-				BC61867D19369D4600D085AF /* Utilities */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -264,15 +260,6 @@
 				BC2A371919375FB600C672B7 /* LKAssetsCollectionSorter.h */,
 			);
 			name = "Helpers (Protocol)";
-			sourceTree = "<group>";
-		};
-		BC61867D19369D4600D085AF /* Utilities */ = {
-			isa = PBXGroup;
-			children = (
-				BC61867E19369D5F00D085AF /* LKImageUtility.h */,
-				BC61867F19369D5F00D085AF /* LKImageUtility.m */,
-			);
-			name = Utilities;
 			sourceTree = "<group>";
 		};
 		BCE6AEDF192DADF000CEB654 /* Collection */ = {
@@ -399,7 +386,6 @@
 				BC060DAA192C0406009989D0 /* FilterViewController.m in Sources */,
 				BC060CE019246CC1009989D0 /* main.m in Sources */,
 				BC060D7719280662009989D0 /* TableViewController.m in Sources */,
-				BC61868019369D5F00D085AF /* LKImageUtility.m in Sources */,
 				BC120FB8192EF785004F34BA /* LKAssetsCollectionGenericFilter.m in Sources */,
 				BC060D86192811E3009989D0 /* PhotoCell.m in Sources */,
 				BC060D83192811CE009989D0 /* PhotoViewController.m in Sources */,
