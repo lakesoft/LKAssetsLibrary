@@ -118,7 +118,7 @@ NSString* const LKAssetsLibraryGroupsKey = @"LKAssetsLibraryGroupsKey";
 ;
                                                   if (assetsGroup.type & self.assetsGroupType) {
                                                       [self.mutableAssetsGroups addObject:assetsGroup];
-                                                      [insertedGroups addObject:group];
+                                                      [insertedGroups addObject:assetsGroup];
                                                   }
                                               }
                                           } else {
