@@ -24,7 +24,10 @@ NSString* const LKAssetsGroupDidReloadNotification = @"LKAssetsGroupDidReloadNot
 #pragma mark - Privates
 - (void)_assetsLibrarychanged:(NSNotification*)notification
 {
-    [self reloadAssets];
+    if (self.assets) {
+        [self unloadAssets];
+        [self reloadAssets];
+    }
 }
 
 #pragma mark - Basics
