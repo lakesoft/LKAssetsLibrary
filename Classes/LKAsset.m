@@ -235,6 +235,23 @@ static NSDateFormatter* _dateFormatter = nil;
     return NO;
 }
 
+- (BOOL)isIOSDeviceScreenshot{
+    
+    CGSize size = UIScreen.mainScreen.bounds.size;
+    size.width *= UIScreen.mainScreen.scale;
+    size.height *= UIScreen.mainScreen.scale;
+    
+    return CGSizeEqualToSize(size, self.size)                       //current device
+    || CGSizeEqualToSize(CGSizeMake(750, 1334), self.size)          //iPhone 6
+    || CGSizeEqualToSize(CGSizeMake(1080, 1920), self.size)         //iPhone 6p
+    || CGSizeEqualToSize(CGSizeMake(640, 1136), self.size)          //iPhone 5,5c,5s
+    || CGSizeEqualToSize(CGSizeMake(1536, 2048), self.size)         //ipad 3+..
+    || CGSizeEqualToSize(CGSizeMake(312, 390), self.size)           //watch 42mm
+    || CGSizeEqualToSize(CGSizeMake(272, 340), self.size)           //watch 38mm
+    || CGSizeEqualToSize(CGSizeMake(768, 1024), self.size)          //ipad 1,2,mini..
+    || CGSizeEqualToSize(CGSizeMake(640, 960), self.size)           //iPhone 4,4s
+    || CGSizeEqualToSize(CGSizeMake(320, 480), self.size);          //iPhone 1,2,3
+}
 
 #pragma mark -
 #pragma mark APIs
