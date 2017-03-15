@@ -44,6 +44,7 @@ typedef NS_ENUM(NSInteger, LKAssetType) {
 @property (assign, nonatomic, readonly) BOOL isJPEG;
 @property (assign, nonatomic, readonly) BOOL isPNG;
 @property (assign, nonatomic, readonly) BOOL isScreenshot;
+@property (assign, nonatomic, readonly) BOOL isIOSDeviceScreenshot;
 @property (assign, nonatomic, readonly) BOOL isPhoto;
 @property (assign, nonatomic, readonly) BOOL isVideo;
 
