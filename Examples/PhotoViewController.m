@@ -34,7 +34,7 @@
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(_didChangeCollection:)
                                                name:LKAssetsGroupDidReloadNotification
-                                             object:NO];
+                                             object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated

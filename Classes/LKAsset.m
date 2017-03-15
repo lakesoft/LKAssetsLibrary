@@ -30,7 +30,7 @@ static NSDateFormatter* _dateFormatter = nil;
 + (void)_setupDateFormatter
 {
     _dateFormatter = [[NSDateFormatter alloc] init];
-    _dateFormatter.calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    _dateFormatter.calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     [_dateFormatter setDateFormat:@"yyyyMMddHH"];
 }
 
