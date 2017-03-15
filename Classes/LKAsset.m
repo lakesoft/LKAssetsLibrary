@@ -110,7 +110,7 @@ static NSDateFormatter* _dateFormatter = nil;
     if (rep) {
         UIImage *image = [UIImage imageWithCGImage:rep.fullScreenImage
                                              scale:rep.scale
-                                       orientation:0];
+                                       orientation:(UIImageOrientation)rep.orientation];
         return image;
 //        UIImage* image = [UIImage imageWithCGImage:rep.fullScreenImage
 //                                             scale:1.0
