@@ -119,6 +119,21 @@ static NSDateFormatter* _dateFormatter = nil;
     }
 }
 
+- (UIImage*)fullScreenImageWithoutOrientation
+{
+    ALAssetRepresentation* rep = self.asset.defaultRepresentation;
+    if (rep) {
+        UIImage *image = [UIImage imageWithCGImage:rep.fullScreenImage
+                                             scale:rep.scale
+                                       orientation:0];
+        return image;
+        
+    } else {
+        // deleted
+        return nil;
+    }
+}
+
 - (UIImage*)fullResolutionImage
 {
     ALAssetRepresentation* rep = self.asset.defaultRepresentation;
@@ -127,7 +142,20 @@ static NSDateFormatter* _dateFormatter = nil;
                                              scale:rep.scale
                                        orientation:(UIImageOrientation)rep.orientation];
         return image;
-//        return [LKImageUtility adjustOrientationImage:image];
+    } else {
+        // deleted
+        return nil;
+    }
+}
+
+- (UIImage*)fullResolutionImageWithoutOrientation
+{
+    ALAssetRepresentation* rep = self.asset.defaultRepresentation;
+    if (rep) {
+        UIImage* image = [UIImage imageWithCGImage:rep.fullResolutionImage
+                                             scale:rep.scale
+                                       orientation:0];
+        return image;
     } else {
         // deleted
         return nil;

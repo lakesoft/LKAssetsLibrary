@@ -26,6 +26,8 @@ typedef NS_ENUM(NSInteger, LKAssetType) {
 @property (weak  , nonatomic, readonly) UIImage* aspectRatioThumbnail;
 @property (weak  , nonatomic, readonly) UIImage* fullScreenImage;
 @property (weak  , nonatomic, readonly) UIImage* fullResolutionImage;
+@property (weak  , nonatomic, readonly) UIImage* fullScreenImageWithoutOrientation;
+@property (weak  , nonatomic, readonly) UIImage* fullResolutionImageWithoutOrientation;
 
 // Properties (Date number)
 @property (assign, nonatomic, readonly) NSTimeInterval timeInterval;    // timeIntervalSince1970
